@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/listItemMessage"
+    android:layout_width="match_parent"
+    android:layout_height="70dp" android:background="@drawable/list_item_background_selector" android:minHeight="?android:attr/listPreferredItemHeight">
+    
+     <TextView
+     android:id="@+id/messageTextView"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:text="Large Text"
+     android:textAppearance="?android:attr/textAppearanceLarge" android:textColor="@color/black" android:layout_gravity="center" android:layout_marginLeft="15dp" android:layout_marginRight="15dp" android:gravity="center"/>
+</FrameLayout>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@drawable/background_repeat">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+    </FrameLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+	    
+	    <LinearLayout
+	        android:id="@+id/linearLayout2"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical" >
+
+	        <LinearLayout
+	            android:id="@+id/LinearLayout06"
+	            android:layout_width="match_parent"
+	            android:layout_height="50dp"
+	            android:orientation="vertical" >
+
+	            <Button
+	                android:id="@+id/tipsButton"
+	                android:layout_width="match_parent"
+	                android:layout_height="30dp"
+	                android:layout_marginLeft="20dp"
+	                android:layout_marginRight="20dp"
+	                android:layout_marginTop="15dp"
+	                android:background="@drawable/btn_black_selector"
+	                android:isScrollContainer="true"
+	                android:text="Tips for Success"
+	                android:textColor="@color/white" />
+	        </LinearLayout>
+
+	        <LinearLayout
+	            android:id="@+id/LinearLayout05"
+	            android:layout_width="match_parent"
+	            android:layout_height="50dp"
+	            android:orientation="vertical" >
+
+	            <Button
+	                android:id="@+id/tellAFriendButton"
+	                android:layout_width="match_parent"
+	                android:layout_height="30dp"
+	                android:background="@drawable/btn_black_selector"
+	                android:text="Tell a Friend"
+	                android:textColor="@color/white" android:layout_marginTop="15dp" android:layout_marginRight="20dp" android:layout_marginLeft="20dp"/>
+
+	        </LinearLayout>
+
+	        <LinearLayout
+	            android:id="@+id/LinearLayout03"
+	            android:layout_width="match_parent"
+	            android:layout_height="50dp"
+	            android:orientation="vertical" >
+
+	            <Button
+	                android:id="@+id/termsAndConditionsButton"
+	                android:layout_width="match_parent"
+	                android:layout_height="30dp"
+	                android:background="@drawable/btn_black_selector"
+	                android:text="Terms and Conditions"
+	                android:textColor="@color/white" android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:layout_marginTop="15dp"/>
+
+	        </LinearLayout>
+
+	        <LinearLayout
+	            android:id="@+id/LinearLayout02"
+	            android:layout_width="match_parent"
+	            android:layout_height="50dp"
+	            android:orientation="vertical" >
+
+	            <Button
+	                android:id="@+id/privacyButton"
+	                android:layout_width="match_parent"
+	                android:layout_height="30dp"
+	                android:background="@drawable/btn_black_selector"
+	                android:text="Privacy Policy"
+	                android:textColor="@color/white" android:layout_marginLeft="20dp" android:layout_marginRight="20dp" android:layout_marginTop="15dp"/>
+
+	        </LinearLayout>
+
+	        <LinearLayout
+	            android:id="@+id/LinearLayout01"
+	            android:layout_width="match_parent"
+	            android:layout_height="50dp"
+	            android:orientation="vertical" >
+
+	            <Button
+	                android:id="@+id/customerServiceButton"
+	                android:layout_width="match_parent"
+	                android:layout_height="30dp"
+	                android:layout_marginLeft="20dp"
+	                android:layout_marginRight="20dp"
+	                android:layout_marginTop="15dp"
+	                android:background="@drawable/btn_black_selector"
+	                android:text="Contact Customer Service"
+	                android:textColor="@color/white" />
+	        </LinearLayout>
+
+	        <LinearLayout
+	            android:id="@+id/LinearLayout04"
+	            android:layout_width="match_parent"
+	            android:layout_height="60dp"
+	            android:orientation="vertical" >
+
+	            <Button
+	                android:id="@+id/eraseButton"
+	                android:layout_width="match_parent"
+	                android:layout_height="30dp"
+	                android:layout_marginLeft="20dp"
+	                android:layout_marginRight="20dp"
+	                android:layout_marginTop="15dp"
+	                android:background="@drawable/btn_black_selector"
+	                android:text="Erase All Content and Settings"
+	                android:textColor="@color/white" />
+	        </LinearLayout>
+
+	    </LinearLayout>
+	    
+    </ScrollView>
+
+
+ 
+</LinearLayout>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" android:background="@color/white">
+
+    <RelativeLayout
+        style="@style/black_toolbar"
+        android:layout_width="fill_parent"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:weightSum="3" android:layout_centerVertical="true">
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/weightButton"
+                    style="@style/black_toolbar_button"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:text="@string/weight" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/caloriesButton"
+                    style="@style/black_toolbar_button"
+                    android:text="@string/calories" android:layout_width="match_parent" android:layout_marginRight="4dp" android:layout_marginLeft="4dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/nutrientsButton"
+                    style="@style/black_toolbar_button"
+                    android:text="@string/nutrients" android:layout_width="match_parent" android:layout_marginRight="4dp" android:layout_marginLeft="4dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/header_arrow" android:scaleType="fitXY" android:background="@color/white"/>
+
+        <TextView
+            android:id="@+id/headerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceLarge" android:layout_gravity="center_horizontal" android:layout_marginTop="4dp" android:textColor="@color/black" android:textSize="18dp"/>
+
+        <ImageView
+            android:id="@+id/caloriesHeaderImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/progress_calories_header" android:layout_gravity="center_horizontal" android:layout_marginTop="5dp"/>
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" android:layout_above="@+id/trackWeightButton" android:layout_alignParentTop="true">
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/trackWeightButton"
+                android:layout_width="160dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/btn_black_selector"
+                android:text="Track Weight"
+                android:textColor="@color/white" android:layout_marginBottom="5dp" android:layout_marginTop="5dp"/>
+
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true" />
+
+        <LinearLayout
+            android:id="@+id/noDataContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/noDataTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No tracked data to plot."
+                android:textColor="@color/dark_grey" android:layout_gravity="center"/>
+
+            <Button
+                android:id="@+id/trackButton"
+                android:layout_width="160dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_black_selector"
+                android:text="Track Now"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

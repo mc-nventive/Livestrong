@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@drawable/background_repeat">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:background="@drawable/background_repeat">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/header_arrow" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_gravity="center_horizontal">
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="60dp"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:scaleType="center"
+                android:src="@drawable/btn_back" />
+
+            <FrameLayout
+                android:id="@+id/frameLayout1"
+                android:layout_width="160dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp" >
+
+                <TextView
+                    android:id="@+id/dateTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Breakfast"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+            </FrameLayout>
+
+            <ImageButton
+                android:id="@+id/forwardButton"
+                android:layout_width="60dp"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:scaleType="center"
+                android:src="@drawable/btn_forward" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <view class="com.livestrong.myplate.utilities.PinnedHeaderListView"
+		        android:id="@android:id/list"
+		        android:layout_width="match_parent"
+		        android:layout_height="match_parent" 
+		        android:background="@drawable/background_repeat"/>
+        
+        <LinearLayout
+            android:id="@+id/messageContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Nothing tracked for the day."
+                android:textColor="@color/dark_grey" />
+
+            <Button
+                android:id="@+id/trackNowButton"
+                android:layout_width="160dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/btn_black_selector"
+                android:text="Track Now"
+                android:textColor="@color/white" />
+             
+        </LinearLayout>
+    </RelativeLayout>
+
+	
+</LinearLayout>

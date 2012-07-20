@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_repeat">
+
+    <RelativeLayout
+        style="@style/black_toolbar"
+        android:layout_width="fill_parent"
+        android:orientation="horizontal"
+        android:paddingBottom="1.0dip"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingTop="5.0dip" >
+	    
+		<LinearLayout
+	        android:layout_width="0px"
+	        android:layout_height="0px"
+	        android:focusable="true"
+	        android:focusableInTouchMode="true" >
+	    </LinearLayout>
+        
+        <TextView
+            android:id="@+id/headerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="REGISTER"
+            android:textStyle="bold" android:textSize="20dp"/>
+
+        <Button
+            android:id="@+id/cancelButton"
+            style="@style/black_toolbar_button"
+            android:layout_width="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="0dp"
+            android:text="@string/cancel"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/header_arrow" />
+
+        <LinearLayout
+            android:id="@+id/LinearLayout01"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_gravity="center_horizontal" >
+
+            <FrameLayout
+                android:id="@+id/frameLayout1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="6dp" >
+
+                <TextView
+                    android:id="@+id/timeOfDayTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:text="CREATE YOUR FREE ACCOUNT"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+            </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:paddingTop="15dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp" >
+
+            <TextView
+                android:id="@+id/TextView05"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="2dp"
+                android:text="Choose username"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/usernameEditText"
+                style="@style/input_field"
+                android:layout_width="match_parent"
+                android:imeOptions="actionNext"
+                android:singleLine="true" android:selectAllOnFocus="true"/>
+
+            <TextView
+                android:id="@+id/TextView04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="2dp"
+                android:text="Choose password"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/passwordEditText"
+                style="@style/input_field"
+                android:layout_width="match_parent"
+                android:inputType="textPassword" android:selectAllOnFocus="true">
+            </EditText>
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="2dp"
+                android:text="Retype password"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/confirmPasswordEditText"
+                style="@style/input_field"
+                android:layout_width="match_parent"
+                android:inputType="textPassword" android:selectAllOnFocus="true"/>
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="2dp"
+                android:text="Name"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/nameEditText"
+                style="@style/input_field"
+                android:layout_width="match_parent"
+                android:imeOptions="actionNext"
+                android:singleLine="true" android:selectAllOnFocus="true"/>
+
+            <TextView
+                android:id="@+id/TextView06"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="2dp"
+                android:text="Email"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/emailEditText"
+                style="@style/input_field"
+                android:layout_width="match_parent"
+                android:imeOptions="actionNext"
+                android:singleLine="true" android:selectAllOnFocus="true"/>
+
+            <TextView
+                android:id="@+id/TextView02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="2dp"
+                android:text="Postal Code"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/postalCodeEditText"
+                style="@style/input_field"
+                android:layout_width="match_parent"
+                android:imeOptions="actionNext"
+                android:singleLine="true" android:selectAllOnFocus="true"/>
+
+            <TextView
+                android:id="@+id/TextView03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="2dp"
+                android:text="Birthday"
+                android:textColor="@color/black" />
+
+            <EditText
+                android:id="@+id/birthdayEditText"
+                style="@style/input_field"
+                android:layout_width="match_parent" />
+
+            <RelativeLayout
+                android:id="@+id/relativeLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" android:layout_marginBottom="10dp">
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="invisible" />
+
+                <Button
+                    android:id="@+id/createAccountButton"
+                    android:layout_width="170dp"
+                    android:layout_height="30dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/btn_black_selector"
+                    android:text="Create Account"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

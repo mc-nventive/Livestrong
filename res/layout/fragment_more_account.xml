@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_repeat"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/connectContainer"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/list_item_community_background"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+id/connectButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/btn_black_selector"
+                    android:text="Connect to LIVESTRONG.com"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/syncContainer"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/list_item_community_background" >
+
+                <TextView
+                    android:id="@+id/TextView01"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Sync"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:layout_marginLeft="2dp" android:layout_marginRight="7dp" android:layout_marginTop="5dp">
+
+                        <Button
+                            android:id="@+id/syncNowButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:background="@drawable/btn_black_selector"
+                            android:text="Sync Now"
+                            android:textColor="@color/white" />
+
+                        <ProgressBar
+                            android:id="@+id/syncProgressBar"
+                            style="?android:attr/progressBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="34dp" android:paddingRight="10dp"/>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/lastSyncTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Last Sync: 20/04/2012 12:14pm" android:textColor="@color/dark_grey" android:textSize="11dp" android:layout_marginTop="5dp" android:layout_marginLeft="3dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout04"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/list_item_community_background" >
+
+            <LinearLayout
+                android:id="@+id/LinearLayout05"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/list_item_community_background" >
+
+                <TextView
+                    android:id="@+id/TextView07"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/weight"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/weightSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="11dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/TextView06"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/weight"
+                android:textColor="@color/dark_grey"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/weightSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="11dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout02"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/list_item_community_background" >
+
+            <TextView
+                android:id="@+id/TextView05"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/distances"
+                android:textColor="@color/dark_grey"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/distancesSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="11dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout03"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/list_item_community_background" >
+
+            <LinearLayout
+                android:id="@+id/LinearLayout01"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/list_item_community_background" >
+
+                <TextView
+                    android:id="@+id/TextView04"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/water"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/waterSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="11dp"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/TextView03"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/gender"
+                android:textColor="@color/dark_grey"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/genderSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="11dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LinearLayout08"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/list_item_community_background" >
+
+            <TextView
+                android:id="@+id/TextView10"
+                android:layout_width="174dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Daily Reminder"
+                android:textColor="@color/dark_grey"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <CheckBox
+                    android:id="@+id/dailyReminderCheckBox"
+                    android:layout_width="35dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="right"
+                    android:text="CheckBox" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/reminderTimeContainer"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/list_item_community_background" >
+
+            <TextView
+                android:id="@+id/TextView12"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="Reminder Time"
+                android:textColor="@color/dark_grey"
+                android:textStyle="bold" />
+	        
+	        <LinearLayout
+		        android:layout_width="0px"
+		        android:layout_height="0px"
+		        android:focusable="true"
+		        android:focusableInTouchMode="true" />
+		    
+            <EditText
+                android:id="@+id/reminderTimeEditText"
+                style="@style/input_field"
+                android:layout_width="0dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginTop="13dp"
+                android:layout_weight="0.63"
+                android:gravity="right"
+                android:inputType="number" />
+            
+        </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
+
+    
+
+</LinearLayout>

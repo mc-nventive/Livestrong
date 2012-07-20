@@ -1,0 +1,483 @@
+#
+# generated on 2012/04/27 02:58:55
+#
+# --table-start--
+dataClass=com.livestrong.myplate.back.models.ActivityLevels
+tableName=Activity_Levels
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=_default
+columnName=default
+# --field-end--
+# --field-start--
+fieldName=levels
+dataPersister=SERIALIZABLE
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.livestrong.myplate.back.models.DiaryEntry
+tableName=diaryentry
+# --table-fields-start--
+# --field-start--
+fieldName=deleted
+columnName=deleted
+indexName=diaryentry_deleted_idx
+# --field-end--
+# --field-start--
+fieldName=modified
+columnName=modified
+# --field-end--
+# --field-start--
+fieldName=datestamp
+columnName=datestamp
+indexName=diaryentry_datestamp_idx
+# --field-end--
+# --field-start--
+fieldName=guid
+id=true
+# --field-end--
+# --field-start--
+fieldName=dirty
+indexName=diaryentry_dirty_idx
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.livestrong.myplate.back.models.Exercise
+tableName=Exercise
+# --table-fields-start--
+# --field-start--
+fieldName=id
+columnName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=exerciseId
+columnName=exerciseId
+# --field-end--
+# --field-start--
+fieldName=exercise
+columnName=exercise
+# --field-end--
+# --field-start--
+fieldName=metricExercise
+# --field-end--
+# --field-start--
+fieldName=description
+# --field-end--
+# --field-start--
+fieldName=calFactor
+# --field-end--
+# --field-start--
+fieldName=distance
+# --field-end--
+# --field-start--
+fieldName=cph
+# --field-end--
+# --field-start--
+fieldName=active
+# --field-end--
+# --field-start--
+fieldName=calsPerHour
+# --field-end--
+# --field-start--
+fieldName=images
+dataPersister=SERIALIZABLE
+# --field-end--
+# --field-start--
+fieldName=custom
+columnName=custom
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.livestrong.myplate.back.models.ExerciseDiaryEntry
+tableName=Diary_Exercise
+# --table-fields-start--
+# --field-start--
+fieldName=exerciseId
+columnName=exerciseId
+# --field-end--
+# --field-start--
+fieldName=label
+# --field-end--
+# --field-start--
+fieldName=minutes
+# --field-end--
+# --field-start--
+fieldName=caloriesBurned
+# --field-end--
+# --field-start--
+fieldName=exercise
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --field-start--
+fieldName=deleted
+columnName=deleted
+indexName=Diary_Exercise_deleted_idx
+# --field-end--
+# --field-start--
+fieldName=modified
+columnName=modified
+# --field-end--
+# --field-start--
+fieldName=datestamp
+columnName=datestamp
+indexName=Diary_Exercise_datestamp_idx
+# --field-end--
+# --field-start--
+fieldName=guid
+id=true
+# --field-end--
+# --field-start--
+fieldName=dirty
+indexName=Diary_Exercise_dirty_idx
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.livestrong.myplate.back.models.Food
+tableName=Food
+# --table-fields-start--
+# --field-start--
+fieldName=id
+columnName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=foodId
+columnName=foodId
+# --field-end--
+# --field-start--
+fieldName=itemTitle
+columnName=itemTitle
+# --field-end--
+# --field-start--
+fieldName=servingSize
+# --field-end--
+# --field-start--
+fieldName=itemBrand
+# --field-end--
+# --field-start--
+fieldName=cals
+# --field-end--
+# --field-start--
+fieldName=calsFromFat
+# --field-end--
+# --field-start--
+fieldName=fat
+# --field-end--
+# --field-start--
+fieldName=satFat
+# --field-end--
+# --field-start--
+fieldName=carbs
+# --field-end--
+# --field-start--
+fieldName=protein
+# --field-end--
+# --field-start--
+fieldName=cholesterol
+# --field-end--
+# --field-start--
+fieldName=sodium
+# --field-end--
+# --field-start--
+fieldName=dietaryFiber
+# --field-end--
+# --field-start--
+fieldName=sugars
+# --field-end--
+# --field-start--
+fieldName=calsPercFat
+# --field-end--
+# --field-start--
+fieldName=calsPercCarbs
+# --field-end--
+# --field-start--
+fieldName=calsPercProtein
+# --field-end--
+# --field-start--
+fieldName=verification
+# --field-end--
+# --field-start--
+fieldName=images
+dataPersister=SERIALIZABLE
+# --field-end--
+# --field-start--
+fieldName=custom
+columnName=custom
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.livestrong.myplate.back.models.FoodDiaryEntry
+tableName=Diary_Food
+# --table-fields-start--
+# --field-start--
+fieldName=itemId
+columnName=itemId
+# --field-end--
+# --field-start--
+fieldName=mealId
+# --field-end--
+# --field-start--
+fieldName=timeOfDay
+columnName=timeOfDay
+# --field-end--
+# --field-start--
+fieldName=servings
+# --field-end--
+# --field-start--
+fieldName=label
+# --field-end--
+# --field-start--
+fieldName=food
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --field-start--
+fieldName=deleted
+columnName=deleted
+indexName=Diary_Food_deleted_idx
+# --field-end--
+# --field-start--
+fieldName=modified
+columnName=modified
+# --field-end--
+# --field-start--
+fieldName=datestamp
+columnName=datestamp
+indexName=Diary_Food_datestamp_idx
+# --field-end--
+# --field-start--
+fieldName=guid
+id=true
+# --field-end--
+# --field-start--
+fieldName=dirty
+indexName=Diary_Food_dirty_idx
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.livestrong.myplate.back.models.Meal
+tableName=Meal
+# --table-fields-start--
+# --field-start--
+fieldName=mealId
+id=true
+# --field-end--
+# --field-start--
+fieldName=mealName
+columnName=mealName
+# --field-end--
+# --field-start--
+fieldName=nutritionInfo
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --field-start--
+fieldName=cals
+# --field-end--
+# --field-start--
+fieldName=items
+foreignCollection=true
+foreignCollectionEager=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.livestrong.myplate.back.models.MealItem
+tableName=MealItem
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=meal
+foreign=true
+# --field-end--
+# --field-start--
+fieldName=food
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --field-start--
+fieldName=servings
+# --field-end--
+# --field-start--
+fieldName=cals
+# --field-end--
+# --field-start--
+fieldName=itemTitle
+# --field-end--
+# --field-start--
+fieldName=itemBrand
+# --field-end--
+# --field-start--
+fieldName=itemShortcut
+# --field-end--
+# --field-start--
+fieldName=brandShortcut
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.livestrong.myplate.back.models.MealNutritionInfo
+tableName=MealNutritionInfo
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=cals
+# --field-end--
+# --field-start--
+fieldName=fat
+# --field-end--
+# --field-start--
+fieldName=cholesterol
+# --field-end--
+# --field-start--
+fieldName=sodium
+# --field-end--
+# --field-start--
+fieldName=carbs
+# --field-end--
+# --field-start--
+fieldName=sugars
+# --field-end--
+# --field-start--
+fieldName=dietary_fiber
+# --field-end--
+# --field-start--
+fieldName=protein
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.livestrong.myplate.back.models.UserProfile
+tableName=UserProfile
+# --table-fields-start--
+# --field-start--
+fieldName=userId
+id=true
+# --field-end--
+# --field-start--
+fieldName=username
+# --field-end--
+# --field-start--
+fieldName=dob
+# --field-end--
+# --field-start--
+fieldName=gender
+# --field-end--
+# --field-start--
+fieldName=height
+# --field-end--
+# --field-start--
+fieldName=weight
+# --field-end--
+# --field-start--
+fieldName=activityLevel
+# --field-end--
+# --field-start--
+fieldName=calories
+# --field-end--
+# --field-start--
+fieldName=goal
+# --field-end--
+# --field-start--
+fieldName=mode
+# --field-end--
+# --field-start--
+fieldName=dirty
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.livestrong.myplate.back.models.WaterDiaryEntry
+tableName=Diary_Water
+# --table-fields-start--
+# --field-start--
+fieldName=glasses
+# --field-end--
+# --field-start--
+fieldName=deleted
+columnName=deleted
+indexName=Diary_Water_deleted_idx
+# --field-end--
+# --field-start--
+fieldName=modified
+columnName=modified
+# --field-end--
+# --field-start--
+fieldName=datestamp
+columnName=datestamp
+indexName=Diary_Water_datestamp_idx
+# --field-end--
+# --field-start--
+fieldName=guid
+id=true
+# --field-end--
+# --field-start--
+fieldName=dirty
+indexName=Diary_Water_dirty_idx
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.livestrong.myplate.back.models.WeightDiaryEntry
+tableName=Diary_Weight
+# --table-fields-start--
+# --field-start--
+fieldName=weight
+# --field-end--
+# --field-start--
+fieldName=calories
+# --field-end--
+# --field-start--
+fieldName=deleted
+columnName=deleted
+indexName=Diary_Weight_deleted_idx
+# --field-end--
+# --field-start--
+fieldName=modified
+columnName=modified
+# --field-end--
+# --field-start--
+fieldName=datestamp
+columnName=datestamp
+indexName=Diary_Weight_datestamp_idx
+# --field-end--
+# --field-start--
+fieldName=guid
+id=true
+# --field-end--
+# --field-start--
+fieldName=dirty
+indexName=Diary_Weight_dirty_idx
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@drawable/background_repeat">
+
+    <RelativeLayout
+        style="@style/black_toolbar"
+        android:layout_width="fill_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true" android:weightSum="4">
+
+            <LinearLayout
+                android:id="@+id/LinearLayout01"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/accountButton"
+                    style="@style/black_toolbar_button"
+                    android:layout_width="match_parent"
+                    android:text="Settings" android:layout_gravity="center" android:layout_marginRight="4dp" android:layout_marginLeft="4dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/profileButton"
+                    style="@style/black_toolbar_button"
+                    android:layout_width="match_parent"
+                    android:text="@string/profile" android:layout_gravity="center" android:layout_marginRight="4dp" android:layout_marginLeft="4dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout02"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/supportButton"
+                    style="@style/black_toolbar_button"
+                    android:layout_width="match_parent"
+                    android:text="@string/support" android:layout_gravity="center" android:layout_marginRight="4dp" android:layout_marginLeft="4dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout03"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/aboutButton"
+                    style="@style/black_toolbar_button"
+                    android:layout_width="match_parent"
+                    android:text="@string/about" android:layout_gravity="center" android:layout_marginRight="4dp" android:layout_marginLeft="4dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </FrameLayout>
+ 
+</LinearLayout>

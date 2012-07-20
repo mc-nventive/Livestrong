@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="loading">Loading...</string>
+    <string name="app_name">Livestrong</string>
+    <string name="app_name_short">Livestrong</string>
+    <string name="fat">Fat</string>
+    <string name="carbs">Carbs</string>
+    <string name="protein">Protein</string>
+    <string name="from_fat">Calories from Fat</string>
+    <string name="serving_size">Serving Size</string>
+    <string name="calories">Calories</string>
+    <string name="multiline">line1 \\nline2</string>
+    <string name="btn_track_breakfast_format">Breakfast\n%s</string>
+    <string name="btn_track_lunch_format">Lunch\n%s</string>
+    <string name="btn_track_dinner_format">Dinner\n%s</string>
+    <string name="btn_track_snacks_format">Snacks\n%s</string>
+    <string name="btn_track_exercise_format">Exercise\n%s</string>
+    <string name="btn_track_water_format">Water\n%s</string>
+    <string name="tab_icon">tab_icon</string>
+    <string name="weight">Weight</string>
+    <string name="nutrients">Nutrients</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="auth_failed_title">Authentication Failed</string>
+    <string name="auth_failed">Invalid username or password.\nPlease try again.</string>
+    <string name="search_hint">Search...</string>
+    <string name="recentlyEaten">Recently Eaten</string>
+    <string name="frequentlyEaten">Frequently Eaten</string>
+    <string name="myMeals">My Meals</string>
+    <string name="recentlyPerformed">Recently Performed</string>
+    <string name="frequentlyPerformed">Frequently Performed</string>
+    <string name="custom_exercises">Custom Exercises</string>
+    <string name="track">TRACK</string>
+    <string name="calorie_goal_header">MY CALORIE GOAL IS</string>
+    <string name="today">Today</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="hours">hours</string>
+    <string name="mins">mins</string>
+    <string name="myMessages">My Messages</string>
+    <string name="community">Community</string>
+    <string name="breakfast">Breakfast</string>
+    <string name="lunch">Lunch</string>
+    <string name="dinner">Dinner</string>
+    <string name="snacks">Snacks</string>
+    <string name="drinkWater">Drink Water</string>
+    <string name="exercise">Exercise</string>
+    <string name="trackWeight">Track Weight</string>
+    <string name="enter_calories_manually">Enter Calories Manually</string>
+    <string name="done">Done</string>
+    <string name="cancel">Cancel</string>
+    <string name="name">Name</string>
+    <string name="grams_per_serving">grams per serving</string>
+    <string name="error">Error</string>
+    <string name="account">Account</string>
+    <string name="profile">Profile</string>
+    <string name="support">Support</string>
+    <string name="about">About</string>
+    <string name="registerHere">Register Here</string>
+    <string name="dontHaveAnAccount">Don\'t have an account?</string>
+    <string name="birthday">Birthday</string>
+    <string name="height">Height</string>
+    <string name="gender">Gender</string>
+    <string name="activityLevel">Activity Level</string>
+    <string name="currentWeight">Current Weight</string>
+    <string name="save">Save</string>
+    <string-array name="activityLevels">
+        <item >Sedentary</item>
+        <item >Lightly Active</item>
+        <item >Moderately Active</item>
+        <item >Very Active</item>
+    </string-array>
+    <string-array name="gender">
+        <item >Male</item>
+        <item >Female</item>
+    </string-array>
+    <string name="calorieGoal">Calorie Goal</string>
+    <string-array name="weightGoal">
+        <item >Maintain my weight</item>
+        <item >Lose 0.90kgs/week</item>
+        <item >Lose 0.68kgs/week</item>
+        <item >Lose 0.45kgs/week</item>
+        <item >Gain 0.90kgs/week</item>
+        <item >Gain 0.68kgs/week</item>
+        <item >Gain 0.45kgs/week</item>
+    </string-array>
+	<string-array name="weightUnits">
+        <item >Kilograms</item>
+        <item >Pounds</item>
+        <item >Stones</item>
+    </string-array>
+    <string-array name="distanceUnits">
+        <item >Meters</item>
+        <item >Miles</item>
+    </string-array>
+    <string-array name="waterUnits">
+        <item >Millileters</item>
+        <item >Ounces</item>
+    </string-array>
+	<string name="weightGoal">Weight Goal</string>
+	<string name="synchronize">Synchronize</string>
+	<string name="distances">Distances</string>
+	<string name="water">Water</string>
+	<string name="signIn">Sign In</string>
+	<string name="tip1">Drink water. You may actually be thirsty instead of hungry. Drink 8 glasses a day. More if you are training.</string>
+	<string name="tip2">Track your food. Tracking keeps you honest. Log your food and watch the transformation happen.</string>
+	<string name="tip3">Set goals. Know where you want to be and apply yourself. Once you write it down, you\'ve put it out there, now just make it happen.</string>
+	<string name="tip4">Exercise. Get in your daily dose, not only will this boost your metabolism, it will boost your mood.</string>
+	<string name="tip5">Buddy up. Find yourself a workout partner, it\'s not so easy to skip the workout when you have someone waiting for you.</string>
+	<string name="tip6">Eat real food. Fruits, vegetables, protein and complex carbs. Limit or eliminate all processed items from your diet - the overall differences will astound you.</string>
+	<string name="deleteData">This will delete all of your local data and reset the application settings to their default values. If you have not signed in with a LIVESTRONG.COM account, your data will be lost.</string>
+    <string name="ptr_pull_to_refresh">Pull to refresh</string>
+    <string name="ptr_release_to_refresh">Release to refresh</string>
+    <string name="ptr_refreshing">Refreshing</string>
+</resources>

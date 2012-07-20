@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:layout_marginBottom="5dp">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Do you agree to our Terms and Conditions and our Privacy Policy?" android:layout_centerInParent="true" android:textSize="15dp" android:textStyle="bold" android:gravity="center"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:layout_marginBottom="10dp">
+
+        <Button
+            android:id="@+id/termsAndConditionsButton"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_black_selector"
+            android:text="View Terms and Conditions"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/privacyButton"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/termsAndConditionsButton"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_black_selector"
+            android:text="View Privacy Policy"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/doneButton"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/privacyButton"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_black_selector"
+            android:text="Yes, I Agree"
+            android:textColor="@color/white" android:layout_marginLeft="30dp" android:layout_marginRight="30dp"/>
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/doneButton"
+            android:background="@drawable/btn_black_selector"
+            android:text="Cancel"
+            android:textColor="@color/white" android:layout_marginLeft="30dp" android:layout_marginRight="30dp" android:layout_marginTop="10dp"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

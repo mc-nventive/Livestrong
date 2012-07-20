@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_repeat">
+
+    <RelativeLayout
+        style="@style/black_toolbar"
+        android:layout_width="fill_parent"
+        android:layout_marginBottom="-3dp"
+        android:orientation="horizontal"
+        android:paddingBottom="1.0dip"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingTop="5.0dip" >
+
+        <LinearLayout
+	        android:layout_width="0px"
+	        android:layout_height="0px"
+	        android:focusable="true"
+	        android:focusableInTouchMode="true" >
+	    </LinearLayout>
+        
+        <TextView
+            android:id="@+id/headerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/enter_calories_manually"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/doneButton"
+            style="@style/black_toolbar_button"
+            android:layout_width="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="0dp"
+            android:text="@string/done"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/cancelButton"
+            style="@style/black_toolbar_button"
+            android:layout_width="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="0dp"
+            android:text="@string/cancel"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/LinearLayout05"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_community_background" >
+
+                <TextView
+                    android:id="@+id/TextView05"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/name"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/nameEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="0.67"
+                    android:inputType="textAutoComplete" android:selectAllOnFocus="true"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout04"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_community_background" >
+
+                <TextView
+                    android:id="@+id/TextView04"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/serving_size"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/servingSizeEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="0.67"
+                    android:gravity="center_vertical" 
+                    android:inputType="textAutoComplete" android:selectAllOnFocus="true"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout03"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_community_background" >
+
+                <TextView
+                    android:id="@+id/TextView03"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/calories"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/caloriesEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="0.67"
+                    android:gravity="center_vertical"
+                    android:inputType="number" android:selectAllOnFocus="true"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_community_background" >
+
+                <TextView
+                    android:id="@+id/TextView01"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/fat"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/fatEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="0.67"
+                    android:gravity="center_vertical"
+                    android:hint="@string/grams_per_serving"
+                    android:inputType="number" android:selectAllOnFocus="true"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_community_background" >
+
+                <TextView
+                    android:id="@+id/TextView02"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/carbs"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/carbsEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="0.20"
+                    android:gravity="center_vertical"
+                    android:hint="@string/grams_per_serving"
+                    android:inputType="number" android:selectAllOnFocus="true"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout06"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_community_background" >
+
+                <TextView
+                    android:id="@+id/TextView06"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/protein"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/proteinEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="0.20"
+                    android:gravity="center_vertical"
+                    android:hint="@string/grams_per_serving"
+                    android:inputType="number" android:selectAllOnFocus="true"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

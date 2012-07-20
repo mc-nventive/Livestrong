@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:id="@+id/listItemDiaryHeader">
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/linearLayout1"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/background_repeat" >
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:background="@drawable/header_blue_slice" android:layout_centerVertical="true">
+    </LinearLayout>
+    
+	<TextView
+	 xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:id="@+id/sectionHeaderTextView"
+	    android:layout_width="fill_parent"
+	    android:layout_height="27dip"
+	    android:textColor="@color/pinned_header_text"
+	    android:textSize="14sp" 
+	    android:paddingLeft="6dip"
+	    android:gravity="center_vertical" 
+	    android:text="title" android:layout_centerInParent="true"/>
+
+	<TextView
+	    android:id="@+id/caloriesLabel"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBaseline="@+id/header_text"
+	    android:layout_alignBottom="@+id/header_text"
+	    android:layout_alignParentRight="true"
+	    android:layout_marginRight="14dp"
+	    android:text="@string/calories" 
+	    android:layout_centerVertical="true" 
+	    android:textColor="@color/white" android:layout_centerInParent="true"/>
+
+	<TextView
+	    android:id="@+id/caloriesTextView"
+	    android:layout_height="wrap_content"
+	    android:layout_marginRight="5dp"
+	    android:layout_toLeftOf="@+id/caloriesLabel"
+	    android:text="..."
+	    android:textColor="@color/white" 
+	    android:layout_width="wrap_content" android:layout_centerInParent="true" android:background="@drawable/circle_blue" android:gravity="center"/>
+
+</RelativeLayout>

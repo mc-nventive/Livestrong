@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="beige">#e7e8db</color>
+    <color name="orange">#ef7332</color>
+    <color name="dark_grey">#3c3c34</color>
+    <color name="tab_medium">#4c4c45</color>
+	<color name="tab_dark">#272722</color>
+	<color name="tab_transparent">#10ffffff</color>
+	<color name="transparent">#80000000</color>
+	<color name="pinned_header_background">#ff202020</color>
+    <color name="pinned_header_text">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="main_background">#d5d5d5</color>
+    <color name="toolbar_btn_unselected">#949494</color>
+    <color name="my_plate_header_text">#616257</color>
+    <color name="red">#E01B1B</color>
+</resources>

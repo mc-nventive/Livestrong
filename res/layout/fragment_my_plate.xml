@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" android:background="@drawable/background_repeat">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/header_bar" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ImageView01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/header_arrow" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="4dp" >
+
+            <TextView
+                android:id="@+id/timeOfDayTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/calorie_goal_header"
+                android:textColor="@color/my_plate_header_text"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/calorieGoalTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="1900"
+        android:textColor="@color/orange" android:textStyle="bold" android:textSize="25dp"/>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:background="@drawable/progress_background_slice">
+
+        <ImageView
+            android:id="@+id/progressForegroundImageView"
+            android:layout_width="20dp"
+            android:layout_height="75dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="1dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/progress_foreground" />
+
+        <TextView
+            android:id="@+id/caloriesConsumedTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="TextView" android:textColor="@color/white" android:textSize="18dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_centerVertical="true">
+
+            <LinearLayout
+                android:id="@+id/buttonsLinearLayout1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true">
+
+                <Button
+                    android:id="@+id/breakfastButton"
+                    style="@style/my_plate_button"
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/btn_track_grey_selector" android:layout_marginTop="0dp" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_marginBottom="0dp"/>
+
+                <Button
+                    android:id="@+id/lunchButton"
+                    style="@style/my_plate_button"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/btn_track_grey_selector" android:layout_marginTop="0dp" android:layout_marginBottom="0dp"/>
+
+                <Button
+                    android:id="@+id/dinnerButton"
+                    style="@style/my_plate_button"
+                    android:background="@drawable/btn_track_grey_selector" android:layout_marginTop="0dp" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:layout_marginBottom="0dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/buttonsLinearLayout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/buttonsLinearLayout1"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1" >
+
+                <Button
+                    android:id="@+id/snacksButton"
+                    style="@style/my_plate_button"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/btn_track_grey_selector" android:layout_marginBottom="0dp" android:layout_marginTop="0dp"/>
+
+                <Button
+                    android:id="@+id/exerciseButton"
+                    style="@style/my_plate_button"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/btn_track_grey_selector" android:layout_marginBottom="0dp" android:layout_marginTop="0dp"/>
+
+                <Button
+                    android:id="@+id/waterButton"
+                    style="@style/my_plate_button"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/btn_track_grey_selector" android:layout_marginBottom="0dp" android:layout_marginTop="0dp"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

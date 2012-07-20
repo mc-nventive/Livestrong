@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_repeat">
+
+    <RelativeLayout
+        style="@style/black_toolbar"
+        android:layout_width="fill_parent"
+        android:layout_marginBottom="-3dp"
+        android:orientation="horizontal"
+        android:paddingBottom="1.0dip"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingTop="5.0dip" >
+	    
+		<LinearLayout
+	        android:layout_width="0px"
+	        android:layout_height="0px"
+	        android:focusable="true"
+	        android:focusableInTouchMode="true" >
+	    </LinearLayout>
+        
+        <TextView
+            android:id="@+id/headerTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="TIPS FOR SUCCESS"
+            android:textStyle="bold" android:textSize="20dp"/>
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+		<LinearLayout
+	        android:id="@+id/linearLayout2"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical" >
+
+			<LinearLayout
+			    android:id="@+id/LinearLayout05"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:background="@drawable/list_item_background" >
+
+			    <RelativeLayout
+			        android:id="@+id/RelativeLayout05"
+			        android:layout_width="wrap_content"
+			        android:layout_height="match_parent" >
+
+			        <TextView
+			            android:id="@+id/TextView10"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_alignParentLeft="true"
+			            android:layout_centerVertical="true"
+			            android:layout_marginLeft="10dp"
+			            android:background="@drawable/circle_blue"
+			            android:gravity="center"
+			            android:text="1"
+			            android:textColor="@color/white"
+			            android:textSize="18dp"
+			            android:textStyle="bold" />
+			    </RelativeLayout>
+
+			    <TextView
+			        android:id="@+id/TextView09"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginBottom="10dp"
+			        android:layout_marginLeft="10dp"
+			        android:layout_marginTop="10dp"
+			        android:text="@string/tip1" android:textColor="@color/dark_grey" android:layout_marginRight="10dp"/>
+			</LinearLayout>
+
+			<LinearLayout
+			    android:id="@+id/LinearLayout04"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:background="@drawable/list_item_background" >
+
+			    <RelativeLayout
+			        android:id="@+id/RelativeLayout04"
+			        android:layout_width="wrap_content"
+			        android:layout_height="match_parent" >
+
+			        <TextView
+			            android:id="@+id/TextView08"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_alignParentLeft="true"
+			            android:layout_centerVertical="true"
+			            android:layout_marginLeft="10dp"
+			            android:background="@drawable/circle_blue"
+			            android:gravity="center"
+			            android:text="2"
+			            android:textColor="@color/white"
+			            android:textSize="18dp"
+			            android:textStyle="bold" />
+			    </RelativeLayout>
+
+			    <TextView
+			        android:id="@+id/TextView07"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginBottom="10dp"
+			        android:layout_marginLeft="10dp"
+			        android:layout_marginTop="10dp"
+			        android:text="@string/tip2" android:textColor="@color/dark_grey" android:layout_marginRight="10dp"/>
+			</LinearLayout>
+
+			<LinearLayout
+			    android:id="@+id/LinearLayout03"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:background="@drawable/list_item_background" >
+
+			    <RelativeLayout
+			        android:id="@+id/RelativeLayout03"
+			        android:layout_width="wrap_content"
+			        android:layout_height="match_parent" >
+
+			        <TextView
+			            android:id="@+id/TextView06"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_alignParentLeft="true"
+			            android:layout_centerVertical="true"
+			            android:layout_marginLeft="10dp"
+			            android:background="@drawable/circle_blue"
+			            android:gravity="center"
+			            android:text="3"
+			            android:textColor="@color/white"
+			            android:textSize="18dp"
+			            android:textStyle="bold" />
+			    </RelativeLayout>
+
+			    <TextView
+			        android:id="@+id/TextView05"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginBottom="10dp"
+			        android:layout_marginLeft="10dp"
+			        android:layout_marginTop="10dp"
+			        android:text="@string/tip3" android:textColor="@color/dark_grey" android:layout_marginRight="10dp"/>
+			</LinearLayout>
+
+			<LinearLayout
+			    android:id="@+id/LinearLayout02"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:background="@drawable/list_item_background" >
+
+			    <RelativeLayout
+			        android:id="@+id/RelativeLayout02"
+			        android:layout_width="wrap_content"
+			        android:layout_height="match_parent" >
+
+			        <TextView
+			            android:id="@+id/TextView04"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_alignParentLeft="true"
+			            android:layout_centerVertical="true"
+			            android:layout_marginLeft="10dp"
+			            android:background="@drawable/circle_blue"
+			            android:gravity="center"
+			            android:text="4"
+			            android:textColor="@color/white"
+			            android:textSize="18dp"
+			            android:textStyle="bold" />
+			    </RelativeLayout>
+
+			    <TextView
+			        android:id="@+id/TextView03"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginBottom="10dp"
+			        android:layout_marginLeft="10dp"
+			        android:layout_marginTop="10dp"
+			        android:text="@string/tip4" android:textColor="@color/dark_grey" android:layout_marginRight="10dp"/>
+			</LinearLayout>
+
+			<LinearLayout
+			    android:id="@+id/LinearLayout01"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:background="@drawable/list_item_background" >
+
+			    <RelativeLayout
+			        android:id="@+id/RelativeLayout01"
+			        android:layout_width="wrap_content"
+			        android:layout_height="match_parent" >
+
+			        <TextView
+			            android:id="@+id/TextView02"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_alignParentLeft="true"
+			            android:layout_centerVertical="true"
+			            android:layout_marginLeft="10dp"
+			            android:background="@drawable/circle_blue"
+			            android:gravity="center"
+			            android:text="5"
+			            android:textColor="@color/white"
+			            android:textSize="18dp"
+			            android:textStyle="bold" />
+			    </RelativeLayout>
+
+			    <TextView
+			        android:id="@+id/TextView01"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:layout_marginBottom="10dp"
+			        android:layout_marginLeft="10dp"
+			        android:layout_marginTop="10dp"
+			        android:text="@string/tip5" android:textColor="@color/dark_grey" android:layout_marginRight="10dp"/>
+			</LinearLayout>
+
+			<LinearLayout
+			    android:id="@+id/linearLayout1"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content" android:background="@drawable/list_item_background">
+
+				<RelativeLayout
+				    android:id="@+id/relativeLayout1"
+				    android:layout_width="wrap_content"
+				    android:layout_height="match_parent" >
+
+				    <TextView
+				        android:id="@+id/textview"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:layout_centerVertical="true"
+				        android:layout_marginLeft="10dp"
+				        android:background="@drawable/circle_blue"
+				        android:gravity="center"
+				        android:text="6"
+				        android:textColor="@color/white"
+				        android:textSize="18dp"
+				        android:textStyle="bold" />
+				</RelativeLayout>
+
+				<TextView
+				    android:id="@+id/textView1"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:layout_marginBottom="10dp"
+				    android:layout_marginLeft="10dp"
+				    android:layout_marginTop="10dp"
+				    android:text="@string/tip6" android:textColor="@color/dark_grey" android:layout_marginRight="10dp"/>
+
+			</LinearLayout>
+
+		</LinearLayout>
+		        
+    </ScrollView>
+
+</LinearLayout>

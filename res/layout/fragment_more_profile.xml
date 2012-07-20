@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_repeat">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/LinearLayout05"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/list_item_community_background" >
+
+                <TextView
+                    android:id="@+id/TextView05"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" android:text="@string/birthday"/>
+
+                <EditText
+                    android:id="@+id/birthdayEditText"
+                    android:layout_width="0dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_weight="0.63"
+                    android:inputType="textAutoComplete" style="@style/input_field" android:gravity="right"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/heightMetricContainer"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/list_item_community_background" >
+
+                <TextView
+                    android:id="@+id/TextView04"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/height"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/heightEditText"
+                    android:layout_width="0dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_weight="0.63"
+                    android:gravity="right" 
+                    android:inputType="numberDecimal" style="@style/input_field" android:selectAllOnFocus="true"/>
+
+                <TextView
+                    android:id="@+id/heightUnitsTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="cm"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" android:layout_gravity="center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/heightImperialContainer"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/list_item_community_background" >
+
+                <TextView
+                    android:id="@+id/TextView08"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/height"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" android:layout_gravity="center_vertical"/>
+
+                <EditText
+                    android:id="@+id/feetEditText"
+                    style="@style/input_field"
+                    android:layout_width="45dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="13dp"
+                    android:gravity="right"
+                    android:inputType="number" 
+					android:selectAllOnFocus="true" 
+					android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:id="@+id/TextView09"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:text="feet"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" android:layout_gravity="center_vertical"/>
+
+                <EditText
+                    android:id="@+id/inchesEditText"
+                    style="@style/input_field"
+                    android:layout_width="45dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="13dp"
+                    android:gravity="right"
+                    android:inputType="numberDecimal" 
+					android:selectAllOnFocus="true" 
+					android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:id="@+id/TextView02"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dp"
+                    android:text="inches"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout03"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/list_item_community_background" >
+
+                <TextView
+                    android:id="@+id/TextView03"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/gender"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/genderSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="5dp"
+                    android:textSize="6dp"
+                    android:layout_weight="1" android:layout_marginTop="11dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout01"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/list_item_community_background" >
+
+                <TextView
+                    android:id="@+id/TextView01"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/activityLevel"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/activityLevelSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_weight="1" android:layout_marginRight="5dp" android:layout_marginTop="11dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout02"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/list_item_community_background" >
+
+                <TextView
+                    android:id="@+id/TextView07"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/currentWeight"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" android:layout_gravity="center_vertical"/>
+
+                <EditText
+                    android:id="@+id/weightEditText"
+                    android:layout_width="0dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="0.63"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right"
+                    android:inputType="numberDecimal" style="@style/input_field" android:layout_marginTop="13dp" android:layout_marginRight="4dp" android:selectAllOnFocus="true"/>
+
+                <TextView
+                    android:id="@+id/weightUnitsTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="lbs"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" android:layout_gravity="center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout06"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/list_item_community_background" >
+
+                <TextView
+                    android:id="@+id/TextView06"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/weightGoal"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/weightGoalSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1" android:layout_marginTop="11dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout08"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/list_item_community_background" android:layout_gravity="right">
+
+                <TextView
+                    android:id="@+id/TextView10"
+                    android:layout_width="174dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Automatic Calorie Goal"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical" >
+
+                    <CheckBox
+                        android:id="@+id/automaticCalorieGoalCheckBox"
+                        android:layout_width="35dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center_vertical"
+                        android:layout_marginRight="5dp"
+                        android:gravity="right"
+                        android:text="CheckBox" android:layout_marginTop="5dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/calorieGoalContainer"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/list_item_community_background" >
+
+                <TextView
+                    android:id="@+id/TextView12"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="@string/calorieGoal"
+                    android:textColor="@color/dark_grey"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/calorieGoalEditText"
+                    style="@style/input_field"
+                    android:layout_width="0dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_weight="0.63"
+                    android:gravity="right"
+                    android:inputType="number" android:selectAllOnFocus="true">
+                </EditText>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
