@@ -97,22 +97,29 @@ public class AddExerciseActivity extends LiveStrongActivity {
 				@Override
 				public void onClick(View v) {
 
+					double pickerMinutes = getPickersMinutes();
+					
 					if (AddExerciseActivity.this.diaryEntry != null) {
-						AddExerciseActivity.this.diaryEntry.setMinutes((int) getPickersMinutes());
-			            DataHelper.saveDiaryEntry(AddExerciseActivity.this.diaryEntry, AddExerciseActivity.this);
+						if (pickerMinutes == 0.0){
+							DataHelper.deleteDiaryEntry(AddExerciseActivity.this.diaryEntry, AddExerciseActivity.this);
+						} else {
+							AddExerciseActivity.this.diaryEntry.setMinutes((int) getPickersMinutes());
+							DataHelper.saveDiaryEntry(AddExerciseActivity.this.diaryEntry, AddExerciseActivity.this);
+						}
 					} else {
 						ExerciseDiaryEntry e = new ExerciseDiaryEntry(
-			            		AddExerciseActivity.this.exercise,
-			            		getPickersMinutes(),
-			            		MyPlateApplication.getWorkingDateStamp());
+				           		AddExerciseActivity.this.exercise,
+				           		getPickersMinutes(),
+				           		MyPlateApplication.getWorkingDateStamp());
 
-			            DataHelper.saveDiaryEntry(e, AddExerciseActivity.this);
-			            
+				        DataHelper.saveDiaryEntry(e, AddExerciseActivity.this);									            
 					}
 
-					Intent resultIntent = new Intent();
-					resultIntent.putExtra(AddExerciseActivity.INTENT_EXERCISE_NAME, AddExerciseActivity.this.exercise.getTitle());
-					setResult(Activity.RESULT_OK, resultIntent);
+					if (pickerMinutes > 0.0){						
+						Intent resultIntent = new Intent();
+						resultIntent.putExtra(AddExerciseActivity.INTENT_EXERCISE_NAME, AddExerciseActivity.this.exercise.getTitle());
+						setResult(Activity.RESULT_OK, resultIntent);
+					}
 					
 					finish();
 				}

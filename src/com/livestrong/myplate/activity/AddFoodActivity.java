@@ -163,23 +163,34 @@ public class AddFoodActivity extends LiveStrongActivity {
 				doneBtn.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						
+						double pickerServings = getPickerServings();
+						
 						if (AddFoodActivity.this.diaryEntry == null){
-							FoodDiaryEntry e = new FoodDiaryEntry(
-		    	            		AddFoodActivity.this.food,
-		    	            		null, // TODO mealId
-		    	            		MyPlateApplication.getWorkingTimeOfDay(), 
-		    	            		getPickerServings(),
-		    	            		MyPlateApplication.getWorkingDateStamp());
-							DataHelper.saveDiaryEntry(e, AddFoodActivity.this);
+							if (pickerServings > 0.0){
+								FoodDiaryEntry e = new FoodDiaryEntry(
+			    	            		AddFoodActivity.this.food,
+			    	            		null, // TODO mealId
+			    	            		MyPlateApplication.getWorkingTimeOfDay(), 
+			    	            		pickerServings,
+			    	            		MyPlateApplication.getWorkingDateStamp());
+								DataHelper.saveDiaryEntry(e, AddFoodActivity.this);
+							}
 						} else {
-							AddFoodActivity.this.diaryEntry.setServings(getPickerServings());
-				            DataHelper.saveDiaryEntry(AddFoodActivity.this.diaryEntry, AddFoodActivity.this);
+							if (pickerServings == 0.0){
+								DataHelper.deleteDiaryEntry(AddFoodActivity.this.diaryEntry, AddFoodActivity.this);				
+							} else {
+								AddFoodActivity.this.diaryEntry.setServings(pickerServings);
+								DataHelper.saveDiaryEntry(AddFoodActivity.this.diaryEntry, AddFoodActivity.this);
+							}							
 						}   
 						
-						Intent resultIntent = new Intent();
-						resultIntent.putExtra(AddFoodActivity.INTENT_FOOD_NAME, AddFoodActivity.this.food.getTitle());
+						if (pickerServings > 0.0){
+							Intent resultIntent = new Intent();
+							resultIntent.putExtra(AddFoodActivity.INTENT_FOOD_NAME, AddFoodActivity.this.food.getTitle());
 						
-						setResult(Activity.RESULT_OK, resultIntent);
+							setResult(Activity.RESULT_OK, resultIntent);
+						}
 						
 	    	            dialog.cancel();
 	    	            finish();							

@@ -5,7 +5,6 @@ import java.lang.reflect.Method;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.net.Proxy.Type;
-import java.net.URLEncoder;
 import java.security.KeyStore;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -185,7 +184,7 @@ public class ApiHelper {
 	 * @example FoodSearchResponse foodSearchResult = ApiHelper.searchFood("sandwich"); 
 	 */
 	public static FoodSearchResponse searchFood(String query, DataHelperDelegate delegate) {
-		String url = getBaseUrl() + "/Food/Foods/?query=" + URLEncoder.encode(query) + "&limit=50&fill=item_title,cals,serving_size,food_id,images.100,images,verification";
+		String url = getBaseUrl() + "/Food/Foods/?query=" + query + "&limit=50&fill=item_title,cals,serving_size,food_id,images.100,images,verification";
 
 		return getRest(url, FoodSearchResponse.class, DataHelper.METHOD_SEARCH_FOODS, delegate, AuthUsing.HTTP_BASIC);
 	}
@@ -197,7 +196,7 @@ public class ApiHelper {
 	 * @example ExerciseSearchResponse exerciseSearchResult = ApiHelper.searchExercises("run"); 
 	 */
 	public static ExerciseSearchResponse searchExercises(String query, DataHelperDelegate delegate) {
-		String url = getBaseUrl() + "/Fitness/Exercises/?query=" + URLEncoder.encode(query) + "&limit=50&fill=exercise,fitness_id,images,cal_factor";
+		String url = getBaseUrl() + "/Fitness/Exercises/?query=" + query + "&limit=50&fill=exercise,fitness_id,images,cal_factor";
 
 		return getRest(url, ExerciseSearchResponse.class, DataHelper.METHOD_SEARCH_EXERCISES, delegate, AuthUsing.HTTP_BASIC);
 	}
@@ -517,7 +516,7 @@ public class ApiHelper {
 		return apiResponse.response;
 	}
 
-	public static <D> ApiHelperResponse<D> requestRestSynchronous(HttpMethod httpMethod, String url, Class<D> responseObjectClass, Object body, MediaType contentType, boolean retry, Method methodCalled, DataHelperDelegate delegate, AuthUsing authUsing) {
+	public synchronized static <D> ApiHelperResponse<D> requestRestSynchronous(HttpMethod httpMethod, String url, Class<D> responseObjectClass, Object body, MediaType contentType, boolean retry, Method methodCalled, DataHelperDelegate delegate, AuthUsing authUsing) {
 		if (!isOnline()) {
 			return new ApiHelperResponse<D>(null, null);
 		}
@@ -598,7 +597,7 @@ public class ApiHelper {
 			proxyPort = BuildValues.PROXY_PORT;
 		}
 
-		if (proxyPort > 0) {
+		if (proxyHost != null && proxyHost.trim().length() > 0 && proxyPort > 0) {
 			SimpleClientHttpRequestFactory factory = ((SimpleClientHttpRequestFactory) restTemplate.getRequestFactory());
 			Proxy proxy = new Proxy(Type.HTTP, new InetSocketAddress(proxyHost, proxyPort));
 			factory.setProxy(proxy);
@@ -629,6 +628,12 @@ public class ApiHelper {
 		} catch (HttpServerErrorException e) {
 			// 5xx status codes
 			return handleApiErrors(gson, e);
+		} catch (java.lang.NullPointerException e) {
+			Log.e(ApiHelper.class.getName(), "Can't connect to API:");
+			return new ApiHelperResponse<D>(e, "Can't connect to LIVESTRONG server.");
+		} catch (java.lang.IllegalArgumentException e) {
+			Log.e(ApiHelper.class.getName(), "Can't connect to API:");
+			return new ApiHelperResponse<D>(e, "Can't connect to LIVESTRONG server.");
 		} catch (org.springframework.web.client.ResourceAccessException e) {
 			Log.e(ApiHelper.class.getName(), "Can't connect to API (proxy error?):");
 			e.getMostSpecificCause().printStackTrace();

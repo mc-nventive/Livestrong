@@ -111,6 +111,9 @@ public class MyPlateFragment extends FragmentDataHelperDelegate {
 					case R.id.waterButton:
 						nextActivity = NEXT_ACTIVITY_WATER;
 						break;
+					default:
+						MyPlateApplication.setWorkingTimeOfDay(TimeOfDay.BREAKFAST);
+						nextActivity = NEXT_ACTIVITY_FOOD;
 				}
 				MyPlateApplication.setWorkingDateStamp(new Date());
 				if (nextActivity != null){

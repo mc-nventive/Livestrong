@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,7 @@ public class MoreFragment extends FragmentDataHelperDelegate {
 	        // the view hierarchy; it would just never be used.
 	        return null;
 	    }
-		
+		//Log.d("MoreFragment", "MoreFragment - onCreate");
 		// Hook up outlets
 		this.view 			= (LinearLayout) inflater.inflate(R.layout.fragment_more, container, false);
 		this.accountButton 	= (Button) this.view.findViewById(R.id.accountButton);
@@ -77,6 +78,24 @@ public class MoreFragment extends FragmentDataHelperDelegate {
 		}
 		
 		super.onPause();
+	}
+	
+	@Override
+	public void onResume() {
+		//Log.d("MoreFragment", "TabBarActivity - MoreFragment - onResume");
+		super.onResume();
+	}
+	
+	@Override
+	public void onDestroy() {
+		//Log.d("MoreFragment", "TabBarActivity - MoreFragment - onDestroy");
+		super.onDestroy();
+	}
+	
+	@Override
+	public void onDetach() {
+		//Log.d("MoreFragment", "TabBarActivity - MoreFragment - onDetach");
+		super.onDetach();
 	}
 	
 	private void initializeButtons(){
