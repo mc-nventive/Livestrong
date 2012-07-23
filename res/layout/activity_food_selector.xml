@@ -1,208 +1,231 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" android:background="@drawable/background_repeat">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background_repeat" >
 
     <LinearLayout
-        android:layout_width="0px"
-        android:layout_height="0px"
-        android:focusable="true"
-        android:focusableInTouchMode="true" >
-    </LinearLayout>
-
-	<com.livestrong.myplate.views.ClearableEditText
-		android:id="@+id/editTextClearable"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:background="@color/black" style=""/>
-    
-<!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
-
-<!-- :nextFocusUp and :nextFocusLeft have been set to the id of this component
-     to prevent the dummy from receiving focus again -->
-
-    <LinearLayout
-        android:id="@+id/toolBarContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical" >
 
-        <RelativeLayout
-            android:id="@+id/toolBar"
-            style="@style/black_toolbar"
-            android:layout_width="fill_parent" >
-
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:layout_centerVertical="true" android:weightSum="4">
-
-                <LinearLayout
-                    android:id="@+id/linearLayout7"
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical" >
-
-                    <Button
-                        android:id="@+id/recentlyEatenButton"
-                        style="@style/black_toolbar_button"
-                        android:layout_width="match_parent"
-                        android:text="Recently Eaten" android:layout_gravity="center" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout3"
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical" >
-
-                    <Button
-                        android:id="@+id/frequentlyEatenButton"
-                        style="@style/black_toolbar_button"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:text="Frequently Eaten" android:layout_gravity="center" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/LinearLayout01"
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical" >
-
-                    <Button
-                        android:id="@+id/myMealsButton"
-                        style="@style/black_toolbar_button"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:text="@string/myMeals" android:layout_gravity="center" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/LinearLayout02"
-                    android:layout_width="fill_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="vertical" >
-
-                    <Button
-                        android:id="@+id/customFoodsButton"
-                        style="@style/black_toolbar_button"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:text="Custom Foods" android:layout_gravity="center" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:src="@drawable/header_arrow"/>
-
-            <LinearLayout
-                android:id="@+id/linearLayout1"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_gravity="center_horizontal">
-
-                <ImageButton
-                    android:id="@+id/backButton"
-                    android:layout_width="60dp"
-                    android:layout_height="match_parent"
-                    android:background="@null"
-                    android:scaleType="center"
-                    android:src="@drawable/btn_back" />
-
-                <FrameLayout
-                    android:id="@+id/frameLayout1"
-                    android:layout_width="90dp"
-                    android:layout_height="match_parent" android:layout_marginTop="6dp">
-
-                    <TextView
-                        android:id="@+id/timeOfDayTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="Breakfast"
-                        android:textColor="@color/black"
-                        android:textSize="18dp" android:layout_gravity="center_horizontal"/>
-
-                </FrameLayout>
-
-                <ImageButton
-                    android:id="@+id/forwardButton"
-                    android:layout_width="60dp"
-                    android:layout_height="match_parent"
-                    android:background="@null"
-                    android:scaleType="center"
-                    android:src="@drawable/btn_forward" />
-
-            </LinearLayout>
-
-        </FrameLayout>
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <ListView
-            android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fadingEdge="none" android:divider="@android:color/transparent">
-        </ListView>
-        
-        <LinearLayout
-            android:id="@+id/messageContainer"
-            android:layout_width="wrap_content"
+        <com.livestrong.myplate.views.ClearableEditText
+            android:id="@+id/editTextClearable"
+            style=""
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:background="@color/black" />
+
+        <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
+
+
+        <!--
+     :nextFocusUp and :nextFocusLeft have been set to the id of this component
+     to prevent the dummy from receiving focus again
+        -->
+
+        <LinearLayout
+            android:id="@+id/toolBarContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/messageTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" No recently eaten foods."
-                android:textColor="@color/dark_grey" android:layout_gravity="center"/>
+            <RelativeLayout
+                android:id="@+id/toolBar"
+                style="@style/black_toolbar"
+                android:layout_width="fill_parent" >
 
-            <TextView
-                android:id="@+id/textView01"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Search above or "
-                android:textColor="@color/dark_grey" android:layout_gravity="center" android:layout_marginTop="5dp"/>
+                <LinearLayout
+                    android:id="@+id/linearLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:weightSum="4" >
 
-            <Button
-                android:id="@+id/addManualButton"
-                android:layout_width="160dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/btn_black_selector"
-                android:text="Add Food Manually"
-                android:textColor="@color/white" />
-             
+                    <LinearLayout
+                        android:id="@+id/linearLayout7"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <Button
+                            android:id="@+id/recentlyEatenButton"
+                            style="@style/black_toolbar_button"
+                            android:layout_width="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:text="Recently Eaten" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <Button
+                            android:id="@+id/frequentlyEatenButton"
+                            style="@style/black_toolbar_button"
+                            android:layout_width="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:layout_weight="1"
+                            android:text="Frequently Eaten" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/LinearLayout01"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <Button
+                            android:id="@+id/myMealsButton"
+                            style="@style/black_toolbar_button"
+                            android:layout_width="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:layout_weight="1"
+                            android:text="@string/myMeals" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/LinearLayout02"
+                        android:layout_width="fill_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <Button
+                            android:id="@+id/customFoodsButton"
+                            style="@style/black_toolbar_button"
+                            android:layout_width="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:layout_weight="1"
+                            android:text="Custom Foods" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/header_arrow" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_horizontal" >
+
+                    <ImageButton
+                        android:id="@+id/backButton"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:scaleType="center"
+                        android:src="@drawable/btn_back" />
+
+                    <FrameLayout
+                        android:id="@+id/frameLayout1"
+                        android:layout_width="90dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="6dp" >
+
+                        <TextView
+                            android:id="@+id/timeOfDayTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Breakfast"
+                            android:textColor="@color/black"
+                            android:textSize="18dp" />
+                    </FrameLayout>
+
+                    <ImageButton
+                        android:id="@+id/forwardButton"
+                        android:layout_width="60dp"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:scaleType="center"
+                        android:src="@drawable/btn_forward" />
+                </LinearLayout>
+            </FrameLayout>
         </LinearLayout>
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
-</LinearLayout>
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@android:color/transparent"
+                android:fadingEdge="none" >
+            </ListView>
+
+            <LinearLayout
+                android:id="@+id/messageContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/messageTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text=" No recently eaten foods."
+                    android:textColor="@color/dark_grey" />
+
+                <TextView
+                    android:id="@+id/textView01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:text="Search above or "
+                    android:textColor="@color/dark_grey" />
+
+                <Button
+                    android:id="@+id/addManualButton"
+                    android:layout_width="160dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/btn_black_selector"
+                    android:text="Add Food Manually"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <com.admarvel.android.ads.AdMarvelView
+        xmlns:admarvel="http://schemas.android.com/apk/res/com.livestrong.myplatelite"
+        android:id="@+id/ad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        admarvel:backgroundColor="#726D6D"
+        admarvel:textBackgroundColor="#726D6D"
+        admarvel:textBorderColor="#000000"
+        admarvel:textFontColor="#00FF00" />
+
+</RelativeLayout>

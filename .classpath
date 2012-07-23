@@ -2,7 +2,37 @@
 <classpath>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="lib" path="libs/gson.jar" sourcepath="external_libraries/google-gson-2.1/gson-2.1-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/ormlite-android.jar" sourcepath="external_libraries/ormlite-4.38/ormlite-android-4.38-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/ormlite-core.jar" sourcepath="external_libraries/ormlite-4.38/ormlite-core-4.38-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/spring-android-auth.jar" sourcepath="external_libraries/spring-android-1.0.0.RC1/src/spring-android-auth-1.0.0.RC1-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/spring-android-core.jar" sourcepath="external_libraries/spring-android-1.0.0.RC1/src/spring-android-core-1.0.0.RC1-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:external_libraries/spring-android-1.0.0.RC1/docs/api/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry exported="true" kind="lib" path="libs/spring-android-rest-template.jar" sourcepath="external_libraries/spring-android-1.0.0.RC1/src/spring-android-rest-template-1.0.0.RC1-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/achartengine.jar" sourcepath="external_libraries/achartengine-1.0.0/achartengine-1.0.0-src.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/LiveStrong/external_libraries/achartengine-1.0.0/achartengine-1.0.0-javadocs.zip!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="libs/android-support-v4.jar"/>
+	<classpathentry kind="lib" path="libs/prettytime.jar" sourcepath="external_libraries/prettytime-1.0.8/prettytime-1.0.8.Final-sources.jar"/>
+	<classpathentry kind="lib" path="libs/acra.jar" sourcepath="external_libraries/acra-4.2.3/src/acra-4.2.3-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/LiveStrong/external_libraries/acra-4.2.3/doc/acra-4.2.3-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="libs/admarvel-android-sdk-admob-adapter.jar"/>
+	<classpathentry kind="lib" path="libs/admarvel-android-sdk-core.jar"/>
+	<classpathentry kind="lib" path="libs/admarvel-android-sdk-millennial-adapter.jar"/>
+	<classpathentry kind="lib" path="libs/admarvel-android-sdk-rhythm-adapter.jar"/>
+	<classpathentry kind="lib" path="libs/GoogleAdMobAdsSdk-4.3.1.jar"/>
+	<classpathentry kind="lib" path="libs/MMAdView.jar"/>
+	<classpathentry kind="lib" path="libs/rhythm-ad-sdk.jar"/>
+	<classpathentry kind="lib" path="libs/SessionM.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

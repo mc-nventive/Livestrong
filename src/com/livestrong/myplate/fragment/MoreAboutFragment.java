@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.livestrong.myplate.Constants;
-import com.livestrong.myplate.R;
+import com.livestrong.myplatelite.R;
 
 public class MoreAboutFragment extends FragmentDataHelperDelegate {
 	

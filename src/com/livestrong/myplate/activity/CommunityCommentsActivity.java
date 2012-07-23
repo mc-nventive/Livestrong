@@ -5,7 +5,6 @@ import java.lang.reflect.Method;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -21,11 +20,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.livestrong.myplate.MyPlateApplication;
-import com.livestrong.myplate.R;
 import com.livestrong.myplate.adapters.CommunityCommentsAdapter;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.api.models.NewCommentResponse;
 import com.livestrong.myplate.back.models.CommunityMessage;
+import com.livestrong.myplate.constants.BuildValues;
+import com.livestrong.myplate.utilities.Utils;
+import com.livestrong.myplatelite.R;
 
 public class CommunityCommentsActivity extends LiveStrongActivity {
 
@@ -96,17 +97,20 @@ public class CommunityCommentsActivity extends LiveStrongActivity {
 	}
 
 	private void sendMessage() {
-		if (DataHelper.isLoggedIn() == false){
+		if (DataHelper.isLoggedIn() == false || BuildValues.IS_LIGHT){
 			new AlertDialog.Builder(MyPlateApplication.getFrontMostActivity())
-		      .setMessage("You must be signed in to post a message.")
-		      .setTitle(R.string.error)
-		      .setNeutralButton(android.R.string.ok,
-		         new DialogInterface.OnClickListener() {
-		         public void onClick(DialogInterface dialog, int whichButton){}
-		         })
+		      .setMessage("This function is not available in the lite version. Would you like to visit the Play store now?")
+		      .setTitle("")
+		      .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Utils.openPlayStore(CommunityCommentsActivity.this);
+				}
+			  })
+			  .setNegativeButton(android.R.string.no, null)
 		      .show();
 			
-			return;			
+			return;
 		}
 				
 		this.sendButton.setVisibility(View.INVISIBLE);
@@ -115,7 +119,7 @@ public class CommunityCommentsActivity extends LiveStrongActivity {
 		
 		DataHelper.postNewComment(
 			this.message.getPostId(),
-			this.messageEditText.getText().toString(), 
+			this.messageEditText.getText().toString(),
 			this);
 		this.hideKeyboard();
 	}
@@ -126,12 +130,12 @@ public class CommunityCommentsActivity extends LiveStrongActivity {
 			int numComments = this.message.getComments();
 			this.message.setComments(++numComments);
 			this.setNumComments(numComments);
-			this.adapter.reloadComments();	
+			this.adapter.reloadComments();
 			this.progressBar.setVisibility(View.INVISIBLE);
 			this.sendButton.setVisibility(View.VISIBLE);
 			this.messageEditText.setEnabled(true);
 			this.messageEditText.setText("");
-		}	
+		}
 	}
 	
 	private void hideKeyboard(){
@@ -140,7 +144,7 @@ public class CommunityCommentsActivity extends LiveStrongActivity {
 			InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
 			imm.hideSoftInputFromWindow(this.messageEditText.getWindowToken(), 0);
 			// Clear focus
-			this.messageEditText.clearFocus();	
+			this.messageEditText.clearFocus();
 		}
 	}
 }

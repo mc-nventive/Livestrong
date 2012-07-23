@@ -28,14 +28,16 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-import com.livestrong.myplate.R;
 import com.livestrong.myplate.activity.CommunityCommentsActivity;
 import com.livestrong.myplate.adapters.CommunityListAdapter;
 import com.livestrong.myplate.animations.DropDownAnimation;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.models.CommunityMessage;
+import com.livestrong.myplate.constants.BuildValues;
 import com.livestrong.myplate.utilities.PullToRefreshListView;
 import com.livestrong.myplate.utilities.PullToRefreshListView.OnRefreshListener;
+import com.livestrong.myplate.utilities.Utils;
+import com.livestrong.myplatelite.R;
 
 public class CommunityFragment extends FragmentDataHelperDelegate implements OnItemClickListener {
 
@@ -76,7 +78,7 @@ public class CommunityFragment extends FragmentDataHelperDelegate implements OnI
 		
 		this.communityListView = (ListView) view.findViewById(R.id.communityListView);
 		if (this.communityListAdapter == null){
-			this.communityListAdapter = new CommunityListAdapter(getActivity(), this.communityListView);	
+			this.communityListAdapter = new CommunityListAdapter(getActivity(), this.communityListView);
 		} else {
 			this.communityListAdapter.setListView(this.communityListView);
 		}
@@ -94,7 +96,7 @@ public class CommunityFragment extends FragmentDataHelperDelegate implements OnI
 					} else {
 						((PullToRefreshListView) communityListView).onRefreshComplete();
 					}
-				}				
+				}
 			}
 		});
 				
@@ -186,14 +188,17 @@ public class CommunityFragment extends FragmentDataHelperDelegate implements OnI
 	}
 
 	private void loadUserMessages() {
-		if (DataHelper.isLoggedIn() == false){
+		if (DataHelper.isLoggedIn() == false || BuildValues.IS_LIGHT){
 			new AlertDialog.Builder(getActivity())
-		      .setMessage("Viewing your messages requires you to be logged in to your LIVESTRONG account")
+		      .setMessage("This function is not available in the lite version. Would you like to visit the Play store now?")
 		      .setTitle("")
-		      .setNeutralButton(android.R.string.ok,
-		         new DialogInterface.OnClickListener() {
-		         public void onClick(DialogInterface dialog, int whichButton){}
-		         })
+		      .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Utils.openPlayStore(getActivity());
+				}
+			  })
+			  .setNegativeButton(android.R.string.no, null)
 		      .show();
 			return;
 		}
@@ -205,14 +210,17 @@ public class CommunityFragment extends FragmentDataHelperDelegate implements OnI
 	}
 
 	private void writeMessageButtonPressed() {
-		if (DataHelper.isLoggedIn() == false){
+		if (DataHelper.isLoggedIn() == false || BuildValues.IS_LIGHT){
 			new AlertDialog.Builder(getActivity())
-		      .setMessage("Posting to the community requires you to be logged in to your LIVESTRONG account")
+		      .setMessage("This function is not available in the lite version. Would you like to visit the Play store now?")
 		      .setTitle("")
-		      .setNeutralButton(android.R.string.ok,
-		         new DialogInterface.OnClickListener() {
-		         public void onClick(DialogInterface dialog, int whichButton){}
-		         })
+		      .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					Utils.openPlayStore(getActivity());
+				}
+			  })
+			  .setNegativeButton(android.R.string.no, null)
 		      .show();
 			return;
 		}
@@ -220,7 +228,7 @@ public class CommunityFragment extends FragmentDataHelperDelegate implements OnI
 		if (this.messageContainer.getLayoutParams().height == 0){
 			this.showMessageContainer(true);
 		} else {
-			this.hideMessageContainer(true);	
+			this.hideMessageContainer(true);
 		}
 	}
 	
@@ -262,11 +270,11 @@ public class CommunityFragment extends FragmentDataHelperDelegate implements OnI
 			this.messageContainer.startAnimation(animation);
 		} else {
 			this.messageContainer.getLayoutParams().height = 0;
-			this.messageContainer.requestLayout();	
-		}	
+			this.messageContainer.requestLayout();
+		}
 	}
 	
-	private void showMessageContainer(Boolean animated){		
+	private void showMessageContainer(Boolean animated){
 		if (animated){
 			//LinearLayout.LayoutParams params = (android.widget.LinearLayout.LayoutParams) messageContainer.getLayoutParams();
 			//params.setMargins(0, 0, 0, 0);
@@ -277,16 +285,16 @@ public class CommunityFragment extends FragmentDataHelperDelegate implements OnI
 			this.messageContainer.requestLayout();
 			
 			DropDownAnimation animation = new DropDownAnimation(this.messageContainer, this.messageContainerHeight);
-			animation.setDuration(300);			
+			animation.setDuration(300);
 			animation.setAnimationListener(new AnimationListener() {
 				@Override
 				public void onAnimationStart(Animation animation) {
 					
-				}				
+				}
 				@Override
 				public void onAnimationRepeat(Animation animation) {
 									
-				}				
+				}
 				@Override
 				public void onAnimationEnd(Animation animation) {
 					final Handler handler = new Handler();

@@ -3,6 +3,14 @@ package com.livestrong.myplate.utilities;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
+import android.widget.Toast;
+
+import com.livestrong.myplate.Constants;
+
 public class Utils {
     public static void CopyStream(InputStream is, OutputStream os)
     {
@@ -20,4 +28,19 @@ public class Utils {
         }
         catch(Exception ex){}
     }
+    
+    public static void openPlayStore(Activity currentActivity) {
+    	try {
+			Intent intent = new Intent(Intent.ACTION_VIEW);
+			intent.setData(Uri.parse("market://details?id=" + Constants.APPLICATION_PACKAGE_ID_PAID));
+			currentActivity.startActivity(intent);
+		} catch (ActivityNotFoundException ex) {
+			// Thrown if market app is not installed
+			Toast.makeText(currentActivity,
+					"Cannot open Play Store. Please search for LiveStrong in the Play Store.",
+					Toast.LENGTH_LONG)
+					.show();
+		}
+    }
+    
 }

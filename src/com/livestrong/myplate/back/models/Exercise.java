@@ -199,12 +199,7 @@ public class Exercise extends AbstractLiveStrongApiObject implements LiveStrongD
 	}
 
 	public double getCalsPerHour() {
-		UserProfile userProfile = DataHelper.getUserProfile(null);
-		if (userProfile == null){
-			return this.calsPerHour;
-		}
-		
-		double userWeight = userProfile.getWeight();
+		double userWeight = DataHelper.getUserProfile(null).getWeight();
 		if (isCustom() || userWeight <= 0) {
 			return this.calsPerHour;
 		}

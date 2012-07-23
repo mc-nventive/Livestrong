@@ -14,9 +14,10 @@ import android.widget.EditText;
 
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.livestrong.myplate.MyPlateApplication;
-import com.livestrong.myplate.R;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.models.Food;
+import com.livestrong.myplate.utilities.SessionMHelper;
+import com.livestrong.myplatelite.R;
 
 public class CreateFoodActivity extends LiveStrongActivity {
 
@@ -132,13 +133,16 @@ public class CreateFoodActivity extends LiveStrongActivity {
 		
 		if (resultCode == Activity.RESULT_OK){
 			String foodName = data.getExtras().getString(AddFoodActivity.INTENT_FOOD_NAME);
+			String sessionM = data.getExtras().getString(SessionMHelper.INTENT_SESSIONM);
 			
 			Intent resultIntent = new Intent();
 			resultIntent.putExtra(AddFoodActivity.INTENT_FOOD_NAME, foodName);
+			if (sessionM != null)
+				resultIntent.putExtra(SessionMHelper.INTENT_SESSIONM, sessionM);
 			
 			setResult(Activity.RESULT_OK, resultIntent);
 			
-            finish();	
+            finish();
 		}
 	}
 
@@ -156,7 +160,7 @@ public class CreateFoodActivity extends LiveStrongActivity {
 	private boolean validateFields(){
 		String errorMessage = "";
 		if (this.nameEditText.getText().toString().equals("")){
-			errorMessage += "A name must be entered.\n";			
+			errorMessage += "A name must be entered.\n";
 		}
 		if (this.servingSizeEditText.getText().toString().equals("")){
 			errorMessage += "A serving size must be entered.\n";
@@ -174,7 +178,7 @@ public class CreateFoodActivity extends LiveStrongActivity {
 		         })
 		      .show();
 			return false;
-		}		
+		}
 		return true;
 	}
 }

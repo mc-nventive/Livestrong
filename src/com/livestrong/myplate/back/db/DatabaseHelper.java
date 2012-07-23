@@ -17,7 +17,7 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import com.livestrong.myplate.R;
+import com.livestrong.myplatelite.R;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.api.ApiHelper;
 import com.livestrong.myplate.back.api.models.SyncDiaryObject;
@@ -145,42 +145,39 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	
 	@SuppressWarnings("unchecked")
 	public static void persistData(Method methodCalled, Object data) {
-		synchronized (DataHelper.getDatabaseHelper()) {
-			if (methodCalled.equals(DataHelper.METHOD_GET_USER_PROFILE)) {
-				if (data instanceof UserProfile) {
-					ApiHelper.persistAuthData();
-					DataHelper.getDatabaseHelper().getUserProfileDao().createOrUpdate((UserProfile) data);
-				}
+		if (methodCalled.equals(DataHelper.METHOD_GET_USER_PROFILE)) {
+			if (data instanceof UserProfile) {
+				ApiHelper.persistAuthData();
+				DataHelper.getDatabaseHelper().getUserProfileDao().createOrUpdate((UserProfile) data);
 			}
-			else if (methodCalled.equals(DataHelper.METHOD_GET_FOODS)) {
-				if (data instanceof List) {
-					RuntimeExceptionDao<Food, Integer> dao = DataHelper.getDatabaseHelper().getFoodDao();
-					for (Food food : (List<Food>) data) {
-						dao.createOrUpdate(food);
-					}
-				}
-			}
-			else if (methodCalled.equals(DataHelper.METHOD_GET_EXERCISES)) {
-				if (data instanceof List) {
-					RuntimeExceptionDao<Exercise, Integer> dao = DataHelper.getDatabaseHelper().getExerciseDao();
-					for (Exercise exercise : (List<Exercise>) data) {
-						dao.createOrUpdate(exercise);
-					}
-				}
-			}
-			else if (methodCalled.equals(DataHelper.METHOD_SYNC_DIARY)) {
-				if (data instanceof SyncDiaryObject) {
-					// Save remote changes in DB
-					((SyncDiaryObject) data).saveAll();
-				}
-			}
-			else if (methodCalled.equals(DataHelper.METHOD_GET_ACTIVITY_LEVELS)) {
-				if (data instanceof ActivityLevels) {
-					DataHelper.getDatabaseHelper().getActivityLevelsDao().createOrUpdate((ActivityLevels) data);
+		}
+		else if (methodCalled.equals(DataHelper.METHOD_GET_FOODS)) {
+			if (data instanceof List) {
+				RuntimeExceptionDao<Food, Integer> dao = DataHelper.getDatabaseHelper().getFoodDao();
+				for (Food food : (List<Food>) data) {
+					dao.createOrUpdate(food);
 				}
 			}
 		}
-		Log.i("DatabaseHelper", "persistData(" + methodCalled.getName() + ", ...) > Done");
+		else if (methodCalled.equals(DataHelper.METHOD_GET_EXERCISES)) {
+			if (data instanceof List) {
+				RuntimeExceptionDao<Exercise, Integer> dao = DataHelper.getDatabaseHelper().getExerciseDao();
+				for (Exercise exercise : (List<Exercise>) data) {
+					dao.createOrUpdate(exercise);
+				}
+			}
+		}
+		else if (methodCalled.equals(DataHelper.METHOD_SYNC_DIARY)) {
+			if (data instanceof SyncDiaryObject) {
+				// Save remote changes in DB
+				((SyncDiaryObject) data).saveAll();
+			}
+		}
+		else if (methodCalled.equals(DataHelper.METHOD_GET_ACTIVITY_LEVELS)) {
+			if (data instanceof ActivityLevels) {
+				DataHelper.getDatabaseHelper().getActivityLevelsDao().createOrUpdate((ActivityLevels) data);
+			}
+		}
 	}
 
 	/**

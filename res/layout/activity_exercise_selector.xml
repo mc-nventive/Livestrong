@@ -1,157 +1,185 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" android:background="@drawable/background_repeat">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background_repeat" >
 
     <LinearLayout
-        android:layout_width="0px"
-        android:layout_height="0px"
-        android:focusable="true"
-        android:focusableInTouchMode="true" >
-    </LinearLayout>
-
-	<com.livestrong.myplate.views.ClearableEditText
-		android:id="@+id/edit_text_clearable"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:background="@color/black"/>
-    
-<!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
-
-<!-- :nextFocusUp and :nextFocusLeft have been set to the id of this component
-     to prevent the dummy from receiving focus again -->
-
-    <LinearLayout
-        android:id="@+id/toolBarContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <RelativeLayout
-            android:id="@+id/tool_bar"
-            style="@style/black_toolbar"
-            android:layout_width="fill_parent" >
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="0px"
+            android:focusable="true"
+            android:focusableInTouchMode="true" >
+        </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/linearLayout1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:weightSum="3">
+        <com.livestrong.myplate.views.ClearableEditText
+            android:id="@+id/edit_text_clearable"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black" />
 
-                <LinearLayout
-                    android:id="@+id/linearLayout2"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" android:layout_weight="1">
+        <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
 
-                    <Button
-                        android:id="@+id/frequentlyPerformedButton"
-                        style="@style/black_toolbar_button"
-                        android:layout_width="match_parent"
-                        android:text="Frequently Performed" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
-                </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/LinearLayout01"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" android:layout_weight="1">
-
-                    <Button
-                        android:id="@+id/customExercisesButton"
-                        style="@style/black_toolbar_button"
-                        android:layout_width="match_parent"
-                        android:text="@string/custom_exercises" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout3"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" android:layout_weight="1">
-
-                    <Button
-                        android:id="@+id/recentlyPerformedButton"
-                        style="@style/black_toolbar_button"
-                        android:layout_width="match_parent"
-                        android:text="Recently Performed" android:layout_marginLeft="4dp" android:layout_marginRight="4dp"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-        </RelativeLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/imageView1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="fitXY"
-                android:src="@drawable/header_arrow" />
-
-            <TextView
-                android:id="@+id/timeOfDayTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="4dp"
-                android:text="Exercise"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/black"
-                android:textSize="18dp" />
-        </FrameLayout>
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <ListView
-            android:id="@+id/listView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fadingEdge="none" android:divider="@android:color/transparent">
-        </ListView>
+        <!--
+     :nextFocusUp and :nextFocusLeft have been set to the id of this component
+     to prevent the dummy from receiving focus again
+        -->
 
         <LinearLayout
-            android:id="@+id/messageContainer"
-            android:layout_width="wrap_content"
+            android:id="@+id/toolBarContainer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/messageTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text=" No recently eaten foods."
-                android:textColor="@color/dark_grey" />
+            <RelativeLayout
+                android:id="@+id/tool_bar"
+                style="@style/black_toolbar"
+                android:layout_width="fill_parent" >
 
-            <TextView
-                android:id="@+id/textView01"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="5dp"
-                android:text="Search above or "
-                android:textColor="@color/dark_grey" />
+                <LinearLayout
+                    android:id="@+id/linearLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="3" >
 
-            <Button
-                android:id="@+id/addManualButton"
-                android:layout_width="160dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/btn_black_selector"
-                android:text="Add Exercise Manually"
-                android:textColor="@color/white" />
+                    <LinearLayout
+                        android:id="@+id/linearLayout2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <Button
+                            android:id="@+id/frequentlyPerformedButton"
+                            style="@style/black_toolbar_button"
+                            android:layout_width="match_parent"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:text="Frequently Performed" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/LinearLayout01"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <Button
+                            android:id="@+id/customExercisesButton"
+                            style="@style/black_toolbar_button"
+                            android:layout_width="match_parent"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:text="@string/custom_exercises" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical" >
+
+                        <Button
+                            android:id="@+id/recentlyPerformedButton"
+                            style="@style/black_toolbar_button"
+                            android:layout_width="match_parent"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:text="Recently Performed" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/imageView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/header_arrow" />
+
+                <TextView
+                    android:id="@+id/timeOfDayTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="4dp"
+                    android:text="Exercise"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="@color/black"
+                    android:textSize="18dp" />
+            </FrameLayout>
         </LinearLayout>
-    </RelativeLayout>
 
-</LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <ListView
+                android:id="@+id/listView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@android:color/transparent"
+                android:fadingEdge="none" >
+            </ListView>
+
+            <LinearLayout
+                android:id="@+id/messageContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/messageTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text=" No recently eaten foods."
+                    android:textColor="@color/dark_grey" />
+
+                <TextView
+                    android:id="@+id/textView01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:text="Search above or "
+                    android:textColor="@color/dark_grey" />
+
+                <Button
+                    android:id="@+id/addManualButton"
+                    android:layout_width="160dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/btn_black_selector"
+                    android:text="Add Exercise Manually"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <com.admarvel.android.ads.AdMarvelView
+        xmlns:admarvel="http://schemas.android.com/apk/res/com.livestrong.myplatelite"
+        android:id="@+id/ad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        admarvel:backgroundColor="#726D6D"
+        admarvel:textBackgroundColor="#726D6D"
+        admarvel:textBorderColor="#000000"
+        admarvel:textFontColor="#00FF00" />
+
+</RelativeLayout>

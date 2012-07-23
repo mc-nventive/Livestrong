@@ -1,6 +1,5 @@
 package com.livestrong.myplate.fragment;
 
-import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,7 +15,6 @@ import android.support.v4.view.ViewPager.LayoutParams;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -27,32 +25,28 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.livestrong.myplate.R;
-import com.livestrong.myplate.activity.LoginActivity;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.DataHelper.DistanceUnits;
 import com.livestrong.myplate.back.DataHelper.WaterUnits;
 import com.livestrong.myplate.back.DataHelper.WeightUnits;
+import com.livestrong.myplate.constants.BuildValues;
 import com.livestrong.myplate.utilities.NotificationReceiver;
+import com.livestrong.myplatelite.R;
+import com.sessionm.api.SessionM;
 
 public class MoreAccountFragment extends FragmentDataHelperDelegate {
 	
-	LinearLayout view, reminderTimeContainer, connectContainer, syncContainer;
+	LinearLayout view, reminderTimeContainer;
 	CheckBox dailyReminderCheckBox;
 	EditText reminderTimeEditText;
 	Spinner weightSpinner, distancesSpinner, waterSpinner;
 	ScrollView scrollView;
 	Dialog dialog;
 	Date reminderTime;
-	Button syncButton;
-	ProgressBar syncProgressBar;
-	TextView lastSyncTextView;
 	int rowHeight = 0;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,7 +63,6 @@ public class MoreAccountFragment extends FragmentDataHelperDelegate {
 		
 		// Hook up outlets
 		this.view = (LinearLayout) inflater.inflate(R.layout.fragment_more_account, container, false);
-		this.connectContainer 		= (LinearLayout) this.view.findViewById(R.id.connectContainer);
 		this.dailyReminderCheckBox 	= (CheckBox) this.view.findViewById(R.id.dailyReminderCheckBox);
 		this.reminderTimeEditText 	= (EditText) this.view.findViewById(R.id.reminderTimeEditText);
 		this.weightSpinner 			= (Spinner) this.view.findViewById(R.id.weightSpinner);
@@ -77,74 +70,45 @@ public class MoreAccountFragment extends FragmentDataHelperDelegate {
 		this.waterSpinner			= (Spinner) this.view.findViewById(R.id.waterSpinner);
 		this.reminderTimeContainer	= (LinearLayout) this.view.findViewById(R.id.reminderTimeContainer);
 		this.scrollView				= (ScrollView) this.view.findViewById(R.id.scrollView);
-		this.syncButton 			= (Button) this.view.findViewById(R.id.syncNowButton);
-		this.syncContainer			= (LinearLayout) this.view.findViewById(R.id.syncContainer);
-		this.lastSyncTextView		= (TextView) this.view.findViewById(R.id.lastSyncTextView);
-		this.syncProgressBar		= (ProgressBar) this.view.findViewById(R.id.syncProgressBar);
-		this.syncProgressBar.setVisibility(View.INVISIBLE);
 		
 		long savedTime = DataHelper.getPref(DataHelper.PREFS_DAILY_REMINDER_TIME, (long) 0);
 		if (savedTime != 0){
 			this.reminderTime = new Date(savedTime);
 		} else {
-			this.reminderTime = new Date();	
-		}		
-		
+			this.reminderTime = new Date();
+		}
+
+		this.initializeButtons();
 		this.refreshReminderEditText();
 		this.initializeEditTexts();
-		this.initializeButtons();
 		this.initializeSpinners();
 		this.initalizeCheckBox();
-		this.refreshSyncTextView();
-		this.refreshLayout();
 		
 		return this.view;
 	}
 	
-	private void refreshLayout(){
-		if (rowHeight == 0){
-			rowHeight = this.connectContainer.getLayoutParams().height;
+	private void initializeButtons() {
+		if (BuildValues.IS_LIGHT) {
+			final Activity activity = getActivity();
+			
+			Button howItWorksButton = (Button) view.findViewById(R.id.howItWorksButton);
+			howItWorksButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					SessionM.getInstance().presentIntroduction(activity);
+				}
+			});
+			
+			Button achievemntsButton = (Button) view.findViewById(R.id.achievmentsButton);
+			achievemntsButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					SessionM.getInstance().presentPortal(activity);
+				}
+			});
 		}
-		if (DataHelper.isLoggedIn()){
-			this.connectContainer.getLayoutParams().height = 0;
-			this.syncContainer.getLayoutParams().height = rowHeight;
-		} else {
-			this.connectContainer.getLayoutParams().height = rowHeight;
-			this.syncContainer.getLayoutParams().height = 0;
-		}
-		this.connectContainer.requestLayout();
-		this.syncContainer.requestLayout();
 	}
 	
-	private void initializeButtons(){
-		Button connectButton = (Button)this.view.findViewById(R.id.connectButton);
-		connectButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(getActivity(), LoginActivity.class);
-				intent.putExtra(LoginActivity.INTENT_APP_OFFLINE_MODE, true);
-				startActivityForResult(intent, 1);
-			}
-		});
-		
-		this.syncButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				syncButton.setEnabled(false);
-				syncProgressBar.setVisibility(View.VISIBLE);
-				DataHelper.refreshData(MoreAccountFragment.this);
-			}
-		});
-	}
-	
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		
-		if (resultCode == Activity.RESULT_OK){
-			this.refreshLayout();
-		}
-	}
 	
 	private void initializeSpinners(){
 		ArrayAdapter<CharSequence> weightAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.weightUnits, R.layout.spinner_item);
@@ -181,9 +145,9 @@ public class MoreAccountFragment extends FragmentDataHelperDelegate {
 		
 	}
 	
-	private void initalizeCheckBox(){		
+	private void initalizeCheckBox(){
 		Boolean dailyReminder = (Boolean) DataHelper.getPref(DataHelper.PREFS_DAILY_REMINDER, (Boolean) null);
-		this.dailyReminderCheckBox.setChecked(dailyReminder);		
+		this.dailyReminderCheckBox.setChecked(dailyReminder);
 		if (!dailyReminder){
 			reminderTimeContainer.getLayoutParams().height = 0;
 		}
@@ -218,7 +182,7 @@ public class MoreAccountFragment extends FragmentDataHelperDelegate {
 				if (dialog == null){
 					dialog = new Dialog(getActivity());
 					dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-					dialog.setContentView(R.layout.dialog_time); 
+					dialog.setContentView(R.layout.dialog_time);
 					final TimePicker timePicker = (TimePicker) dialog.findViewById(R.id.timePicker1);
 					timePicker.setCurrentHour(reminderTime.getHours());
 					timePicker.setCurrentMinute(reminderTime.getMinutes());
@@ -229,7 +193,7 @@ public class MoreAccountFragment extends FragmentDataHelperDelegate {
 						public void onClick(View v) {
 				            dialog.cancel();
 						}
-					});	
+					});
 										
 					Button doneButton = (Button) dialog.findViewById(R.id.doneButton);
 					doneButton.setOnClickListener(new View.OnClickListener() {
@@ -250,7 +214,7 @@ public class MoreAccountFragment extends FragmentDataHelperDelegate {
 				}
 				
 				if (!dialog.isShowing()){
-					dialog.show();	
+					dialog.show();
 				}
 				
 				return true;
@@ -271,7 +235,7 @@ public class MoreAccountFragment extends FragmentDataHelperDelegate {
 		// Save Weight Units
 		int position = this.weightSpinner.getSelectedItemPosition();
 		if (position == 0){ // Kilograms selected
-			DataHelper.setPref(DataHelper.PREFS_WEIGHT_UNITS, WeightUnits.KILOGRAMS.toString()); 
+			DataHelper.setPref(DataHelper.PREFS_WEIGHT_UNITS, WeightUnits.KILOGRAMS.toString());
 		} else if (position == 1){ // Pounds selected
 			DataHelper.setPref(DataHelper.PREFS_WEIGHT_UNITS, WeightUnits.POUNDS.toString());
 		} else { // Stones selected
@@ -281,18 +245,18 @@ public class MoreAccountFragment extends FragmentDataHelperDelegate {
 		// Save Distance Units
 		position = this.distancesSpinner.getSelectedItemPosition();
 		if (position == 0){ // Kilograms selected
-			DataHelper.setPref(DataHelper.PREFS_DISTANCE_UNITS, DistanceUnits.METERS.toString()); 
+			DataHelper.setPref(DataHelper.PREFS_DISTANCE_UNITS, DistanceUnits.METERS.toString());
 		} else if (position == 1){ // Pounds selected
 			DataHelper.setPref(DataHelper.PREFS_DISTANCE_UNITS, DistanceUnits.MILES.toString());
-		} 
+		}
 		
 		// Save Water Units
 		position = this.waterSpinner.getSelectedItemPosition();
 		if (position == 0){ // Kilograms selected
-			DataHelper.setPref(DataHelper.PREFS_WATER_UNITS, WaterUnits.MILLILITERS.toString()); 
+			DataHelper.setPref(DataHelper.PREFS_WATER_UNITS, WaterUnits.MILLILITERS.toString());
 		} else if (position == 1){ // Pounds selected
 			DataHelper.setPref(DataHelper.PREFS_WATER_UNITS, WaterUnits.ONCES.toString());
-		}		
+		}
 		
 		// Save Dialy Reminder status
 		if (this.dailyReminderCheckBox.isChecked()){
@@ -305,37 +269,17 @@ public class MoreAccountFragment extends FragmentDataHelperDelegate {
 	@Override
 	public void onPause() {
 		// Save data
-		this.saveProfile();	
+		this.saveProfile();
 		
 		super.onPause();
 	}
 
-	@Override
-	public void dataReceived(Method methodCalled, Object data) {
-		if (methodCalled.equals(DataHelper.METHOD_SYNC_DIARY)) {
-			this.syncProgressBar.setVisibility(View.INVISIBLE);
-			this.syncButton.setEnabled(true);
-			this.refreshSyncTextView();
-		}
-	}
-
-	private void refreshSyncTextView(){
-		long time = DataHelper.getPref(DataHelper.PREFS_LAST_SYNC, (long) 0);
-		if (time != 0){
-			Date lastSync = new Date(time);
-			SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy h:mm:ss a");
-			this.lastSyncTextView.setText("Last Sync: " + dateFormat.format(lastSync));
-		} else {
-			this.lastSyncTextView.setText("Last Sync: ");
-		}
-	}
-	
-	private void setDailyReminder(){		
+	private void setDailyReminder(){
         //---use the AlarmManager to trigger an alarm---
-        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Activity.ALARM_SERVICE);                 
+        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Activity.ALARM_SERVICE);
 
         //---get current date and time---
-        Calendar calendar = Calendar.getInstance();       
+        Calendar calendar = Calendar.getInstance();
         
         //---sets the time for the alarm to trigger---
         calendar.setTime(new Date());
@@ -358,9 +302,9 @@ public class MoreAccountFragment extends FragmentDataHelperDelegate {
 	
 	private PendingIntent getDailyReminderIntent(){
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
-            	getActivity().getBaseContext(), 0, 
-                new Intent(getActivity(), NotificationReceiver.class), 
-                0); 
+            	getActivity().getBaseContext(), 0,
+                new Intent(getActivity(), NotificationReceiver.class),
+                0);
         return pendingIntent;
 	}
 }

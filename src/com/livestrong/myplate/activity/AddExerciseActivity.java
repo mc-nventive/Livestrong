@@ -10,15 +10,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.admarvel.android.ads.AdMarvelView;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.livestrong.myplate.MyPlateApplication;
-import com.livestrong.myplate.R;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.models.Exercise;
 import com.livestrong.myplate.back.models.ExerciseDiaryEntry;
+import com.livestrong.myplate.utilities.AdvertisementHelper;
 import com.livestrong.myplate.utilities.ImageLoader;
+import com.livestrong.myplate.utilities.SessionMHelper;
 import com.livestrong.myplate.utilities.picker.NumberPicker;
 import com.livestrong.myplate.utilities.picker.NumberPicker.OnChangedListener;
+import com.livestrong.myplatelite.R;
 
 public class AddExerciseActivity extends LiveStrongActivity {
 	
@@ -79,7 +82,7 @@ public class AddExerciseActivity extends LiveStrongActivity {
 	    	
 	    	ImageLoader imageLoader = new ImageLoader(this);
 	    	ImageView imageView = (ImageView)findViewById(R.id.foodImageView);
-	    	imageView.setImageResource(R.drawable.icon_fitness);			
+	    	imageView.setImageResource(R.drawable.icon_fitness);
 	    	imageLoader.DisplayImage(this.exercise.getSmallImage(), imageView);
 	    	
 	        Button iDidThisButton = (Button) findViewById(R.id.iDidThisButton);
@@ -96,30 +99,27 @@ public class AddExerciseActivity extends LiveStrongActivity {
 	        iDidThisButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					Intent resultIntent = new Intent();
+					resultIntent.putExtra(AddExerciseActivity.INTENT_EXERCISE_NAME, AddExerciseActivity.this.exercise.getTitle());
 
-					double pickerMinutes = getPickersMinutes();
-					
 					if (AddExerciseActivity.this.diaryEntry != null) {
-						if (pickerMinutes == 0.0){
-							DataHelper.deleteDiaryEntry(AddExerciseActivity.this.diaryEntry, AddExerciseActivity.this);
-						} else {
-							AddExerciseActivity.this.diaryEntry.setMinutes((int) getPickersMinutes());
-							DataHelper.saveDiaryEntry(AddExerciseActivity.this.diaryEntry, AddExerciseActivity.this);
-						}
+						// Updating entry
+						AddExerciseActivity.this.diaryEntry.setMinutes((int) getPickersMinutes());
+			            DataHelper.saveDiaryEntry(AddExerciseActivity.this.diaryEntry, AddExerciseActivity.this);
 					} else {
+						// New entry
 						ExerciseDiaryEntry e = new ExerciseDiaryEntry(
-				           		AddExerciseActivity.this.exercise,
-				           		getPickersMinutes(),
-				           		MyPlateApplication.getWorkingDateStamp());
+			            		AddExerciseActivity.this.exercise,
+			            		getPickersMinutes(),
+			            		MyPlateApplication.getWorkingDateStamp());
 
-				        DataHelper.saveDiaryEntry(e, AddExerciseActivity.this);									            
+			            DataHelper.saveDiaryEntry(e, AddExerciseActivity.this);
+			            
+		            	// Log a SessionM event
+			            resultIntent.putExtra(SessionMHelper.INTENT_SESSIONM, "trackedExercise");
 					}
 
-					if (pickerMinutes > 0.0){						
-						Intent resultIntent = new Intent();
-						resultIntent.putExtra(AddExerciseActivity.INTENT_EXERCISE_NAME, AddExerciseActivity.this.exercise.getTitle());
-						setResult(Activity.RESULT_OK, resultIntent);
-					}
+					setResult(Activity.RESULT_OK, resultIntent);
 					
 					finish();
 				}
@@ -134,6 +134,9 @@ public class AddExerciseActivity extends LiveStrongActivity {
 			});
 
         }
+        
+		// Initialize advertisements
+		AdvertisementHelper.requestAd((AdMarvelView) findViewById(R.id.ad), this);
     }
 
 	private double getPickersMinutes() {

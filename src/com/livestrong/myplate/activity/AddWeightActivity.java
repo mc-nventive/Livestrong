@@ -1,9 +1,9 @@
 package com.livestrong.myplate.activity;
 
 import java.text.DecimalFormat;
-import java.text.Format;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,12 +11,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.livestrong.myplate.MyPlateApplication;
-import com.livestrong.myplate.R;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.DataHelper.WaterUnits;
 import com.livestrong.myplate.back.DataHelper.WeightUnits;
 import com.livestrong.myplate.back.models.DiaryEntries;
 import com.livestrong.myplate.back.models.WeightDiaryEntry;
+import com.livestrong.myplate.utilities.SessionMHelper;
+import com.livestrong.myplatelite.R;
 
 public class AddWeightActivity extends LiveStrongActivity {
 	
@@ -71,6 +72,7 @@ public class AddWeightActivity extends LiveStrongActivity {
         trackButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				Intent resultIntent = new Intent();
 				
 				String weightString = weightEditText.getText().toString();
 				if (weightString.equals("")){
@@ -83,11 +85,14 @@ public class AddWeightActivity extends LiveStrongActivity {
 				WeightDiaryEntry e = entries.getWeightEntry(MyPlateApplication.getWorkingDateStamp());
 				if (e == null) {
 					e = new WeightDiaryEntry(weight, MyPlateApplication.getWorkingDateStamp());
+					
+					// Post SessionM event for first time tracking this day
+					resultIntent.putExtra(SessionMHelper.INTENT_SESSIONM, "trackedWeight");
 				} else {
 					e.setWeight(weight);
 				}
 				
-				setResult(Activity.RESULT_OK);
+				setResult(Activity.RESULT_OK, resultIntent);
 				
 	            DataHelper.saveDiaryEntry(e, AddWeightActivity.this);
 	            finish();
@@ -98,6 +103,7 @@ public class AddWeightActivity extends LiveStrongActivity {
 			@Override
 			public void onClick(View v) {
 	            DataHelper.deleteDiaryEntry(AddWeightActivity.this.diaryEntry, AddWeightActivity.this);
+	            setResult(Activity.RESULT_OK);
 	            finish();
 			}
 		});

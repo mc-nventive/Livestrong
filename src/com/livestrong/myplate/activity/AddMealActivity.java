@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.livestrong.myplate.MyPlateApplication;
-import com.livestrong.myplate.R;
 import com.livestrong.myplate.adapters.MealListAdapter;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.DataHelperDelegate;
@@ -21,6 +20,8 @@ import com.livestrong.myplate.back.models.FoodDiaryEntry;
 import com.livestrong.myplate.back.models.FoodDiaryEntry.TimeOfDay;
 import com.livestrong.myplate.back.models.Meal;
 import com.livestrong.myplate.back.models.MealItem;
+import com.livestrong.myplate.utilities.SessionMHelper;
+import com.livestrong.myplatelite.R;
 
 public class AddMealActivity extends LiveStrongActivity implements DataHelperDelegate {
 	
@@ -63,12 +64,13 @@ public class AddMealActivity extends LiveStrongActivity implements DataHelperDel
 					}
 					
 					Intent resultIntent = new Intent();
+					resultIntent.putExtra(SessionMHelper.INTENT_SESSIONM, "trackedFood");
 					resultIntent.putExtra(AddFoodActivity.INTENT_FOOD_NAME, meal.getTitle());
 					
 					setResult(Activity.RESULT_OK, resultIntent);
 					
-    	            finish();	
-				}			
+    	            finish();
+				}
 			}
 		});
 	}

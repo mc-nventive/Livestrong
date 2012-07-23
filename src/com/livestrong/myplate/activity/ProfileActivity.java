@@ -9,10 +9,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.livestrong.myplate.R;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.models.UserProfile;
 import com.livestrong.myplate.fragment.MoreProfileFragment;
+import com.livestrong.myplatelite.R;
 
 public class ProfileActivity extends LiveStrongFragmentActivity {
 		
@@ -37,10 +37,10 @@ public class ProfileActivity extends LiveStrongFragmentActivity {
         }
         
         // load profile fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();		
+        FragmentManager fragmentManager = getSupportFragmentManager();
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		fragmentTransaction.replace(R.id.frameLayout, profileFragment);
-		fragmentTransaction.commit();   
+		fragmentTransaction.commit();
 		
 		Button doneButton = (Button) findViewById(R.id.doneButton);
 		doneButton.setOnClickListener(new OnClickListener() {
@@ -53,5 +53,6 @@ public class ProfileActivity extends LiveStrongFragmentActivity {
 				finish();
 			}
 		});
+		
 	}
 }

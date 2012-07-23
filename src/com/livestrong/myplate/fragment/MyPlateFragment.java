@@ -10,9 +10,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -24,9 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.livestrong.myplate.MyPlateApplication;
-import com.livestrong.myplate.R;
 import com.livestrong.myplate.activity.AddWaterActivity;
-import com.livestrong.myplate.activity.AddWeightActivity;
 import com.livestrong.myplate.activity.ExerciseSelectorActivity;
 import com.livestrong.myplate.activity.FoodSelectorActivity;
 import com.livestrong.myplate.animations.WidthAnimation;
@@ -34,9 +29,12 @@ import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.models.DiaryEntries.DiaryEntryType;
 import com.livestrong.myplate.back.models.FoodDiaryEntry.TimeOfDay;
 import com.livestrong.myplate.back.models.UserProgress;
+import com.livestrong.myplate.utilities.SessionMHelper;
+import com.livestrong.myplatelite.R;
+import com.sessionm.api.SessionM;
 
 public class MyPlateFragment extends FragmentDataHelperDelegate {
-	private final static Class<?> NEXT_ACTIVITY_FOOD     = FoodSelectorActivity.class; 
+	private final static Class<?> NEXT_ACTIVITY_FOOD     = FoodSelectorActivity.class;
 	private final static Class<?> NEXT_ACTIVITY_EXERCICE = ExerciseSelectorActivity.class;
 	private final static Class<?> NEXT_ACTIVITY_WATER    = AddWaterActivity.class;
 
@@ -78,11 +76,11 @@ public class MyPlateFragment extends FragmentDataHelperDelegate {
 		
         this.initializeButtons();
         
-		return view;  
+		return view;
 	}
 	
 	public void initializeButtons(){
-		OnClickListener onClickListener = new OnClickListener() {			
+		OnClickListener onClickListener = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				int id = v.getId();
@@ -111,14 +109,11 @@ public class MyPlateFragment extends FragmentDataHelperDelegate {
 					case R.id.waterButton:
 						nextActivity = NEXT_ACTIVITY_WATER;
 						break;
-					default:
-						MyPlateApplication.setWorkingTimeOfDay(TimeOfDay.BREAKFAST);
-						nextActivity = NEXT_ACTIVITY_FOOD;
 				}
 				MyPlateApplication.setWorkingDateStamp(new Date());
 				if (nextActivity != null){
 					Intent intent = new Intent(getActivity(), nextActivity);
-					startActivity(intent);
+					startActivityForResult(intent, 1);
 				}
 			}
 		};
@@ -128,7 +123,20 @@ public class MyPlateFragment extends FragmentDataHelperDelegate {
 		this.dinnerBtn.setOnClickListener(onClickListener);
 		this.snacksBtn.setOnClickListener(onClickListener);
 		this.exerciseBtn.setOnClickListener(onClickListener);
-		this.waterBtn.setOnClickListener(onClickListener);     		
+		this.waterBtn.setOnClickListener(onClickListener);
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		// An activity might post a SessionM event
+		if (data != null && data.getExtras() != null) {
+			final String sessionM = data.getExtras().getString(SessionMHelper.INTENT_SESSIONM);
+			if (sessionM != null) {
+				SessionM.getInstance().presentActivity(getActivity(), sessionM);
+			}
+		}
 	}
 	
 	@Override
@@ -160,8 +168,8 @@ public class MyPlateFragment extends FragmentDataHelperDelegate {
 	}
 
 	private void refreshViewState(){
-		if (!isAdded() && !isVisible()){  
-			return; // Do not have access to Activity so must return 
+		if (!isAdded() && !isVisible()){
+			return; // Do not have access to Activity so must return
 		}
 		
 		Map<DiaryEntryType, String>diaryEntry = DataHelper.getDiarySummaryPerType(new Date());
@@ -177,7 +185,7 @@ public class MyPlateFragment extends FragmentDataHelperDelegate {
 		
 		String lunchStr = diaryEntry.get(DiaryEntryType.LUNCH);
 		if (lunchStr.equals("0")){
-			this.lunchBtn.setText(String.format(getString(R.string.btn_track_lunch_format), defaultStr));	
+			this.lunchBtn.setText(String.format(getString(R.string.btn_track_lunch_format), defaultStr));
 		} else {
 			this.lunchBtn.setText(String.format(getString(R.string.btn_track_lunch_format), lunchStr));
 			this.lunchBtn.setBackgroundResource(R.drawable.btn_track_blue_selector);
@@ -185,7 +193,7 @@ public class MyPlateFragment extends FragmentDataHelperDelegate {
 				
 		String dinnerStr = diaryEntry.get(DiaryEntryType.DINNER);
 		if (dinnerStr.equals("0")){
-			this.dinnerBtn.setText(String.format(getString(R.string.btn_track_dinner_format), defaultStr));	
+			this.dinnerBtn.setText(String.format(getString(R.string.btn_track_dinner_format), defaultStr));
 		} else {
 			this.dinnerBtn.setText(String.format(getString(R.string.btn_track_dinner_format), dinnerStr));
 			this.dinnerBtn.setBackgroundResource(R.drawable.btn_track_blue_selector);
@@ -216,7 +224,7 @@ public class MyPlateFragment extends FragmentDataHelperDelegate {
 		}
 		
 		// Set Progress bar width
-		Display display = getActivity().getWindowManager().getDefaultDisplay();   
+		Display display = getActivity().getWindowManager().getDefaultDisplay();
         
 		UserProgress userProgress = DataHelper.getUserCaloriesProgress(new Date());
 	 

@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.Stack;
 
 import org.acra.ACRA;
-import org.acra.annotation.ReportsCrashes;
 
 import android.app.Activity;
 import android.app.Application;
@@ -21,8 +20,8 @@ import com.livestrong.myplate.back.DataHelperDelegate;
 import com.livestrong.myplate.back.db.DatabaseHelper;
 import com.livestrong.myplate.back.models.FoodDiaryEntry.TimeOfDay;
 import com.livestrong.myplate.utilities.SimpleDate;
+import com.livestrong.myplatelite.R;
 
-@ReportsCrashes(formKey = "dEx3eE1zenRWcG5NR1lTaW5td1Jvdmc6MQ")
 public class MyPlateApplication extends Application {
 	private static Context context;
 
@@ -54,7 +53,7 @@ public class MyPlateApplication extends Application {
 			MyPlateApplication.workingDateStamp = null;
 		} else {
 			MyPlateApplication.workingDateStamp = new SimpleDate(workingDateStamp);
-		}		
+		}
 	}
 
 	public static void setWorkingTimeOfDay(TimeOfDay workingTimeOfDay) {
@@ -83,10 +82,10 @@ public class MyPlateApplication extends Application {
 
 	// TODO Move this function and make it use the strings.xml resource file
 	public static String getWorkingTimeOfDayString(){
-        TimeOfDay timeOfDay = getWorkingTimeOfDay(); 
+        TimeOfDay timeOfDay = getWorkingTimeOfDay();
         switch (timeOfDay){
         	case BREAKFAST:
-        		return "Breakfast";        	
+        		return "Breakfast";
         	case LUNCH:
         		return "Lunch";
         	case DINNER:
@@ -130,14 +129,14 @@ public class MyPlateApplication extends Application {
 					if (callCounter >= 3){ // we only want to set the database helper to null after all refresh data callbacks have been made
 						DataHelper.setDatabaseHelper(null);
 						MyPlateApplication.setWorkingDateStamp(null);
-					}											
+					}
 				}
 
 				@Override
 				public boolean errorOccurredThreaded(Method methodCalled, Exception error, String errorMessage) {
 					return false;
 				}
-			});			
+			});
 		}
 	}
 
@@ -165,7 +164,7 @@ public class MyPlateApplication extends Application {
 			return  MyPlateApplication.getContext().getString(R.string.today);
 		} else if (isYesterday(date)) {
 			return MyPlateApplication.getContext().getString(R.string.yesterday);
-		} else { 
+		} else {
 			return dateFormatter.format(date);
 		}
 	}

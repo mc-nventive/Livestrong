@@ -17,7 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.livestrong.myplate.MyPlateApplication;
-import com.livestrong.myplate.R;
+import com.livestrong.myplatelite.R;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.api.ApiHelper;
 import com.livestrong.myplate.back.models.CommunityMessage;

@@ -6,4 +6,6 @@ public class BuildValues {
     public static final boolean IGNORE_INVALID_SSL_CERTS = @app.api.ignore_invalid_certs@;   
     public static final String PROXY_HOST = "@app.proxy.host@";
     public static final int PROXY_PORT = @app.proxy.port@;
+    
+    public static final boolean IS_LIGHT = @app.light@;
 }

@@ -58,7 +58,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.livestrong.myplate.MyPlateApplication;
-import com.livestrong.myplate.R;
+import com.livestrong.myplatelite.R;
 import com.livestrong.myplate.back.AsyncDataHelper;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.DataHelperDelegate;
@@ -516,7 +516,7 @@ public class ApiHelper {
 		return apiResponse.response;
 	}
 
-	public synchronized static <D> ApiHelperResponse<D> requestRestSynchronous(HttpMethod httpMethod, String url, Class<D> responseObjectClass, Object body, MediaType contentType, boolean retry, Method methodCalled, DataHelperDelegate delegate, AuthUsing authUsing) {
+	public static <D> ApiHelperResponse<D> requestRestSynchronous(HttpMethod httpMethod, String url, Class<D> responseObjectClass, Object body, MediaType contentType, boolean retry, Method methodCalled, DataHelperDelegate delegate, AuthUsing authUsing) {
 		if (!isOnline()) {
 			return new ApiHelperResponse<D>(null, null);
 		}
@@ -597,7 +597,7 @@ public class ApiHelper {
 			proxyPort = BuildValues.PROXY_PORT;
 		}
 
-		if (proxyHost != null && proxyHost.trim().length() > 0 && proxyPort > 0) {
+		if (proxyPort > 0) {
 			SimpleClientHttpRequestFactory factory = ((SimpleClientHttpRequestFactory) restTemplate.getRequestFactory());
 			Proxy proxy = new Proxy(Type.HTTP, new InetSocketAddress(proxyHost, proxyPort));
 			factory.setProxy(proxy);
@@ -628,12 +628,6 @@ public class ApiHelper {
 		} catch (HttpServerErrorException e) {
 			// 5xx status codes
 			return handleApiErrors(gson, e);
-		} catch (java.lang.NullPointerException e) {
-			Log.e(ApiHelper.class.getName(), "Can't connect to API:");
-			return new ApiHelperResponse<D>(e, "Can't connect to LIVESTRONG server.");
-		} catch (java.lang.IllegalArgumentException e) {
-			Log.e(ApiHelper.class.getName(), "Can't connect to API:");
-			return new ApiHelperResponse<D>(e, "Can't connect to LIVESTRONG server.");
 		} catch (org.springframework.web.client.ResourceAccessException e) {
 			Log.e(ApiHelper.class.getName(), "Can't connect to API (proxy error?):");
 			e.getMostSpecificCause().printStackTrace();

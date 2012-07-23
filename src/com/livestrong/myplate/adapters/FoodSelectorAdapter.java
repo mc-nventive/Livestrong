@@ -1,7 +1,6 @@
 package com.livestrong.myplate.adapters;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -13,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.livestrong.myplate.MyPlateApplication;
-import com.livestrong.myplate.R;
+import com.livestrong.myplatelite.R;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.api.ApiHelper;
 import com.livestrong.myplate.back.api.models.FoodSearchResponse;
@@ -24,7 +23,7 @@ import com.livestrong.myplate.utilities.ImageLoader;
 
 public class FoodSelectorAdapter extends AbstractBaseAdapterDataHelperDelegate {
 
-	private List<LiveStrongDisplayableListItem> listItems = new ArrayList<LiveStrongDisplayableListItem>();
+	private List<LiveStrongDisplayableListItem> listItems;
 	private ImageLoader imageLoader; 
 	private TimeOfDay timeOfDay;
 	private Boolean isLoading = false;

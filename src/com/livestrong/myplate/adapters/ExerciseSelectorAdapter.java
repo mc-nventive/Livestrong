@@ -1,7 +1,6 @@
 package com.livestrong.myplate.adapters;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -14,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.livestrong.myplate.MyPlateApplication;
-import com.livestrong.myplate.R;
+import com.livestrong.myplatelite.R;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.api.ApiHelper;
 import com.livestrong.myplate.back.api.models.ExerciseSearchResponse;
@@ -23,7 +22,7 @@ import com.livestrong.myplate.utilities.ImageLoader;
 
 public class ExerciseSelectorAdapter extends AbstractBaseAdapterDataHelperDelegate {
 
-	private List<Exercise> exercises = new ArrayList<Exercise>();
+	private List<Exercise> exercises;
 	private ImageLoader imageLoader;
 	private Boolean isLoading = false;
 	private Boolean showSearchOnlinePromp = false;

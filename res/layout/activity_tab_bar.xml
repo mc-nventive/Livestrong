@@ -3,7 +3,7 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
-
+    
 	<TabHost
 	    android:id="@android:id/tabhost"
 	    android:layout_width="fill_parent"
@@ -27,6 +27,15 @@
 	            android:layout_weight="0.96" android:id="@+id/frame">
 
 	        </FrameLayout>
+	        
+            <com.admarvel.android.ads.AdMarvelView xmlns:admarvel="http://schemas.android.com/apk/res/com.livestrong.myplatelite"
+                android:id="@+id/ad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                admarvel:backgroundColor="#726D6D"
+                admarvel:textBackgroundColor="#726D6D"
+                admarvel:textFontColor="#00FF00"
+                admarvel:textBorderColor="#000000" />
 
 	        <TabWidget
 	            android:id="@android:id/tabs"

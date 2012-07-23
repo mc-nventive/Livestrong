@@ -9,7 +9,6 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +30,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint.Align;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager.LayoutParams;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -45,13 +43,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.livestrong.myplate.MyPlateApplication;
-import com.livestrong.myplate.R;
 import com.livestrong.myplate.activity.AddWeightActivity;
 import com.livestrong.myplate.activity.TrackActivity;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.models.DiaryEntries;
 import com.livestrong.myplate.back.models.WeightDiaryEntry;
+import com.livestrong.myplate.utilities.SessionMHelper;
 import com.livestrong.myplate.utilities.SimpleDate;
+import com.livestrong.myplatelite.R;
+import com.sessionm.api.SessionM;
 
 public class ProgressFragment extends FragmentDataHelperDelegate {
 
@@ -69,11 +69,9 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 
 	private DiaryEntries diaryEntries;
 	private Map<String, Double> nutrients;
-	private Map<SimpleDate, Double> dailyWeight = new LinkedHashMap<SimpleDate, Double>();
-	private Map<SimpleDate, Integer> dailyCalories = new LinkedHashMap<SimpleDate, Integer>();
-	private Map<SimpleDate, Integer> dailyCaloriesGoals = new LinkedHashMap<SimpleDate, Integer>();
-	
-	private boolean loading = false; 
+	private Map<SimpleDate, Double> dailyWeight;
+	private Map<SimpleDate, Integer> dailyCalories;
+	private Map<SimpleDate, Integer> dailyCaloriesGoals;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		if (container == null) {
@@ -137,16 +135,11 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 	}
 	
 	private void loadData(){
-		if (this.loading) {
-			return;
-		}
-		this.loading = true;
-
 		this.diaryEntries = null;
 		this.nutrients = null;
-		this.dailyWeight = new LinkedHashMap<SimpleDate, Double>();
-		this.dailyCalories = new LinkedHashMap<SimpleDate, Integer>();
-		this.dailyCaloriesGoals = new LinkedHashMap<SimpleDate, Integer>();
+		this.dailyWeight = null;
+		this.dailyCalories = null;
+		this.dailyCaloriesGoals = null;
 		
 		// Fetch data for all graphs!
 		DataHelper.getDailyDiaryEntries(this.graphFromDate, this.graphToDate, this);
@@ -195,8 +188,8 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 			@Override
 			public void onClick(View arg0) {
 				MyPlateApplication.setWorkingDateStamp(new Date());
-				Intent intent = new Intent(getCurrentActivity(), TrackActivity.class);
-				startActivity(intent);
+				Intent intent = new Intent(getActivity(), TrackActivity.class);
+				startActivityForResult(intent, 1);
 			}
 		});
 		
@@ -206,14 +199,26 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 				WeightDiaryEntry weightDiaryEntry = diaryEntries.getWeightEntry(new Date());
 				
 				MyPlateApplication.setWorkingDateStamp(new Date());
-				Intent intent = new Intent(getCurrentActivity(), AddWeightActivity.class);
+				Intent intent = new Intent(getActivity(), AddWeightActivity.class);
 				
 				if (weightDiaryEntry != null){
 					intent.putExtra(WeightDiaryEntry.class.getName(), weightDiaryEntry);
 				}
-				startActivity(intent);
+				startActivityForResult(intent, 1);
 			}
 		});
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		// An activity might post a SessionM event
+		if (data != null && data.getExtras() != null) {
+			String sessionM = data.getExtras().getString(SessionMHelper.INTENT_SESSIONM);
+			if (sessionM != null)
+				SessionM.getInstance().presentActivity(getActivity(), sessionM);
+		}
 	}
 		
 	public void showWeightChart(){
@@ -230,9 +235,6 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 		if (weightChartView == null){
 			this.noDataContainer.setVisibility(View.VISIBLE);
 		} else {
-			if (weightChartView.getParent() != null) {
-				((LinearLayout) weightChartView.getParent()).removeAllViews();
-			}
 			layout.addView(weightChartView);
 			this.trackWeightButton.getLayoutParams().height = LayoutParams.WRAP_CONTENT;
 			this.noDataContainer.setVisibility(View.INVISIBLE);
@@ -256,9 +258,6 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 		if (caloriesChartView == null){
 			this.noDataContainer.setVisibility(View.VISIBLE);
 		} else {
-			if (caloriesChartView.getParent() != null) {
-				((LinearLayout) caloriesChartView.getParent()).removeAllViews();
-			}
 			layout.addView(caloriesChartView);
 			this.noDataContainer.setVisibility(View.INVISIBLE);
 		}
@@ -271,7 +270,7 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 		this.headerTextView.setText("TODAY");
 		
 		if (nutrientsChartView == null){
-			nutrientsChartView = getNutrientsChart();	
+			nutrientsChartView = getNutrientsChart();
 		}
 		
 		layout.removeAllViews();
@@ -284,9 +283,6 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 		if (nutrientsChartView == null){
 			this.noDataContainer.setVisibility(View.VISIBLE);
 		} else {
-			if (nutrientsChartView.getParent() != null) {
-				((LinearLayout) nutrientsChartView.getParent()).removeAllViews();
-			}
 			layout.addView(nutrientsChartView, layoutParams);
 			this.noDataContainer.setVisibility(View.INVISIBLE);
 		}
@@ -407,9 +403,9 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 			renderer.setXAxisMin(minTime);
 		}
 		renderer.setXAxisMax(maxTime);
-		renderer.setPanLimits(new double[] { minTime, maxTime, 0, maxWeight });	
+		renderer.setPanLimits(new double[] { minTime, maxTime, 0, maxWeight });
 		
-		return ChartFactory.getTimeChartView(getCurrentActivity(), dataSet, renderer, "d MMM");
+		return ChartFactory.getTimeChartView(getActivity(), dataSet, renderer, "d MMM");
 	
 	}
 	
@@ -536,7 +532,7 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 			}
 		}
 
-		return ChartFactory.getCombinedXYChartView(getCurrentActivity(), dataSet, renderer, new String[] { BarChart.TYPE, LineChart.TYPE });
+		return ChartFactory.getCombinedXYChartView(getActivity(), dataSet, renderer, new String[] { BarChart.TYPE, LineChart.TYPE });
 	}
 	
 	private View getNutrientsChart() {
@@ -569,7 +565,7 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 		renderer.setLegendTextSize(getPixelSize());
 		renderer.setShowLabels(true);
 
-		return ChartFactory.getPieChartView(getCurrentActivity(), categorySeries, renderer);
+		return ChartFactory.getPieChartView(getActivity(), categorySeries, renderer);
 	}
 
 	protected DefaultRenderer buildCategoryRenderer(int[] colors) {
@@ -594,25 +590,21 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 			this.nutrients = (Map<String, Double>) data;
 		}
 
-		Activity activity = getCurrentActivity();
+		Activity activity = getActivity();
+		if (activity == null){
+			return;
+		}
+		
 		activity.runOnUiThread(new Runnable() {
 		    public void run() {
 		    	dataReceived(methodCalled, data);
 		    }
 		});
 	}
-	
-	private FragmentActivity getCurrentActivity() {
-		FragmentActivity act = super.getActivity();
-		if (act == null) {
-			act = (FragmentActivity) MyPlateApplication.getFrontMostActivity();
-		}
-		return act;
-	}
 
 	@Override
 	public void dataReceived(Method methodCalled, Object data) {
-		if (getCurrentActivity() == null){
+		if (getActivity() == null){
 			return;
 		}
 		
@@ -634,15 +626,11 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 				showNutrientsChart();
 			}
 		}
-		
-		if (this.diaryEntries != null && this.nutrients != null) {
-			this.loading = false;
-		}
 	}
 	
 	private int getPixelSize(){
 		DisplayMetrics metrics = new DisplayMetrics();
-		getCurrentActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		switch(metrics.densityDpi){
 			case DisplayMetrics.DENSITY_LOW:
 				return 7;

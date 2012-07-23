@@ -15,40 +15,20 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-            <LinearLayout
-                android:id="@+id/connectContainer"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:background="@drawable/list_item_community_background"
-                android:orientation="vertical" >
-
-                <Button
-                    android:id="@+id/connectButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/btn_black_selector"
-                    android:text="Connect to LIVESTRONG.com"
-                    android:textColor="@color/white" />
-            </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/syncContainer"
+                android:id="@+id/sessionMContainer"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="75dp"
                 android:background="@drawable/list_item_community_background" >
 
                 <TextView
-                    android:id="@+id/TextView01"
                     android:layout_width="110dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:text="Sync"
+                    android:text="mPOINTS Mobile Rewards"
                     android:textColor="@color/dark_grey"
                     android:textStyle="bold" />
 
@@ -57,34 +37,25 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical" >
 
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:layout_marginLeft="2dp" android:layout_marginRight="7dp" android:layout_marginTop="5dp">
 
                         <Button
-                            android:id="@+id/syncNowButton"
+                            android:id="@+id/howItWorksButton"
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
+                            android:layout_marginTop="5dp"
                             android:background="@drawable/btn_black_selector"
-                            android:text="Sync Now"
+                            android:text="How It Works"
+                            android:textColor="@color/white" />
+                        
+                         <Button
+                            android:id="@+id/achievmentsButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/btn_black_selector"
+                            android:text="Achievements"
                             android:textColor="@color/white" />
 
-                        <ProgressBar
-                            android:id="@+id/syncProgressBar"
-                            style="?android:attr/progressBarStyleSmall"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="34dp" android:paddingRight="10dp"/>
-
-                    </RelativeLayout>
-
-                    <TextView
-                        android:id="@+id/lastSyncTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Last Sync: 20/04/2012 12:14pm" android:textColor="@color/dark_grey" android:textSize="11dp" android:layout_marginTop="5dp" android:layout_marginLeft="3dp"/>
 
                 </LinearLayout>
 

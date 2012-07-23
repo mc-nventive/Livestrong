@@ -7,9 +7,6 @@ import java.util.Date;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -21,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.livestrong.myplate.MyPlateApplication;
-import com.livestrong.myplate.R;
 import com.livestrong.myplate.activity.AddExerciseActivity;
 import com.livestrong.myplate.activity.AddFoodActivity;
 import com.livestrong.myplate.activity.AddWaterActivity;
@@ -31,10 +27,13 @@ import com.livestrong.myplate.adapters.DiaryAdapter;
 import com.livestrong.myplate.back.models.DiaryEntry;
 import com.livestrong.myplate.back.models.ExerciseDiaryEntry;
 import com.livestrong.myplate.back.models.FoodDiaryEntry;
+import com.livestrong.myplate.back.models.FoodDiaryEntry.TimeOfDay;
 import com.livestrong.myplate.back.models.WaterDiaryEntry;
 import com.livestrong.myplate.back.models.WeightDiaryEntry;
-import com.livestrong.myplate.back.models.FoodDiaryEntry.TimeOfDay;
 import com.livestrong.myplate.utilities.PinnedHeaderListView;
+import com.livestrong.myplate.utilities.SessionMHelper;
+import com.livestrong.myplatelite.R;
+import com.sessionm.api.SessionM;
 
 public class DiaryListFragment extends FragmentDataHelperDelegate implements OnItemClickListener {
 	
@@ -46,7 +45,7 @@ public class DiaryListFragment extends FragmentDataHelperDelegate implements OnI
 	private Button trackNowButton;
 	protected Date selectedDate;
 	private TextView dateTextView;
-	private LinearLayout messageContainer;  
+	private LinearLayout messageContainer;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		if (container == null) {
@@ -60,7 +59,7 @@ public class DiaryListFragment extends FragmentDataHelperDelegate implements OnI
 	        return null;
 	    }
 		
-		View view = (LinearLayout)inflater.inflate(R.layout.fragment_diary_list, container, false);  
+		View view = (LinearLayout)inflater.inflate(R.layout.fragment_diary_list, container, false);
     
 		// Hooking up outlets
 		this.backBtn 		= (ImageButton) view.findViewById(R.id.backButton);
@@ -97,15 +96,15 @@ public class DiaryListFragment extends FragmentDataHelperDelegate implements OnI
 //		super.onCreateOptionsMenu(menu, inflater);
 //		menu.add(0, 1, 0, "Track").setIcon(android.R.drawable.ic_menu_add);
 //	}
-//	
+//
 //	@Override
 //	public boolean onOptionsItemSelected(MenuItem item) {
 //		super.onOptionsItemSelected(item);
-//		
+//
 //		MyPlateApplication.setWorkingDateStamp(this.selectedDate);
 //		Intent intent = new Intent(getActivity(), TrackActivity.class);
 //		startActivity(intent);
-//		
+//
 //		return true;
 //	}
 	
@@ -113,16 +112,16 @@ public class DiaryListFragment extends FragmentDataHelperDelegate implements OnI
 	public void onResume() {
 		super.onResume();
 		if (this.adapter != null && this.selectedDate != null){
-			this.adapter.setDate(this.selectedDate);			
-		}	
+			this.adapter.setDate(this.selectedDate);
+		}
 		
-		// Show or hide Track Now button 
+		// Show or hide Track Now button
 		if (this.messageContainer != null){
 			if (this.adapter != null && this.adapter.getCount() == 0){
 				this.messageContainer.setVisibility(View.VISIBLE);
 			} else {
 				this.messageContainer.setVisibility(View.INVISIBLE);
-			}	
+			}
 		}
 	}
 	
@@ -135,7 +134,7 @@ public class DiaryListFragment extends FragmentDataHelperDelegate implements OnI
 		int section = this.adapter.getSectionForPosition(position);
 		switch (section){
 			case 0:
-				MyPlateApplication.setWorkingTimeOfDay(TimeOfDay.BREAKFAST);	
+				MyPlateApplication.setWorkingTimeOfDay(TimeOfDay.BREAKFAST);
 				break;
 			case 1:
 				MyPlateApplication.setWorkingTimeOfDay(TimeOfDay.LUNCH);
@@ -145,7 +144,7 @@ public class DiaryListFragment extends FragmentDataHelperDelegate implements OnI
 				break;
 			case 3:
 				MyPlateApplication.setWorkingTimeOfDay(TimeOfDay.SNACKS);
-				break;			
+				break;
 		}
 		
 		
@@ -153,7 +152,7 @@ public class DiaryListFragment extends FragmentDataHelperDelegate implements OnI
 			FoodDiaryEntry diaryEntry = (FoodDiaryEntry) clickedEntry;
 			Intent intent = new Intent(MyPlateApplication.getContext(), AddFoodActivity.class);
 			intent.putExtra(FoodDiaryEntry.class.getName(), diaryEntry);
-			startActivity(intent);	
+			startActivity(intent);
 		}
 		else if (clickedEntry instanceof ExerciseDiaryEntry) {
 			ExerciseDiaryEntry diaryEntry = (ExerciseDiaryEntry) clickedEntry;
@@ -191,7 +190,7 @@ public class DiaryListFragment extends FragmentDataHelperDelegate implements OnI
 					case R.id.forwardButton:
 						if (!MyPlateApplication.isToday(selectedDate)){
 							calendar.add(Calendar.DATE, 1);  // add one day
-						} 
+						}
 						break;
 				}
 				
@@ -208,9 +207,21 @@ public class DiaryListFragment extends FragmentDataHelperDelegate implements OnI
 			public void onClick(View view) {
 				MyPlateApplication.setWorkingDateStamp(selectedDate);
 				Intent intent = new Intent(getActivity(), TrackActivity.class);
-				startActivity(intent);
+				startActivityForResult(intent, 1);
 			}
 		});
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		// An activity might post a SessionM event
+		if (data != null && data.getExtras() != null) {
+			String sessionM = data.getExtras().getString(SessionMHelper.INTENT_SESSIONM);
+			if (sessionM != null)
+				SessionM.getInstance().presentActivity(getActivity(), sessionM);
+		}
 	}
 	
 	protected void setSelectedDate(Date date){
@@ -237,7 +248,7 @@ public class DiaryListFragment extends FragmentDataHelperDelegate implements OnI
 			this.dateTextView.setText(R.string.today);
 		} else if (MyPlateApplication.isYesterday(this.selectedDate)) {
 			this.dateTextView.setText(R.string.yesterday);
-		} else { 
+		} else {
 			this.dateTextView.setText(dateFormatter.format(this.selectedDate));
 		}
 	}

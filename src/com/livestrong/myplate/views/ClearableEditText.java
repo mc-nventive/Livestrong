@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 
-import com.livestrong.myplate.R;
+import com.livestrong.myplatelite.R;
 
 public class ClearableEditText extends RelativeLayout {
 	

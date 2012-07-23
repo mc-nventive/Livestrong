@@ -12,13 +12,17 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.livestrong.myplate.R;
 import com.livestrong.myplate.activity.TipsActivity;
 import com.livestrong.myplate.activity.WebViewActivity;
 import com.livestrong.myplate.activity.WelcomeActivity;
 import com.livestrong.myplate.back.DataHelper;
+import com.livestrong.myplate.constants.BuildValues;
+import com.livestrong.myplatelite.R;
+import com.sessionm.api.SessionM;
 
 public class MoreSupportFragment extends FragmentDataHelperDelegate {
+	
+	private static final int SHARE_EMAIL_ACTIVITY = 1;
 	
 	private LinearLayout view;
 	
@@ -35,7 +39,7 @@ public class MoreSupportFragment extends FragmentDataHelperDelegate {
 	    }
 		
 		// Hook up outlets
-		this.view = (LinearLayout) inflater.inflate(R.layout.fragment_more_support, container, false);	
+		this.view = (LinearLayout) inflater.inflate(R.layout.fragment_more_support, container, false);
 			
 			
 		Button termsButton = (Button) this.view.findViewById(R.id.termsAndConditionsButton);
@@ -70,7 +74,7 @@ public class MoreSupportFragment extends FragmentDataHelperDelegate {
             	emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Support Request (Android app)");
             	startActivity(Intent.createChooser(emailIntent, "Send mail..."));
 			}
-		});			
+		});
 		
 		Button tellAFriendButton = (Button) view.findViewById(R.id.tellAFriendButton);
 		tellAFriendButton.setOnClickListener(new OnClickListener() {
@@ -81,7 +85,7 @@ public class MoreSupportFragment extends FragmentDataHelperDelegate {
             	emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "LIVESTRONG.COM Calorie Tracker");
             	emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Check out the LIVESTRONG.COM Calorie Tracker that helps me track my progress daily! \n\n");
 
-            	startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            	startActivityForResult(Intent.createChooser(emailIntent, "Send mail..."), SHARE_EMAIL_ACTIVITY);
 			}
 		});
 		
@@ -100,7 +104,7 @@ public class MoreSupportFragment extends FragmentDataHelperDelegate {
 			public void onClick(View v) {
 				final Dialog dialog = new Dialog(getActivity());
 				dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-				dialog.setContentView(R.layout.dialog_delete_data); 
+				dialog.setContentView(R.layout.dialog_delete_data);
 				final LinearLayout progressContainer = (LinearLayout) dialog.findViewById(R.id.loaderContainer);
 				progressContainer.setVisibility(View.INVISIBLE);
 				final LinearLayout buttonsContainer = (LinearLayout) dialog.findViewById(R.id.buttonsContainer);
@@ -111,7 +115,7 @@ public class MoreSupportFragment extends FragmentDataHelperDelegate {
 					public void onClick(View v) {
 						dialog.dismiss();
 					}
-				});	
+				});
 				
 				Button doneButton = (Button) dialog.findViewById(R.id.doneButton);
 				doneButton.setOnClickListener(new View.OnClickListener() {
@@ -130,9 +134,9 @@ public class MoreSupportFragment extends FragmentDataHelperDelegate {
 								
 								dialog.cancel();
 								
-								getActivity().finish();	  
+								getActivity().finish();
 						  }
-						}, 500);					
+						}, 500);
 					}
 				});
 				
@@ -141,5 +145,15 @@ public class MoreSupportFragment extends FragmentDataHelperDelegate {
 		});
 		
 		return this.view;
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if (requestCode == SHARE_EMAIL_ACTIVITY && BuildValues.IS_LIGHT) {
+			// Post notification to SessionM
+			SessionM.getInstance().presentActivity(getActivity(), "sharedWithEmail");
+		}
 	}
 }

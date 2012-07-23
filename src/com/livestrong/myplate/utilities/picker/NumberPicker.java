@@ -32,7 +32,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.livestrong.myplate.R;
+import com.livestrong.myplatelite.R;
 
 /**
  * This class has been pulled from the Android platform source code, its an internal widget that hasn't been

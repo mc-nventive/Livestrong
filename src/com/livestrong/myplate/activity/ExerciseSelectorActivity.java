@@ -27,12 +27,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.livestrong.myplate.R;
+import com.admarvel.android.ads.AdMarvelView;
 import com.livestrong.myplate.adapters.ExerciseSelectorAdapter;
 import com.livestrong.myplate.animations.DropDownAnimation;
 import com.livestrong.myplate.back.api.ApiHelper;
 import com.livestrong.myplate.back.models.Exercise;
+import com.livestrong.myplate.utilities.AdvertisementHelper;
+import com.livestrong.myplate.utilities.SessionMHelper;
 import com.livestrong.myplate.views.ClearableEditText;
+import com.livestrong.myplatelite.R;
+import com.sessionm.api.SessionM;
 
 public class ExerciseSelectorActivity extends LiveStrongActivity implements OnItemClickListener {
 	
@@ -83,10 +87,13 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
         this.initializeButtons();
         
         // This is used to removed a banding effect caused when drawing gradients in list view items
-        getWindow().setFormat(PixelFormat.RGBA_8888); 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DITHER); 
+        getWindow().setFormat(PixelFormat.RGBA_8888);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DITHER);
         
         loadListFromSelectedButton();
+        
+		// Initialize advertisements
+		AdvertisementHelper.requestAd((AdMarvelView) findViewById(R.id.ad), this);
 	}
 	
 	@Override
@@ -102,6 +109,10 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
 			
 			String exerciseName = data.getExtras().getString(AddExerciseActivity.INTENT_EXERCISE_NAME);
 			this.displayNotification(exerciseName + " was added to your diary.");
+			
+			String sessionM = data.getExtras().getString(SessionMHelper.INTENT_SESSIONM);
+			if (sessionM != null)
+				SessionM.getInstance().presentActivity(this, sessionM);
 			
 			setResult(Activity.RESULT_OK);
 		}
@@ -137,7 +148,7 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
 		
         this.searchEditText.addTextChangedListener(new TextWatcher() {
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {				
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				if (s.length() == 0){
 					// Hide toolbar when field is empty
 					showToolBar();
@@ -164,7 +175,7 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
         
         this.searchEditText.setOnKeyListener(new View.OnKeyListener() {
 			@Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {				
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
 				if (event.getAction() == KeyEvent.ACTION_DOWN) {
 					if (keyCode == KeyEvent.KEYCODE_ENTER) {
 						// Search for value in Edit Field
@@ -174,7 +185,7 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
 						hideKeyboard();
 						
 						return true;
-					} 
+					}
 				}
 				return false;
 			}
@@ -187,7 +198,7 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
 			public void onClick(View button) {
 				if (button.isSelected()){
 					return;
-				} 
+				}
 				unSelectTabButtons();
 				button.setSelected(true);
 				
@@ -198,7 +209,7 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
 						break;
 					case R.id.frequentlyPerformedButton:
 						messageTextView.setText("No frequently performed exercises.");
-						break;					
+						break;
 					case R.id.customExercisesButton:
 						messageTextView.setText("No custom exercises.");
 						break;
@@ -214,7 +225,7 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
 		this.frequentlyPerformedBtn.setOnClickListener(onClickListener);
 		this.customExercisesBtn.setOnClickListener(onClickListener);
 		
-		this.addManualButton.setOnClickListener(new OnClickListener() {			
+		this.addManualButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				showCreateExerciseActivity();
@@ -263,14 +274,14 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
 			if (object == null && this.exerciseSelectorAdapter.isShowingSearchOnlinePrompt()){ // If user selects online search list item
 				this.performServerSearch();
 				return;
-			} 
+			}
 		}
 	
 		// Regular exercise item selected
 		Exercise exercise = (Exercise) this.exerciseSelectorAdapter.getItem(position);
 		Intent intent = new Intent(this, AddExerciseActivity.class);
 		intent.putExtra(exercise.getClass().getName(), exercise);
-		startActivityForResult(intent, 1);	
+		startActivityForResult(intent, 1);
 	}
 	
 	public void hideToolBar() {

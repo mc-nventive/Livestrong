@@ -3,7 +3,7 @@ package com.livestrong.myplate.activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.livestrong.myplate.R;
+import com.livestrong.myplatelite.R;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.models.Food;
 

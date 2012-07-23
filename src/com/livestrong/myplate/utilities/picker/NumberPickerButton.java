@@ -22,7 +22,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.widget.ImageButton;
 
-import com.livestrong.myplate.R;
+import com.livestrong.myplatelite.R;
 
 /**
  * This class exists purely to cancel long click events.

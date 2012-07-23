@@ -1,6 +1,6 @@
 package com.livestrong.myplate.utilities;
 
-import com.livestrong.myplate.R;
+import com.livestrong.myplatelite.R;
 
 import android.content.Context;
 import android.util.AttributeSet;

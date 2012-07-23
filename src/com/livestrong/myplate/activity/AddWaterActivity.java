@@ -4,18 +4,22 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.admarvel.android.ads.AdMarvelView;
 import com.livestrong.myplate.MyPlateApplication;
-import com.livestrong.myplate.R;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.DataHelper.WaterUnits;
 import com.livestrong.myplate.back.models.DiaryEntries;
 import com.livestrong.myplate.back.models.WaterDiaryEntry;
+import com.livestrong.myplate.utilities.AdvertisementHelper;
 import com.livestrong.myplate.utilities.picker.NumberPicker;
+import com.livestrong.myplatelite.R;
 
 public class AddWaterActivity extends LiveStrongActivity {
 	
@@ -63,6 +67,7 @@ public class AddWaterActivity extends LiveStrongActivity {
         iDrankThisButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				Intent resultIntent = new Intent();
 				
 				double ounces = getPickerOnces();
 				
@@ -71,19 +76,25 @@ public class AddWaterActivity extends LiveStrongActivity {
 				WaterDiaryEntry e = entries.getWaterEntry(MyPlateApplication.getWorkingDateStamp());
 				if (e == null) {
 					e = new WaterDiaryEntry(ounces, MyPlateApplication.getWorkingDateStamp());
+					
+					// Post SessionM event for first time tracking this day
+					// Seems like this event was removed...
+					// resultIntent.putExtra(SessionMHelper.INTENT_SESSIONM, "trackedWater");
 				} else {
 					if (diaryEntry != null){
 						if (ounces == 0.0){ // Remove the entry if user enters 0 onces
 							DataHelper.deleteDiaryEntry(e, AddWaterActivity.this);
 						} else {
-							e.setOnces(ounces);	
-						}						
+							e.setOnces(ounces);
+						}
 					} else {
 						if (ounces > 0.0){
-							e.addOnces(ounces);							
-						} 
+							e.addOnces(ounces);
+						}
 					}
 				}
+				
+				setResult(Activity.RESULT_OK, resultIntent);
 
 	            DataHelper.saveDiaryEntry(e, AddWaterActivity.this);
 	            finish();
@@ -94,10 +105,13 @@ public class AddWaterActivity extends LiveStrongActivity {
 			@Override
 			public void onClick(View v) {
 	            DataHelper.deleteDiaryEntry(AddWaterActivity.this.diaryEntry, AddWaterActivity.this);
+	            setResult(Activity.RESULT_OK);
 	            finish();
 			}
 		});
 
+		// Initialize advertisements
+		AdvertisementHelper.requestAd((AdMarvelView) findViewById(R.id.ad), this);
 	}
 
 	private double getPickerOnces() {

@@ -9,7 +9,6 @@ import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.logger.Logger;
 import com.j256.ormlite.logger.LoggerFactory;
 import com.j256.ormlite.support.ConnectionSource;
-import com.livestrong.myplate.back.DataHelper;
 
 /**
  * Fragment class to use for activities in Android.
@@ -62,7 +61,6 @@ public abstract class OrmLiteFragmentActivity<H extends OrmLiteSqliteOpenHelper>
 			helper = getHelperInternal(this);
 			created = true;
 		}
-		DataHelper.setDatabaseHelper((DatabaseHelper) getHelper());
 		super.onCreate(savedInstanceState);
 	}
 

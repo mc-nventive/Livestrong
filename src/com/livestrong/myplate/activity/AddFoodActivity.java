@@ -15,13 +15,16 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.admarvel.android.ads.AdMarvelView;
 import com.livestrong.myplate.MyPlateApplication;
-import com.livestrong.myplate.R;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.models.Food;
 import com.livestrong.myplate.back.models.FoodDiaryEntry;
+import com.livestrong.myplate.utilities.AdvertisementHelper;
 import com.livestrong.myplate.utilities.ImageLoader;
+import com.livestrong.myplate.utilities.SessionMHelper;
 import com.livestrong.myplate.utilities.picker.NumberPicker;
+import com.livestrong.myplatelite.R;
 
 public class AddFoodActivity extends LiveStrongActivity {
 	
@@ -86,7 +89,7 @@ public class AddFoodActivity extends LiveStrongActivity {
 					imageView.setImageResource(R.drawable.icon_breakfast);
 					break;
 				case LUNCH:
-					imageView.setImageResource(R.drawable.icon_lunch);				
+					imageView.setImageResource(R.drawable.icon_lunch);
 					break;
 				case DINNER:
 					imageView.setImageResource(R.drawable.icon_dinner);
@@ -130,7 +133,10 @@ public class AddFoodActivity extends LiveStrongActivity {
 	    	tv = (TextView) findViewById(R.id.timeOfDayTextView);
 	    	tv.setText(MyPlateApplication.getWorkingTimeOfDayString());
 	    	
-	        this.initializeButtons();       
+	        this.initializeButtons();
+	        
+			// Initialize advertisements
+			AdvertisementHelper.requestAd((AdMarvelView) findViewById(R.id.ad), this);
         }
     }
 	
@@ -156,44 +162,36 @@ public class AddFoodActivity extends LiveStrongActivity {
 				AddFoodActivity.this.initializePickers(dialog);
 				
 				if (AddFoodActivity.this.diaryEntry != null){
-					setPickers(AddFoodActivity.this.diaryEntry.getServings());	
-				} 
+					setPickers(AddFoodActivity.this.diaryEntry.getServings());
+				}
 				
 				Button doneBtn = (Button) dialog.findViewById(R.id.doneButton);
 				doneBtn.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						Intent resultIntent = new Intent();
+						resultIntent.putExtra(AddFoodActivity.INTENT_FOOD_NAME, AddFoodActivity.this.food.getTitle());
 						
-						double pickerServings = getPickerServings();
-						
-						if (AddFoodActivity.this.diaryEntry == null){
-							if (pickerServings > 0.0){
-								FoodDiaryEntry e = new FoodDiaryEntry(
-			    	            		AddFoodActivity.this.food,
-			    	            		null, // TODO mealId
-			    	            		MyPlateApplication.getWorkingTimeOfDay(), 
-			    	            		pickerServings,
-			    	            		MyPlateApplication.getWorkingDateStamp());
-								DataHelper.saveDiaryEntry(e, AddFoodActivity.this);
-							}
+						if (AddFoodActivity.this.diaryEntry == null) {
+							FoodDiaryEntry e = new FoodDiaryEntry(
+		    	            		AddFoodActivity.this.food,
+		    	            		null, // TODO mealId
+		    	            		MyPlateApplication.getWorkingTimeOfDay(),
+		    	            		getPickerServings(),
+		    	            		MyPlateApplication.getWorkingDateStamp());
+							DataHelper.saveDiaryEntry(e, AddFoodActivity.this);
+							
+							// Post SessionM event in previous activity, because this one is closing
+							resultIntent.putExtra(SessionMHelper.INTENT_SESSIONM, "trackedFood");
 						} else {
-							if (pickerServings == 0.0){
-								DataHelper.deleteDiaryEntry(AddFoodActivity.this.diaryEntry, AddFoodActivity.this);				
-							} else {
-								AddFoodActivity.this.diaryEntry.setServings(pickerServings);
-								DataHelper.saveDiaryEntry(AddFoodActivity.this.diaryEntry, AddFoodActivity.this);
-							}							
-						}   
-						
-						if (pickerServings > 0.0){
-							Intent resultIntent = new Intent();
-							resultIntent.putExtra(AddFoodActivity.INTENT_FOOD_NAME, AddFoodActivity.this.food.getTitle());
-						
-							setResult(Activity.RESULT_OK, resultIntent);
+							AddFoodActivity.this.diaryEntry.setServings(getPickerServings());
+				            DataHelper.saveDiaryEntry(AddFoodActivity.this.diaryEntry, AddFoodActivity.this);
 						}
 						
+						setResult(Activity.RESULT_OK, resultIntent);
+						
 	    	            dialog.cancel();
-	    	            finish();							
+    	            	finish();
 					}
 				});
 				

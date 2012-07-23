@@ -87,6 +87,7 @@
 		<echo message="Debug: ${app.debug}"/>
 		<echo message="API - Use Staging: ${app.api.staging}"/>
 		<echo message="API - Ignore invalid SSL certificates: ${app.api.ignore_invalid_certs}"/>
+		<echo message="Light version: ${app.light}" />
 	    <copy file="./templates/BuildValues.java" todir="./src/com/livestrong/myplate/constants/" overwrite="true">
 		    <filterset>
 		        <filter token="app.debug" value="${app.debug}"/>
@@ -94,6 +95,7 @@
 				<filter token="app.api.ignore_invalid_certs" value="${app.api.ignore_invalid_certs}"/>
 		        <filter token="app.proxy.host" value="${app.proxy.host}"/>
 		        <filter token="app.proxy.port" value="${app.proxy.port}"/>
+		        <filter token="app.light" value="${app.light}" />
 		    </filterset>
 	    </copy>
 	    <!--copy file="./templates/build_values.xml" todir="./res/values" overwrite="true">

@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.livestrong.myplate.MyPlateApplication;
-import com.livestrong.myplate.R;
+import com.livestrong.myplatelite.R;
 import com.livestrong.myplate.back.models.Meal;
 import com.livestrong.myplate.back.models.MealItem;
 import com.livestrong.myplate.back.models.FoodDiaryEntry.TimeOfDay;

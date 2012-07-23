@@ -21,7 +21,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.util.Log;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.stmt.SelectArg;
 import com.livestrong.myplate.activity.LoginActivity;
@@ -182,11 +181,7 @@ public class DataHelper {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	public static DatabaseHelper getDatabaseHelper() {
-		if (databaseHelper.size() == 0) {
-			setDatabaseHelper((DatabaseHelper) OpenHelperManager.getHelper(context));
-		}
 		return databaseHelper.lastElement();
 	}
 
@@ -495,7 +490,7 @@ public class DataHelper {
 			List<Integer> foodIds = new ArrayList<Integer>();
 			for (DiaryEntry diaryEntry : frequentDiaryEntries) {
 				Food food = ((FoodDiaryEntry) diaryEntry).getFood();
-				if (food == null || food.isGeneric()) {
+				if (food.isGeneric()) {
 					// Generic calorie coming from the API
 					continue;
 				}
@@ -626,7 +621,7 @@ public class DataHelper {
 			List<Integer> exerciseIds = new ArrayList<Integer>();
 			for (DiaryEntry diaryEntry : recentDiaryEntries) {
 				Exercise exercise = ((ExerciseDiaryEntry) diaryEntry).getExercise();
-				if (exercise == null || exercise.isGeneric()) {
+				if (exercise.isGeneric()) {
 					// Generic exercise coming from the API
 					continue;
 				}
@@ -1077,7 +1072,6 @@ public class DataHelper {
 			if (allWeights.get(day) != null) {
 				userWeight = allWeights.get(day);
 			}
-			
 			dailySummary.put(day, userProfile.getCaloriesGoal(userWeight));
 		}
 

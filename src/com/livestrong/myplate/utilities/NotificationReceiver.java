@@ -10,23 +10,19 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.livestrong.myplate.R;
+import com.livestrong.myplatelite.R;
 import com.livestrong.myplate.activity.TabBarActivity;
 import com.livestrong.myplate.back.DataHelper;
-import com.livestrong.myplate.back.db.DatabaseHelper;
 import com.livestrong.myplate.back.models.DiaryEntries;
 
 public class NotificationReceiver extends BroadcastReceiver {
 
 	@Override
-	@SuppressWarnings("deprecation")
 	public void onReceive(Context context, Intent arg1) {
 		//---get the notification ID for the notification; 
 	    // passed in by the MainActivity---
 	    //int notifID = getIntent().getExtras().getInt("NotifID");
 	 
-		DataHelper.setDatabaseHelper((DatabaseHelper) OpenHelperManager.getHelper(context, DatabaseHelper.class));
 		
 		// Check if user has tracked anything
 		DiaryEntries diaryEntries = DataHelper.getDailyDiaryEntries(new Date(), null);
@@ -52,8 +48,6 @@ public class NotificationReceiver extends BroadcastReceiver {
 	    notification.flags = Notification.FLAG_AUTO_CANCEL;
 	    
 	    nm.notify((int) System.currentTimeMillis(), notification);
-	    
-	    DataHelper.setDatabaseHelper(null);
 	}
 
 }

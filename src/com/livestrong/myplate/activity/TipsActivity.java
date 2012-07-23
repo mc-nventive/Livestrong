@@ -2,7 +2,7 @@ package com.livestrong.myplate.activity;
 
 import android.os.Bundle;
 
-import com.livestrong.myplate.R;
+import com.livestrong.myplatelite.R;
 
 public class TipsActivity extends LiveStrongFragmentActivity {
 	

@@ -16,8 +16,8 @@ public class LiveStrongFragmentActivity extends OrmLiteFragmentActivity<Database
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// DataHelper.setDatabaseHelper() will be called in super.onCreate() below
 		super.onCreate(savedInstanceState);
+		DataHelper.setDatabaseHelper(getHelper());
 		Log.d(this.getClass().getName(), "Setting database helper");
 	}
 

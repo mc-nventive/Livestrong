@@ -1,136 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background_repeat"
-    android:orientation="vertical" >
-
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/header_bar" />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@drawable/header_arrow" />
-
-        <LinearLayout
-            android:id="@+id/LinearLayout02"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="4dp" >
-
-            <FrameLayout
-                android:id="@+id/frameLayout1"
-                android:layout_width="180dp"
-                android:layout_height="match_parent"
-                android:layout_marginTop="1dp" >
-
-                <TextView
-                    android:id="@+id/timeOfDayTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_horizontal"
-                    android:text="Today"
-                    android:textColor="@color/black"
-                    android:textSize="18dp" />
-            </FrameLayout>
-        </LinearLayout>
-    </FrameLayout>
-
-    <RelativeLayout
-        android:id="@+id/listItemDiaryHeader"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginBottom="-10dp" >
-
-        <LinearLayout
-            android:id="@+id/LinearLayout01"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:background="@drawable/header_blue_slice" >
-        </LinearLayout>
-
-        <TextView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/TextView01"
-            android:layout_width="fill_parent"
-            android:layout_height="27dip"
-            android:layout_centerInParent="true"
-            android:gravity="center_vertical"
-            android:paddingLeft="6dip"
-            android:text="@string/water"
-            android:textColor="@color/pinned_header_text"
-            android:textSize="14sp" />
-    </RelativeLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/background_repeat" >
 
     <LinearLayout
-        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/header_bar" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/header_arrow" />
+
+            <LinearLayout
+                android:id="@+id/LinearLayout02"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp" >
+
+                <FrameLayout
+                    android:id="@+id/frameLayout1"
+                    android:layout_width="180dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="1dp" >
+
+                    <TextView
+                        android:id="@+id/timeOfDayTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Today"
+                        android:textColor="@color/black"
+                        android:textSize="18dp" />
+                </FrameLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+        <RelativeLayout
+            android:id="@+id/listItemDiaryHeader"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginBottom="-10dp" >
+
+            <LinearLayout
+                android:id="@+id/LinearLayout01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/header_blue_slice" >
+            </LinearLayout>
+
+            <TextView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/TextView01"
+                android:layout_width="fill_parent"
+                android:layout_height="27dip"
+                android:layout_centerInParent="true"
+                android:gravity="center_vertical"
+                android:paddingLeft="6dip"
+                android:text="@string/water"
+                android:textColor="@color/pinned_header_text"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp" >
+
+            <com.livestrong.myplate.utilities.picker.NumberPicker
+                android:id="@+id/waterPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/unitsTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="ounces"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="70dp" >
+
+            <Button
+                android:id="@+id/iDrankThisButton"
+                android:layout_width="170dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/btn_black_selector"
+                android:text="I Drank This"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/deleteButton"
+                android:layout_width="170dp"
+                android:layout_height="30dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/btn_black_selector"
+                android:text="Delete"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.admarvel.android.ads.AdMarvelView
+        xmlns:admarvel="http://schemas.android.com/apk/res/com.livestrong.myplatelite"
+        android:id="@+id/ad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp" >
+        android:layout_alignParentBottom="true"
+        admarvel:backgroundColor="#726D6D"
+        admarvel:textBackgroundColor="#726D6D"
+        admarvel:textBorderColor="#000000"
+        admarvel:textFontColor="#00FF00" />
 
-        <com.livestrong.myplate.utilities.picker.NumberPicker
-            android:id="@+id/waterPicker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/unitsTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="ounces"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/black" />
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="70dp" >
-
-        <Button
-            android:id="@+id/iDrankThisButton"
-            android:layout_width="170dp"
-            android:layout_height="30dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/btn_black_selector"
-            android:text="I Drank This"
-            android:textColor="@color/white" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <Button
-            android:id="@+id/deleteButton"
-            android:layout_width="170dp"
-            android:layout_height="30dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/btn_black_selector"
-            android:text="Delete"
-            android:textColor="@color/white" />
-    </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

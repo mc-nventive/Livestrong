@@ -27,15 +27,19 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.admarvel.android.ads.AdMarvelView;
 import com.livestrong.myplate.MyPlateApplication;
-import com.livestrong.myplate.R;
 import com.livestrong.myplate.adapters.FoodSelectorAdapter;
 import com.livestrong.myplate.animations.DropDownAnimation;
 import com.livestrong.myplate.back.api.ApiHelper;
 import com.livestrong.myplate.back.models.Food;
 import com.livestrong.myplate.back.models.FoodDiaryEntry.TimeOfDay;
 import com.livestrong.myplate.back.models.Meal;
+import com.livestrong.myplate.utilities.AdvertisementHelper;
+import com.livestrong.myplate.utilities.SessionMHelper;
 import com.livestrong.myplate.views.ClearableEditText;
+import com.livestrong.myplatelite.R;
+import com.sessionm.api.SessionM;
 
 public class FoodSelectorActivity extends LiveStrongActivity implements OnItemClickListener {
 	
@@ -96,10 +100,13 @@ public class FoodSelectorActivity extends LiveStrongActivity implements OnItemCl
         this.initializeTimeOfDayButtons();
         
         // This is used to removed a banding effect caused when drawing gradients in list view items
-        getWindow().setFormat(PixelFormat.RGBA_8888); 
+        getWindow().setFormat(PixelFormat.RGBA_8888);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DITHER);
         
         this.loadListFromSelectedButton();
+        
+		// Initialize advertisements
+		AdvertisementHelper.requestAd((AdMarvelView) findViewById(R.id.ad), this);
 	}
 	
 	// Initialize menu
@@ -127,7 +134,7 @@ public class FoodSelectorActivity extends LiveStrongActivity implements OnItemCl
 		
         this.searchEditText.addTextChangedListener(new TextWatcher() {
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {				
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				if (s.length() == 0){
 					// Hide toolbar when field is empty
 					showToolBar();
@@ -154,7 +161,7 @@ public class FoodSelectorActivity extends LiveStrongActivity implements OnItemCl
         
         this.searchEditText.setOnKeyListener(new View.OnKeyListener() {
 			@Override
-			public boolean onKey(View v, int keyCode, KeyEvent event) {				
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
 				if (event.getAction() == KeyEvent.ACTION_DOWN) {
 					if (keyCode == KeyEvent.KEYCODE_ENTER) {
 						// Search for value in Edit Field
@@ -164,7 +171,7 @@ public class FoodSelectorActivity extends LiveStrongActivity implements OnItemCl
 						hideKeyboard();
 						
 						return true;
-					} 
+					}
 				}
 				return false;
 			}
@@ -177,7 +184,7 @@ public class FoodSelectorActivity extends LiveStrongActivity implements OnItemCl
 			public void onClick(View button) {
 				if (button.isSelected()){
 					return;
-				} 
+				}
 				unSelectTabButtons();
 				button.setSelected(true);
 				
@@ -190,7 +197,7 @@ public class FoodSelectorActivity extends LiveStrongActivity implements OnItemCl
 					case R.id.frequentlyEatenButton:
 						//foodSelectorAdapter.loadFrequentlyEaten();
 						messageTextView.setText("No frequently eaten food items.");
-						break;					
+						break;
 					case R.id.myMealsButton:
 						//foodSelectorAdapter.loadMyMeals();
 						messageTextView.setText("No meals.");
@@ -318,20 +325,20 @@ public class FoodSelectorActivity extends LiveStrongActivity implements OnItemCl
 				intent.putExtra(food.getClass().getName(), food);
 				startActivityForResult(intent, 1);
 				return;
-			}	
-		} 
+			}
+		}
 	
 		// Regular food item selected
 		if (this.recentlyEatenBtn.isSelected() || this.frequentlyEatenBtn.isSelected() || this.customFoodsButton.isSelected()){
 			Food food = (Food) this.foodSelectorAdapter.getItem(position);
 			Intent intent = new Intent(this, AddFoodActivity.class);
 			intent.putExtra(food.getClass().getName(), food);
-			startActivityForResult(intent, 1);	
+			startActivityForResult(intent, 1);
 		} else if (this.myMealsBtn.isSelected()){
 			Meal meal = (Meal) this.foodSelectorAdapter.getItem(position);
 			Intent intent = new Intent(this, AddMealActivity.class);
 			intent.putExtra(meal.getClass().getName(), meal);
-			startActivityForResult(intent, 1);	
+			startActivityForResult(intent, 1);
 		}
 	}
 	
@@ -348,6 +355,11 @@ public class FoodSelectorActivity extends LiveStrongActivity implements OnItemCl
 			
 			String foodName = data.getExtras().getString(AddFoodActivity.INTENT_FOOD_NAME);
 			this.displayNotification(foodName + " was added to your diary.");
+			
+			// The add food activity potentially sets a sessionM tracking event.
+			String sessionM = data.getExtras().getString(SessionMHelper.INTENT_SESSIONM);
+			if (sessionM != null)
+				SessionM.getInstance().presentActivity(this, sessionM);
 			
 			setResult(Activity.RESULT_OK);
 		}

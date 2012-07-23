@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 
+import com.admarvel.android.ads.AdMarvelView;
 import com.livestrong.myplate.MyPlateApplication;
-import com.livestrong.myplate.R;
 import com.livestrong.myplate.back.models.FoodDiaryEntry.TimeOfDay;
+import com.livestrong.myplate.utilities.AdvertisementHelper;
+import com.livestrong.myplatelite.R;
 
 public class TrackActivity extends LiveStrongFragmentActivity {
 	
@@ -37,7 +39,7 @@ public class TrackActivity extends LiveStrongFragmentActivity {
         
         OnClickListener onClickListener = new OnClickListener() {
 			@Override
-			public void onClick(View view) {				
+			public void onClick(View view) {
 				Intent intent = null;
 				
 				switch (view.getId()) {
@@ -68,9 +70,8 @@ public class TrackActivity extends LiveStrongFragmentActivity {
 						break;
 				}
 				if (intent != null){
-					startActivityForResult(intent, 1);	
-					finish();
-				}				
+					startActivityForResult(intent, 1);
+				}
 			}
 		};
 		
@@ -80,6 +81,28 @@ public class TrackActivity extends LiveStrongFragmentActivity {
 		this.snacksItem.setOnClickListener(onClickListener);
 		this.waterItem.setOnClickListener(onClickListener);
 		this.exerciseItem.setOnClickListener(onClickListener);
-		this.weightItem.setOnClickListener(onClickListener);		
+		this.weightItem.setOnClickListener(onClickListener);
+		
+		// Initialize advertisements
+		AdvertisementHelper.requestAd((AdMarvelView) findViewById(R.id.ad), this);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+		super.onActivityResult(requestCode, resultCode, intent);
+		
+		// bubble up the result
+		if (resultCode == Activity.RESULT_OK) {
+			Intent resultIntent = new Intent();
+			if (intent.getExtras() != null) {
+				for (String key : intent.getExtras().keySet()) {
+					resultIntent.putExtra(key, intent.getExtras().getString(key));
+				}
+			}
+			
+			setResult(resultCode, resultIntent);
+			
+			finish();
+		}
 	}
 }
