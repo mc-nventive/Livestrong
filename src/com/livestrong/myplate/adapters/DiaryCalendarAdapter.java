@@ -81,7 +81,7 @@ public class DiaryCalendarAdapter extends AbstractBaseAdapterDataHelperDelegate 
 			if (this.month.get(Calendar.YEAR) == todayCalendar.get(Calendar.YEAR) && // isToday
 					this.month.get(Calendar.MONTH) == todayCalendar.get(Calendar.MONTH) && this.days[position].equals("" + todayCalendar.get(Calendar.DAY_OF_MONTH))) {
 				view.setBackgroundResource(R.drawable.calendar_icon_orange);
-			} else if (caloriesSum > 0 && caloriesSum < calorieGoal) { // is within calorie goal
+			} else if (null != caloriesSum && 0 != caloriesSum && caloriesSum < calorieGoal) { // is within calorie goal
 				view.setBackgroundResource(R.drawable.calendar_icon_green);
 			} else if (caloriesSum > calorieGoal) { // surpassed calorie goal
 				view.setBackgroundResource(R.drawable.calendar_icon_red);

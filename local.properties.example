@@ -7,6 +7,6 @@
 # location of the SDK. This is only used by Ant
 # For customization when using a Version Control System, please read the
 # header note.
-sdk.dir=/Users/tristanhimmelman/workspace/android-sdks
+sdk.dir=/media/Windows7_OS/Users/hamady/android-sdk-linux
 #app.proxy.host = 192.168.2.171
 #app.proxy.port = 8888

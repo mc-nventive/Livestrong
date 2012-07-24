@@ -238,7 +238,7 @@ public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabC
         super.onResume();
 		// The activity has become visible (it is now "resumed").
         
-        MyPlateApplication.setWorkingDateStamp(new Date());
+        //MyPlateApplication.setWorkingDateStamp(new Date());
 	}
 
 	@Override
