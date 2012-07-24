@@ -99,27 +99,35 @@ public class AddExerciseActivity extends LiveStrongActivity {
 	        iDidThisButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent resultIntent = new Intent();
-					resultIntent.putExtra(AddExerciseActivity.INTENT_EXERCISE_NAME, AddExerciseActivity.this.exercise.getTitle());
 
+					double pickerMinutes = getPickersMinutes();
+				 	
 					if (AddExerciseActivity.this.diaryEntry != null) {
-						// Updating entry
-						AddExerciseActivity.this.diaryEntry.setMinutes((int) getPickersMinutes());
-			            DataHelper.saveDiaryEntry(AddExerciseActivity.this.diaryEntry, AddExerciseActivity.this);
+						if (pickerMinutes == 0.0){
+							DataHelper.deleteDiaryEntry(AddExerciseActivity.this.diaryEntry, AddExerciseActivity.this);
+						} else {
+							AddExerciseActivity.this.diaryEntry.setMinutes((int) getPickersMinutes());
+							DataHelper.saveDiaryEntry(AddExerciseActivity.this.diaryEntry, AddExerciseActivity.this);
+						}
 					} else {
-						// New entry
 						ExerciseDiaryEntry e = new ExerciseDiaryEntry(
-			            		AddExerciseActivity.this.exercise,
-			            		getPickersMinutes(),
-			            		MyPlateApplication.getWorkingDateStamp());
+				           		AddExerciseActivity.this.exercise,
+				           		getPickersMinutes(),
+				           		MyPlateApplication.getWorkingDateStamp());
 
-			            DataHelper.saveDiaryEntry(e, AddExerciseActivity.this);
-			            
-		            	// Log a SessionM event
-			            resultIntent.putExtra(SessionMHelper.INTENT_SESSIONM, "trackedExercise");
+				        DataHelper.saveDiaryEntry(e, AddExerciseActivity.this);		
 					}
 
-					setResult(Activity.RESULT_OK, resultIntent);
+					if (pickerMinutes > 0.0){						
+						Intent resultIntent = new Intent();
+						resultIntent.putExtra(AddExerciseActivity.INTENT_EXERCISE_NAME, AddExerciseActivity.this.exercise.getTitle());
+						
+						if(null != AddExerciseActivity.this.diaryEntry){
+							// Log a SessionM event
+				            resultIntent.putExtra(SessionMHelper.INTENT_SESSIONM, "trackedExercise");
+						}
+						setResult(Activity.RESULT_OK, resultIntent);
+					}
 					
 					finish();
 				}

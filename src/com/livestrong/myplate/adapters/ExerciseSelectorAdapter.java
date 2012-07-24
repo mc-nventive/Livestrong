@@ -1,6 +1,7 @@
 package com.livestrong.myplate.adapters;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -22,7 +23,7 @@ import com.livestrong.myplate.utilities.ImageLoader;
 
 public class ExerciseSelectorAdapter extends AbstractBaseAdapterDataHelperDelegate {
 
-	private List<Exercise> exercises;
+	private List<Exercise> exercises = new ArrayList<Exercise>();
 	private ImageLoader imageLoader;
 	private Boolean isLoading = false;
 	private Boolean showSearchOnlinePromp = false;

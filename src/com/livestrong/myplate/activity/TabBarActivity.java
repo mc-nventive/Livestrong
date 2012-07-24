@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -56,6 +57,7 @@ public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabC
         	this.drawableId = drawableId;
         	this.clss = clazz;
         	this.args = args;
+        	this.fragment = null;
         }
 	}
 	
@@ -153,19 +155,18 @@ public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabC
 	 */
 	
 	public void onTabChanged(String tag) {
+		//Log.d("TabBarActivity", "TabBarActivity - onTabChange: " + tag);
 		TabInfo newTab = this.mapTabInfo.get(tag);
-		if (lastTab != newTab) {
+		if (lastTab == null || lastTab != newTab) {
+			///Log.d("TabBarActivity", "TabBarActivity - create new Tab: " + tag);
 			FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
-            
-//    		if (newTab.position > lastTab.position){
-//    			fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
-//    		} else {
-//    			fragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
-//    		}
             
     		if (newTab != null) {
                 if (newTab.fragment == null) {
-                    newTab.fragment = Fragment.instantiate(this, newTab.clss.getName(), newTab.args);
+                	//Log.d("TabBarActivity", "TabBarActivity - no saved tab fragment instanciate it: " + tag);
+                	newTab.fragment = Fragment.instantiate(this, newTab.clss.getName(), newTab.args);
+                } else {
+                	//Log.d("TabBarActivity", "TabBarActivity - tab fragment already exists: " + newTab.fragment.getClass().toString());
                 }
 
                 fragmentTransaction.replace(R.id.frame, newTab.fragment, newTab.tag);
@@ -184,39 +185,38 @@ public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabC
 	 */
 	
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
-		// If there is no userProfile, show WelcomeActivity
-//        if (DataHelper.getUserProfile(null) == null) {
-//        	Intent intent = new Intent(this, WelcomeActivity.class);
-//			startActivity(intent);
-//
-//			finish();
-//			return;
-//        }
-		
+		super.onCreate(savedInstanceState);	
 		
 		// The activity is being created; create views, bind data to lists, etc.
 		setContentView(R.layout.activity_tab_bar);
 		
-		// Light version contains ads
-		if (BuildValues.IS_LIGHT)
-			initializeAdvertisement();
-		
+		this.mapTabInfo = new HashMap<String, TabInfo>();
 		this.initialiseTabHost(savedInstanceState);
+		this.lastTab = null;
 		
 		//initialize the pager
+		Fragment newFragment = null;
+		String tag = null;
+		
 		if (savedInstanceState != null) {
-           tabHost.setCurrentTabByTag(savedInstanceState.getString("tab")); //set the tab as per the saved state
+			
+			tag = savedInstanceState.getString("tab"); 
+			this.mapTabInfo.get(tag).fragment = null; // set to null to ensure the tab is instantiated 
+			Log.d("TabBarActivity", "TabBarActivity - savedInstanceState savedTab: " + tag);
+			tabHost.setCurrentTabByTag(tag); //set the tab as per the saved state
+        } 
+        
+		if (tag == null){
+			Log.d("TabBarActivity", "TabBarActivity - no saved State. Load MyPlate Tab");
+			tag = "tab1";
+			tabHost.setCurrentTabByTag(tag);
         }
 		
-		Fragment newFragment = new MyPlateFragment();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.frame, newFragment).commit();
-        
+		this.onTabChanged(tag);
+
         // This is used to removed a banding effect caused when drawing gradients in list view items
-        getWindow().setFormat(PixelFormat.RGBA_8888);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DITHER);
+        getWindow().setFormat(PixelFormat.RGBA_8888); 
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DITHER);   
         
 	}
 	// Initialize menu
@@ -270,7 +270,7 @@ public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabC
         super.onResume();
 		// The activity has become visible (it is now "resumed").
         
-        MyPlateApplication.setWorkingDateStamp(new Date());
+        //MyPlateApplication.setWorkingDateStamp(new Date());
 	}
 
 	@Override
@@ -278,7 +278,9 @@ public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabC
 		super.onSaveInstanceState(outState);
 		// Called before making the activity vulnerable to destruction; save your activity state in outState.
 		// UI elements states are saved automatically by super.onSaveInstanceState()
-		outState.putString("tab", lastTab.tag);
+		if (lastTab != null){
+			outState.putString("tab", lastTab.tag);
+		}
 	}
 
 	@Override

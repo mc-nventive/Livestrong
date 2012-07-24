@@ -3,6 +3,7 @@ package com.livestrong.myplate.back.api.models;
 import java.util.Collection;
 
 import com.livestrong.myplate.back.models.Food;
+import com.livestrong.myplate.back.api.models.AbstractSearchResponse;
 
 public class FoodSearchResponse extends AbstractSearchResponse {
 	private Collection<Food> foods;

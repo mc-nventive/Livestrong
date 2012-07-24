@@ -108,20 +108,23 @@ public class MoreProfileFragment extends FragmentDataHelperDelegate {
 	
 	@Override
 	public void onResume() {
+		super.onResume();
 		Log.d("MoreProfile", "key RESUME");
 		this.userProfile = DataHelper.getUserProfile(null);	
 		if (this.userProfile != null){
 			this.birthDate = userProfile.getDob();	
 		}
 		
-		this.initializeFragmentBasedOnPreferences();
+		if (this.view != null){
+			this.initializeFragmentBasedOnPreferences();
+		}
+		
 		this.initializeEditTexts();
 		this.initializeSpinners();
-		super.onResume();
 	}
 	
 	private void initializeFragmentBasedOnPreferences(){
-		DistanceUnits distanceUnits = DistanceUnits.valueOf((String) DataHelper.getPref(DataHelper.PREFS_DISTANCE_UNITS, (String) null));
+		DistanceUnits distanceUnits = DistanceUnits.valueOf((String) DataHelper.getPref(DataHelper.PREFS_DISTANCE_UNITS, DistanceUnits.MILES));
 		LinearLayout container;
 		if (distanceUnits == DistanceUnits.METERS){
 			container = (LinearLayout) this.view.findViewById(R.id.heightImperialContainer);
@@ -132,7 +135,7 @@ public class MoreProfileFragment extends FragmentDataHelperDelegate {
 		container.getLayoutParams().height = 0;
 		container.requestLayout();
 		
-		WeightUnits weightUnits = WeightUnits.valueOf((String) DataHelper.getPref(DataHelper.PREFS_WEIGHT_UNITS, (String) null));
+		WeightUnits weightUnits = WeightUnits.valueOf((String) DataHelper.getPref(DataHelper.PREFS_WEIGHT_UNITS, WeightUnits.POUNDS));
 		if (weightUnits == WeightUnits.KILOGRAMS){
 			this.weightUnitsTextView.setText("kgs");
 		} else if (weightUnits == WeightUnits.POUNDS){
@@ -143,13 +146,15 @@ public class MoreProfileFragment extends FragmentDataHelperDelegate {
 	}
 	
 	private void initializeEditTexts(){
-		this.weightEditText.setText(this.userProfile.getWeightForSelectedUnits());
-		this.heightEditText.setText(this.userProfile.getMetricHeight() + "");
-		this.feetEditText.setText(this.userProfile.getFeet() + "");
-		this.inchesEditText.setText(this.userProfile.getInches() + "");
-		this.calorieGoalEditText.setText(this.userProfile.getCaloriesGoal() + "");
-		
-		this.refreshBirthdayEditText();	
+		if (this.userProfile != null){
+			this.weightEditText.setText(this.userProfile.getWeightForSelectedUnits());
+			this.heightEditText.setText(this.userProfile.getMetricHeight() + "");
+			this.feetEditText.setText(this.userProfile.getFeet() + "");
+			this.inchesEditText.setText(this.userProfile.getInches() + "");
+			this.calorieGoalEditText.setText(this.userProfile.getCaloriesGoal() + "");
+			
+			this.refreshBirthdayEditText();
+		}
 	}
 	
 	private void initializeSpinners(){
@@ -262,7 +267,11 @@ public class MoreProfileFragment extends FragmentDataHelperDelegate {
 	
 	private void refreshBirthdayEditText(){
 		SimpleDateFormat formatter = new SimpleDateFormat("d MMMM, yyyy");
-		this.birthdayEditText.setText(formatter.format(this.birthDate));
+		if (this.birthDate == null) {
+			this.birthdayEditText.setText("");
+		} else {
+			this.birthdayEditText.setText(formatter.format(this.birthDate));
+		}
 	}
 	
 	private void initalizeCheckBox(){				
@@ -307,15 +316,19 @@ public class MoreProfileFragment extends FragmentDataHelperDelegate {
 		this.userProfile.setDob(this.birthDate);
 		
 		// Save height
-		DistanceUnits distanceUnits = DistanceUnits.valueOf((String) DataHelper.getPref(DataHelper.PREFS_DISTANCE_UNITS, (String) null));
+		DistanceUnits distanceUnits = DistanceUnits.valueOf((String) DataHelper.getPref(DataHelper.PREFS_DISTANCE_UNITS, DistanceUnits.MILES));
 		if (distanceUnits == DistanceUnits.METERS){
 			String heightString = this.heightEditText.getText().toString();
+			heightString = heightString.replace(",", ".");
 			if (heightString.length() > 0){
 				this.userProfile.editHeight(Double.parseDouble(heightString));	
 			}		
 		} else {
 			String feetString = this.feetEditText.getText().toString();
+			feetString = feetString.replace(",", ".");
 			String inchesString = this.inchesEditText.getText().toString();
+			inchesString = inchesString.replace(",", ".");
+			
 			if (feetString.length() == 0){
 				feetString = "0";
 			}
@@ -335,6 +348,7 @@ public class MoreProfileFragment extends FragmentDataHelperDelegate {
 		
 		// Save Weight
 		String weightString = this.weightEditText.getText().toString();
+		weightString = weightString.replace(",", ".");
 		if (weightString.length() > 0){
 			this.userProfile.editWeight(Double.parseDouble(weightString));
 		}	

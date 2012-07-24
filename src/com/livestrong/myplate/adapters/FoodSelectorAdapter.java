@@ -1,6 +1,7 @@
 package com.livestrong.myplate.adapters;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -23,7 +24,7 @@ import com.livestrong.myplate.utilities.ImageLoader;
 
 public class FoodSelectorAdapter extends AbstractBaseAdapterDataHelperDelegate {
 
-	private List<LiveStrongDisplayableListItem> listItems;
+	private List<LiveStrongDisplayableListItem> listItems = new ArrayList<LiveStrongDisplayableListItem>();
 	private ImageLoader imageLoader; 
 	private TimeOfDay timeOfDay;
 	private Boolean isLoading = false;

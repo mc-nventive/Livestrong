@@ -169,26 +169,38 @@ public class AddFoodActivity extends LiveStrongActivity {
 				doneBtn.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						Intent resultIntent = new Intent();
-						resultIntent.putExtra(AddFoodActivity.INTENT_FOOD_NAME, AddFoodActivity.this.food.getTitle());
 						
-						if (AddFoodActivity.this.diaryEntry == null) {
-							FoodDiaryEntry e = new FoodDiaryEntry(
-		    	            		AddFoodActivity.this.food,
-		    	            		null, // TODO mealId
-		    	            		MyPlateApplication.getWorkingTimeOfDay(),
-		    	            		getPickerServings(),
-		    	            		MyPlateApplication.getWorkingDateStamp());
-							DataHelper.saveDiaryEntry(e, AddFoodActivity.this);
-							
-							// Post SessionM event in previous activity, because this one is closing
-							resultIntent.putExtra(SessionMHelper.INTENT_SESSIONM, "trackedFood");
+						double pickerServings = getPickerServings();
+						
+						if (AddFoodActivity.this.diaryEntry == null){
+							if (pickerServings > 0.0){
+								FoodDiaryEntry e = new FoodDiaryEntry(
+			    	            		AddFoodActivity.this.food,
+			    	            		null, // TODO mealId
+			    	            		MyPlateApplication.getWorkingTimeOfDay(), 
+			    	            		pickerServings,
+			    	            		MyPlateApplication.getWorkingDateStamp());
+								DataHelper.saveDiaryEntry(e, AddFoodActivity.this);
+							}
 						} else {
-							AddFoodActivity.this.diaryEntry.setServings(getPickerServings());
-				            DataHelper.saveDiaryEntry(AddFoodActivity.this.diaryEntry, AddFoodActivity.this);
+							if (pickerServings == 0.0){
+								DataHelper.deleteDiaryEntry(AddFoodActivity.this.diaryEntry, AddFoodActivity.this);				
+							} else {
+								AddFoodActivity.this.diaryEntry.setServings(pickerServings);
+								DataHelper.saveDiaryEntry(AddFoodActivity.this.diaryEntry, AddFoodActivity.this);
+							}	
 						}
 						
-						setResult(Activity.RESULT_OK, resultIntent);
+						if (pickerServings > 0.0){
+							Intent resultIntent = new Intent();
+							resultIntent.putExtra(AddFoodActivity.INTENT_FOOD_NAME, AddFoodActivity.this.food.getTitle());
+							if(null == AddFoodActivity.this.diaryEntry)
+							{
+								// Post SessionM event in previous activity, because this one is closing
+								resultIntent.putExtra(SessionMHelper.INTENT_SESSIONM, "trackedFood");
+							}
+							setResult(Activity.RESULT_OK, resultIntent);
+						}
 						
 	    	            dialog.cancel();
     	            	finish();

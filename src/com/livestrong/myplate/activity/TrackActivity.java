@@ -92,7 +92,7 @@ public class TrackActivity extends LiveStrongFragmentActivity {
 		super.onActivityResult(requestCode, resultCode, intent);
 		
 		// bubble up the result
-		if (resultCode == Activity.RESULT_OK) {
+		if (resultCode == Activity.RESULT_OK && null != intent) {
 			Intent resultIntent = new Intent();
 			if (intent.getExtras() != null) {
 				for (String key : intent.getExtras().keySet()) {

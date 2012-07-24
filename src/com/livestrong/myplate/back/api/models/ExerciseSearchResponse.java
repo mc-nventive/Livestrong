@@ -3,6 +3,7 @@ package com.livestrong.myplate.back.api.models;
 import java.util.Collection;
 
 import com.livestrong.myplate.back.models.Exercise;
+import com.livestrong.myplate.back.api.models.AbstractSearchResponse;
 
 public class ExerciseSearchResponse extends AbstractSearchResponse {
 	private Collection<Exercise> exercises;
