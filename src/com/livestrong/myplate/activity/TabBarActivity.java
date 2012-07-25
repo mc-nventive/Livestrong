@@ -190,6 +190,10 @@ public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabC
 		// The activity is being created; create views, bind data to lists, etc.
 		setContentView(R.layout.activity_tab_bar);
 		
+		// Light version contains ads
+		if (BuildValues.IS_LIGHT)
+			initializeAdvertisement();
+		
 		this.mapTabInfo = new HashMap<String, TabInfo>();
 		this.initialiseTabHost(savedInstanceState);
 		this.lastTab = null;

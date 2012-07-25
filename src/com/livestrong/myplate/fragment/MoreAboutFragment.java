@@ -30,7 +30,7 @@ public class MoreAboutFragment extends FragmentDataHelperDelegate {
 		this.view = (LinearLayout) inflater.inflate(R.layout.fragment_more_about, container, false);	
 		
 		TextView versionTextView = (TextView) this.view.findViewById(R.id.versionTextView);
-		versionTextView.setText("Version " + Constants.APPLICATION_VERSION);
+		versionTextView.setText("Lite Version " + Constants.APPLICATION_VERSION);
 		
 		return this.view;
 	}
