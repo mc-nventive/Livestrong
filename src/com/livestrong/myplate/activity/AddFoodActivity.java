@@ -258,9 +258,9 @@ public class AddFoodActivity extends LiveStrongActivity {
         this.servingsFractionPicker = (NumberPicker) dialog.findViewById(R.id.servingsFractionPicker);
 		
 		String[] servingValues = FoodDiaryEntry.servingsPickerValues.keySet().toArray(new String[FoodDiaryEntry.servingsPickerValues.size()]);
-        this.servingsPicker.setRange(1, servingValues.length - 1, servingValues);
+        this.servingsPicker.setRange(0, servingValues.length - 1, servingValues);
         this.servingsPicker.setFocusable(false);
-        this.servingsPicker.setCurrent(1);
+        this.servingsPicker.setCurrent(0);
         
         String[] servingFractionValues = FoodDiaryEntry.servingsFractionPickerValues.keySet().toArray(new String[FoodDiaryEntry.servingsFractionPickerValues.size()]);
         this.servingsFractionPicker.setRange(0, servingFractionValues.length - 1, servingFractionValues);
