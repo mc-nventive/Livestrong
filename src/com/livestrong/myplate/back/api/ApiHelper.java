@@ -624,6 +624,10 @@ public class ApiHelper {
 					Log.e(ApiHelper.class.getName(), "Received 403 Forbidden status code; already retried. Aborting.");
 				}
 			}
+			else if(e.getStatusCode() == HttpStatus.BAD_REQUEST)
+			{
+				Log.e(ApiHelper.class.getName(), "Received 400 Bad Request: Username already exists.");
+			}
 			return handleApiErrors(gson, e);
 		} catch (HttpServerErrorException e) {
 			// 5xx status codes
@@ -653,6 +657,11 @@ public class ApiHelper {
 			Map<String, Object> error = gson.fromJson(json, Map.class);
 			errorMessage = Html.fromHtml((String) error.get("error_msg")).toString();
 		} catch (Exception e2) {
+		}
+		
+		if(e.getStatusCode() == HttpStatus.BAD_REQUEST)
+		{
+			errorMessage = "That username is already in use.";
 		}
 
 		Log.e(ApiHelper.class.getName(), "API error occurred (" + e.getStatusCode() + "): " + errorMessage);
