@@ -82,7 +82,8 @@ public class WaterDiaryEntry extends DiaryEntry implements LiveStrongDisplayable
 	}
 	
 	public void addOnces(double onces) {
-		this.glasses += onces * 1/ONCES_PER_GLASS;
+		this.glasses += (int)((int)onces * 1/ONCES_PER_GLASS);
+		wasModified();
 	}
 	
 	public double getOnces() {
