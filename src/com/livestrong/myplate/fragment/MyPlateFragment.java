@@ -50,7 +50,10 @@ public class MyPlateFragment extends FragmentDataHelperDelegate {
 	
 	private class UserProgressTask extends AsyncTask<Void, Void, UserProgress>
 	{
-		
+		protected void onPreExecute() 
+		{
+			MyPlateFragment.this.view.findViewById(R.id.progressBar1).setVisibility(View.VISIBLE);
+		}
 		@Override
 		protected UserProgress doInBackground(Void... params) 
 		{
@@ -90,6 +93,7 @@ public class MyPlateFragment extends FragmentDataHelperDelegate {
 				caloriesConsumedTextView.setText(_userProgress.getProgress());
 				calorieGoalTextView.setText(_userProgress.getDailyCaloriesGoal());
 
+				MyPlateFragment.this.view.findViewById(R.id.progressBar1).setVisibility(View.GONE);
 			}
 		};
 	};

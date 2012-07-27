@@ -659,7 +659,7 @@ public class ApiHelper {
 		
 		if(e.getStatusCode() == HttpStatus.BAD_REQUEST)
 		{
-			errorMessage = "That username is already in use.";
+			errorMessage = "That username or email is already in use.";
 		}
 
 		Log.e(ApiHelper.class.getName(), "API error occurred (" + e.getStatusCode() + "): " + errorMessage);
