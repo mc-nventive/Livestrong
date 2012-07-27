@@ -1,5 +1,6 @@
 package com.livestrong.myplate.fragment;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -13,6 +14,8 @@ import android.widget.LinearLayout;
 
 import com.livestrong.myplate.R;
 import com.livestrong.myplate.back.DataHelper;
+import com.livestrong.myplate.back.models.Exercise;
+import com.livestrong.myplate.back.models.UserProfile;
 
 public class MoreFragment extends FragmentDataHelperDelegate {
 
@@ -23,6 +26,26 @@ public class MoreFragment extends FragmentDataHelperDelegate {
 	MoreSupportFragment supportFragment;
 	MoreAboutFragment aboutFragment;
 	int lastTabIndex;
+	
+	private class UserProfileTask extends AsyncTask<Void, Void, UserProfile>
+	{
+		
+		@Override
+		protected UserProfile doInBackground(Void... params) 
+		{
+			return DataHelper.getUserProfile(null);
+		}
+		
+		protected void onPostExecute(UserProfile profile) 
+		{
+			if (profile != null) 
+			{
+				profileFragment.saveProfile();
+				accountFragment.saveProfile();
+			}
+		};
+
+	};
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		if (container == null) {
@@ -72,10 +95,7 @@ public class MoreFragment extends FragmentDataHelperDelegate {
 	
 	@Override
 	public void onPause() {
-		if (DataHelper.getUserProfile(null) != null){
-			profileFragment.saveProfile();
-			accountFragment.saveProfile();
-		}
+		new UserProfileTask().execute(new Void[]{});
 		
 		super.onPause();
 	}

@@ -10,6 +10,7 @@ import java.util.TreeMap;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager.LayoutParams;
@@ -56,12 +57,29 @@ public class MoreProfileFragment extends FragmentDataHelperDelegate {
 	private TextView weightUnitsTextView;
 	private ActivityLevels activityLevels;
 	private TreeMap<Double, String> weightGoalsMap;
+	
+	private class UserProfileTask extends AsyncTask<Void, Void, UserProfile>
+	{
+		
+		@Override
+		protected UserProfile doInBackground(Void... params) 
+		{
+			return DataHelper.getUserProfile(null);
+		}
+		
+		protected void onPostExecute(UserProfile profile) 
+		{
+			if (profile != null) 
+			{
+				userProfile = profile;
+				birthDate = userProfile.getDob();
+			}
+		};
+
+	};
 		
 	public MoreProfileFragment(){
-		this.userProfile = DataHelper.getUserProfile(null);	
-		if (this.userProfile != null){
-			this.birthDate = userProfile.getDob();	
-		}
+		new UserProfileTask().execute(new Void[]{});
 	}
 	
 	public void createNewUserProfile(){
@@ -110,10 +128,7 @@ public class MoreProfileFragment extends FragmentDataHelperDelegate {
 	public void onResume() {
 		super.onResume();
 		Log.d("MoreProfile", "key RESUME");
-		this.userProfile = DataHelper.getUserProfile(null);	
-		if (this.userProfile != null){
-			this.birthDate = userProfile.getDob();	
-		}
+		new UserProfileTask().execute(new Void[]{});
 		
 		if (this.view != null){
 			this.initializeFragmentBasedOnPreferences();

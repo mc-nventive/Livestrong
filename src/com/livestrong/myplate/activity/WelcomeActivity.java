@@ -14,7 +14,7 @@ import com.livestrong.myplate.back.models.UserProfile;
 
 public class WelcomeActivity extends LiveStrongFragmentActivity {
 	
-	private AsyncTask<Void, Void, UserProfile> _userProfileTask = new AsyncTask<Void, Void, UserProfile>()
+	private class UserProfileTask extends AsyncTask<Void, Void, UserProfile>
 	{
 		protected void onPreExecute() 
 		{
@@ -56,7 +56,7 @@ public class WelcomeActivity extends LiveStrongFragmentActivity {
         setContentView(R.layout.activity_welcome);
         
         // If user is signed in, or has a profile, show TabBarActivity
-        _userProfileTask.execute(new Void[]{});
+        new UserProfileTask().execute(new Void[]{});
         
         // Download activity levels 
         DataHelper.getActivityLevels(this);

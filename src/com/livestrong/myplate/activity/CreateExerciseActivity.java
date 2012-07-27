@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,12 +18,34 @@ import com.livestrong.myplate.MyPlateApplication;
 import com.livestrong.myplate.R;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.models.Exercise;
+import com.livestrong.myplate.back.models.UserProfile;
 
 public class CreateExerciseActivity extends LiveStrongActivity {
 
 	EditText nameEditText, caloriesEditText;
 	Button cancelButton, doneButton;
 	Exercise customExercise;
+	
+	private class UserProfileTask extends AsyncTask<Void, Void, UserProfile>
+	{
+		
+		@Override
+		protected UserProfile doInBackground(Void... params) 
+		{
+			return DataHelper.getUserProfile(null);
+		}
+		
+		protected void onPostExecute(UserProfile profile) 
+		{
+			if (profile != null) 
+			{
+				customExercise = new Exercise(true, profile.getWeight());
+				initializeEditTexts();
+				initializeButtons(profile.getWeight());
+			}
+		};
+
+	};
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,11 +64,7 @@ public class CreateExerciseActivity extends LiveStrongActivity {
 		this.cancelButton = (Button) findViewById(R.id.cancelButton);
 		this.doneButton = (Button) findViewById(R.id.doneButton);
 
-		this.customExercise = new Exercise(true);
-
-		this.initializeEditTexts();
-		this.initializeButtons();
-
+		new UserProfileTask().execute(new Void[]{});
 	}
 
 	public void initializeEditTexts() {
@@ -53,7 +72,7 @@ public class CreateExerciseActivity extends LiveStrongActivity {
 		this.caloriesEditText.setText(Math.round(this.customExercise.getCalsPerHour()) + "");
 	}
 
-	public void initializeButtons() {
+	public void initializeButtons(final double userWeight) {
 		View.OnClickListener onClickListener = new OnClickListener() {
 
 			@Override
@@ -80,7 +99,7 @@ public class CreateExerciseActivity extends LiveStrongActivity {
 						calories = Integer.parseInt(CreateExerciseActivity.this.caloriesEditText.getText().toString());
 					}
 					
-					CreateExerciseActivity.this.customExercise = new Exercise(true, name, calories);
+					CreateExerciseActivity.this.customExercise = new Exercise(true, name, calories, userWeight);
 					
 					RuntimeExceptionDao<Exercise, Integer> dao = DataHelper.getDatabaseHelper().getExerciseDao();
 					dao.create(CreateExerciseActivity.this.customExercise);

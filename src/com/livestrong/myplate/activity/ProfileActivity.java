@@ -2,6 +2,7 @@ package com.livestrong.myplate.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,6 +17,31 @@ import com.livestrong.myplate.fragment.MoreProfileFragment;
 
 public class ProfileActivity extends LiveStrongFragmentActivity {
 		
+	private class UserProfileTask  extends AsyncTask<Void, Void, UserProfile>
+	{		
+		@Override
+		protected UserProfile doInBackground(Void... params) 
+		{
+			return DataHelper.getUserProfile(null);
+		}
+		
+		protected void onPostExecute(UserProfile profile) 
+		{
+			 if (profile == null) 
+			 {
+		            // Use chose to not log in
+		            _profileFragment.createNewUserProfile();
+	         } 
+			 else 
+			 {
+	        	profile.setProfileDefaults();
+	         }
+		};
+
+	};
+	
+	private MoreProfileFragment _profileFragment;
+			
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
@@ -27,26 +53,21 @@ public class ProfileActivity extends LiveStrongFragmentActivity {
         // The activity is being created; create views, bind data to lists, etc.
         setContentView(R.layout.activity_profile);
         
-        final MoreProfileFragment profileFragment = new MoreProfileFragment();
-        UserProfile userProfile = DataHelper.getUserProfile(null);
-        if (userProfile == null) {
-            // Use chose to not log in
-            profileFragment.createNewUserProfile();
-        } else {
-        	userProfile.setProfileDefaults();
-        }
+        _profileFragment = new MoreProfileFragment();
         
+        new UserProfileTask().execute(new Void[]{});
+
         // load profile fragment
         FragmentManager fragmentManager = getSupportFragmentManager();		
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		fragmentTransaction.replace(R.id.frameLayout, profileFragment);
+		fragmentTransaction.replace(R.id.frameLayout, _profileFragment);
 		fragmentTransaction.commit();   
 		
 		Button doneButton = (Button) findViewById(R.id.doneButton);
 		doneButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				profileFragment.saveProfile();
+				_profileFragment.saveProfile();
 				Intent intent = new Intent(ProfileActivity.this, TabBarActivity.class);
 				startActivity(intent);
 				setResult(Activity.RESULT_OK);

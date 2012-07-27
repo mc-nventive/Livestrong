@@ -21,6 +21,7 @@ public class Exercise extends AbstractLiveStrongApiObject implements LiveStrongD
 	public static final String TITLE_FIELD_NAME = "exercise";
 	public static final String EXERCISE_ID_FIELD_NAME = "exerciseId";
 	public static final String CUSTOM_FIELD_NAME = "custom";
+	public static final String USER_WEIGHT_NAME = "user_weight";
 
 	public final static int CUSTOM_EXERCISE_ID = 87;
 	
@@ -68,14 +69,18 @@ public class Exercise extends AbstractLiveStrongApiObject implements LiveStrongD
 
 	@DatabaseField(columnName = CUSTOM_FIELD_NAME)
 	private boolean custom = false; // User saved this as a custom food
+	
+	private final double _userWeight;
 
 	public Exercise() {
+		_userWeight = 0.0f;
 	}
 
-	public Exercise(boolean isCustom) {
+	public Exercise(boolean isCustom, double userWeight) {
 		this.custom = isCustom;
 		this.exerciseId = CUSTOM_EXERCISE_ID;
 		this.calFactor = 0.0;
+		_userWeight = userWeight;
 		if (isCustom) {
 			this.exercise = "My Custom Exercise " + getNextAvailableCustomId();
 		} else {
@@ -83,11 +88,12 @@ public class Exercise extends AbstractLiveStrongApiObject implements LiveStrongD
 		}
 	} 
 	
-	public Exercise(Boolean isCustom, String name, int calsPerHour){
+	public Exercise(Boolean isCustom, String name, int calsPerHour, double userWeight){
 		this.custom = isCustom;
 		this.exercise = name;
 		this.exerciseId = CUSTOM_EXERCISE_ID;
 		this.calsPerHour = calsPerHour;
+		_userWeight = userWeight;
 	}
 	
 	public String getTitle() {
@@ -199,16 +205,15 @@ public class Exercise extends AbstractLiveStrongApiObject implements LiveStrongD
 	}
 
 	public double getCalsPerHour() {
-		UserProfile userProfile = DataHelper.getUserProfile(null);
-		if (userProfile == null){
+		
+		if (0 == Double.compare(_userWeight, 0.0f)){
 			return this.calsPerHour;
 		}
 		
-		double userWeight = userProfile.getWeight();
-		if (isCustom() || userWeight <= 0) {
+		if (isCustom() || _userWeight <= 0) {
 			return this.calsPerHour;
 		}
-		double caloriesBurnedPerSecond = getCalsBurnedPerSecond(userWeight);
+		double caloriesBurnedPerSecond = getCalsBurnedPerSecond(_userWeight);
 		double caloriesBurnedPerHour = caloriesBurnedPerSecond * 60.0 * 60.0;
 		this.calsPerHour = (int) Math.round(caloriesBurnedPerHour);
 		return caloriesBurnedPerHour;

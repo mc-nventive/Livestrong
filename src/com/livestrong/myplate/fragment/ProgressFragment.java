@@ -30,6 +30,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint.Align;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager.LayoutParams;
@@ -50,6 +51,7 @@ import com.livestrong.myplate.activity.AddWeightActivity;
 import com.livestrong.myplate.activity.TrackActivity;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.models.DiaryEntries;
+import com.livestrong.myplate.back.models.UserProfile;
 import com.livestrong.myplate.back.models.WeightDiaryEntry;
 import com.livestrong.myplate.utilities.SimpleDate;
 
@@ -74,6 +76,26 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 	private Map<SimpleDate, Integer> dailyCaloriesGoals = new LinkedHashMap<SimpleDate, Integer>();
 	
 	private boolean loading = false; 
+	private double _bmi;
+	
+	private class UserProfileTask extends AsyncTask<Void, Void, UserProfile>
+	{
+		
+		@Override
+		protected UserProfile doInBackground(Void... params) 
+		{
+			return DataHelper.getUserProfile(null);
+		}
+		
+		protected void onPostExecute(UserProfile profile) 
+		{
+			if (profile != null) 
+			{
+				_bmi = profile.getBmi();
+			}
+		};
+
+	};
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		if (container == null) {
@@ -87,6 +109,8 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 			return null;
 		}
 		View view = (LinearLayout) inflater.inflate(R.layout.fragment_progress, container, false);
+		
+		new UserProfileTask().execute(new Void[]{});
 
 		// Get dates for which we will fetch graph data (2 months back)
 		Calendar calendar = Calendar.getInstance();
@@ -217,8 +241,7 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 	}
 		
 	public void showWeightChart(){
-		double bmi = DataHelper.getUserProfile(null).getBmi();
-		this.headerTextView.setText("BMI: " + new DecimalFormat("#.#").format(bmi));
+		this.headerTextView.setText("BMI: " + new DecimalFormat("#.#").format(_bmi));
 		
 		if (weightChartView == null){
 			weightChartView = getWeightChart();

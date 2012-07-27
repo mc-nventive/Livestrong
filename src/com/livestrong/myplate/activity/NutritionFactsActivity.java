@@ -1,15 +1,46 @@
 package com.livestrong.myplate.activity;
 
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.livestrong.myplate.R;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.models.Food;
+import com.livestrong.myplate.back.models.UserProfile;
 
 public class NutritionFactsActivity extends LiveStrongActivity {
 	
-	private static int caloriesGoal;
+	private Food _food;
+	
+	private class UserProfileTask extends AsyncTask<Void, Void, UserProfile>
+	{
+		@Override
+		protected UserProfile doInBackground(Void... params) 
+		{
+			return DataHelper.getUserProfile(null);
+		}
+		
+		protected void onPostExecute(UserProfile profile) 
+		{
+			if (profile != null) 
+			{
+				((TextView) findViewById(R.id.totalFatDailyTextView)).setText(getDailyValue(profile.getCaloriesGoal(), _food.getFat(), 65)+"%");
+	            ((TextView) findViewById(R.id.satFatDailyTextView)).setText(getDailyValue(profile.getCaloriesGoal(), _food.getSatFat(), 20)+"%");
+	            ((TextView) findViewById(R.id.cholesterolDailyTextView)).setText(getDailyValue(profile.getCaloriesGoal(), _food.getCholesterol(), 300)+"%");
+	            ((TextView) findViewById(R.id.sodiumDailyTextView)).setText(getDailyValue(profile.getCaloriesGoal(), _food.getSodium(), 2300)+"%");
+	            ((TextView) findViewById(R.id.carbsDailyTextView)).setText(getDailyValue(profile.getCaloriesGoal(), _food.getCarbs(), 300)+"%");
+	            ((TextView) findViewById(R.id.dietaryFiberDailyTextView)).setText(getDailyValue(profile.getCaloriesGoal(), _food.getDietaryFiber(), 25)+"%");
+	            ((TextView) findViewById(R.id.proteinDailyTextView)).setText(getDailyValue(profile.getCaloriesGoal(), _food.getProtein(), 50)+"%");
+
+	            ((TextView) findViewById(R.id.fatPercTextView)).setText(Math.round(_food.getCalsPercFat())+"%");
+	            ((TextView) findViewById(R.id.carbsPercTextView)).setText(Math.round(_food.getCalsPercCarbs())+"%");
+	            ((TextView) findViewById(R.id.proteinPercTextView)).setText(Math.round(_food.getCalsPercProtein())+"%");
+	        }
+		};
+
+	};
 
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,38 +55,28 @@ public class NutritionFactsActivity extends LiveStrongActivity {
         
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-        	Food food = (Food) extras.get(Food.class.getName());
+        	_food = (Food) extras.get(Food.class.getName());
 
-            ((TextView) findViewById(R.id.servingSizeTextView)).setText(food.getServingSize());
-            ((TextView) findViewById(R.id.caloriesTextView)).setText(food.getCals()+"");
-            ((TextView) findViewById(R.id.caloriesFromFatTextView)).setText(food.getCalsFromFat()+"");
+            ((TextView) findViewById(R.id.servingSizeTextView)).setText(_food.getServingSize());
+            ((TextView) findViewById(R.id.caloriesTextView)).setText(_food.getCals()+"");
+            ((TextView) findViewById(R.id.caloriesFromFatTextView)).setText(_food.getCalsFromFat()+"");
 
-            ((TextView) findViewById(R.id.totalFatTextView)).setText(Math.round(food.getFat())+"g");
-            ((TextView) findViewById(R.id.satFatTextView)).setText(Math.round(food.getSatFat())+"g");
-            ((TextView) findViewById(R.id.cholesterolTextView)).setText(Math.round(food.getCholesterol())+"mg");
-            ((TextView) findViewById(R.id.sodiumTextView)).setText(Math.round(food.getSodium())+"mg");
-            ((TextView) findViewById(R.id.carbsTextView)).setText(Math.round(food.getCarbs())+"g");
-            ((TextView) findViewById(R.id.dietaryFiberTextView)).setText(Math.round(food.getDietaryFiber())+"g");
-            ((TextView) findViewById(R.id.sugarsTextView)).setText(Math.round(food.getSugars())+"g");
-            ((TextView) findViewById(R.id.proteinTextView)).setText(Math.round(food.getProtein())+"g");
+            ((TextView) findViewById(R.id.totalFatTextView)).setText(Math.round(_food.getFat())+"g");
+            ((TextView) findViewById(R.id.satFatTextView)).setText(Math.round(_food.getSatFat())+"g");
+            ((TextView) findViewById(R.id.cholesterolTextView)).setText(Math.round(_food.getCholesterol())+"mg");
+            ((TextView) findViewById(R.id.sodiumTextView)).setText(Math.round(_food.getSodium())+"mg");
+            ((TextView) findViewById(R.id.carbsTextView)).setText(Math.round(_food.getCarbs())+"g");
+            ((TextView) findViewById(R.id.dietaryFiberTextView)).setText(Math.round(_food.getDietaryFiber())+"g");
+            ((TextView) findViewById(R.id.sugarsTextView)).setText(Math.round(_food.getSugars())+"g");
+            ((TextView) findViewById(R.id.proteinTextView)).setText(Math.round(_food.getProtein())+"g");
 
             // Daily values
-            caloriesGoal = DataHelper.getUserProfile(null).getCaloriesGoal();
-            ((TextView) findViewById(R.id.totalFatDailyTextView)).setText(getDailyValue(food.getFat(), 65)+"%");
-            ((TextView) findViewById(R.id.satFatDailyTextView)).setText(getDailyValue(food.getSatFat(), 20)+"%");
-            ((TextView) findViewById(R.id.cholesterolDailyTextView)).setText(getDailyValue(food.getCholesterol(), 300)+"%");
-            ((TextView) findViewById(R.id.sodiumDailyTextView)).setText(getDailyValue(food.getSodium(), 2300)+"%");
-            ((TextView) findViewById(R.id.carbsDailyTextView)).setText(getDailyValue(food.getCarbs(), 300)+"%");
-            ((TextView) findViewById(R.id.dietaryFiberDailyTextView)).setText(getDailyValue(food.getDietaryFiber(), 25)+"%");
-            ((TextView) findViewById(R.id.proteinDailyTextView)).setText(getDailyValue(food.getProtein(), 50)+"%");
-
-            ((TextView) findViewById(R.id.fatPercTextView)).setText(Math.round(food.getCalsPercFat())+"%");
-            ((TextView) findViewById(R.id.carbsPercTextView)).setText(Math.round(food.getCalsPercCarbs())+"%");
-            ((TextView) findViewById(R.id.proteinPercTextView)).setText(Math.round(food.getCalsPercProtein())+"%");
+            new UserProfileTask().execute(new Void[]{});
+            
         }
     }
 	
-	private int getDailyValue(double grams, double rdv) {
+	private int getDailyValue(int caloriesGoal, double grams, double rdv) {
 		double dailyValueRatio = caloriesGoal / 2000.0;
 		return (int) Math.round(100 * (grams / (rdv * dailyValueRatio)));
 	}
