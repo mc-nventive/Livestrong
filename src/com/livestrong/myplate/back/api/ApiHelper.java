@@ -471,9 +471,6 @@ public class ApiHelper {
 		ApiHelperResponse<D> apiResponse;
 		
 		if (Thread.currentThread() == Looper.getMainLooper().getThread()) {
-			// We're in the Main (UI) thread.
-			// This is a workaround for Android 3+, where you can't do network access on the main thread.
-			// Yeah, yeah... Android apps shouldn't do sync network calls, but just this once, let's do it this way, to not have to change a lot of things in the app.
 			AsyncApiHelper<D> asyncTask = new AsyncApiHelper<D>();
 			asyncTask.execute(httpMethod, url, responseObjectClass, body, contentType, retry, methodCalled, delegate, authUsing);
 			while (!asyncTask.done) {
