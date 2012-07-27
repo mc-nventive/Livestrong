@@ -93,6 +93,10 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 			{
 				_bmi = profile.getBmi();
 			}
+			else
+			{
+				"".toString();
+			}
 		};
 
 	};

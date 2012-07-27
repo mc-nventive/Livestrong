@@ -1105,8 +1105,8 @@ public class DataHelper {
 	 * @return UserProgress
 	 * @example UserProgress userProgress = DataHelper.getUserCaloriesProgress(new Date());
 	 */
-	public static UserProgress getUserCaloriesProgress(Date day) {
-		return new UserProgress(day);
+	public static UserProgress getUserCaloriesProgress(Date day, int dailyCaloriesGoal) {
+		return new UserProgress(day, dailyCaloriesGoal);
 	}
 
 	@SuppressWarnings("unchecked")

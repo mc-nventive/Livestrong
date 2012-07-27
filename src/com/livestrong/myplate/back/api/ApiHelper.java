@@ -470,7 +470,19 @@ public class ApiHelper {
 	private static <D> D requestRest(HttpMethod httpMethod, String url, Class<D> responseObjectClass, Object body, MediaType contentType, boolean retry, Method methodCalled, DataHelperDelegate delegate, AuthUsing authUsing) {
 		ApiHelperResponse<D> apiResponse;
 		
-		apiResponse = requestRestSynchronous(httpMethod, url, responseObjectClass, body, contentType, retry, methodCalled, delegate, authUsing);
+		if (Thread.currentThread() == Looper.getMainLooper().getThread()) {
+			//TODO: Remove this after completing the refactory of the network queries
+			AsyncApiHelper<D> asyncTask = new AsyncApiHelper<D>();
+			asyncTask.execute(httpMethod, url, responseObjectClass, body, contentType, retry, methodCalled, delegate, authUsing);
+			while (!asyncTask.done) {
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e) {}
+			}
+			apiResponse = asyncTask.response;
+		} else {
+			apiResponse = requestRestSynchronous(httpMethod, url, responseObjectClass, body, contentType, retry, methodCalled, delegate, authUsing);
+		}
 		
 		if (apiResponse.error) {
 			if (delegate == null || !delegate.errorOccurredThreaded(methodCalled, apiResponse.exception, apiResponse.errorMessage)) {

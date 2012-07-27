@@ -10,6 +10,7 @@ import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager.LayoutParams;
@@ -39,6 +40,7 @@ import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.DataHelper.DistanceUnits;
 import com.livestrong.myplate.back.DataHelper.WaterUnits;
 import com.livestrong.myplate.back.DataHelper.WeightUnits;
+import com.livestrong.myplate.back.models.UserProfile;
 import com.livestrong.myplate.utilities.NotificationReceiver;
 
 public class MoreAccountFragment extends FragmentDataHelperDelegate {
@@ -54,6 +56,18 @@ public class MoreAccountFragment extends FragmentDataHelperDelegate {
 	ProgressBar syncProgressBar;
 	TextView lastSyncTextView;
 	int rowHeight = 0;
+	
+	private class UserRefreshTask  extends AsyncTask<Void, Void, Void>
+	{		
+		@Override
+		protected Void doInBackground(Void... params) 
+		{
+			DataHelper.refreshData(MoreAccountFragment.this);
+			
+			return null;
+		}
+
+	};
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		if (container == null) {
@@ -132,7 +146,7 @@ public class MoreAccountFragment extends FragmentDataHelperDelegate {
 			public void onClick(View v) {
 				syncButton.setEnabled(false);
 				syncProgressBar.setVisibility(View.VISIBLE);
-				DataHelper.refreshData(MoreAccountFragment.this);
+				new UserRefreshTask().execute(new Void[]{});
 			}
 		});
 	}

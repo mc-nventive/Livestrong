@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Map;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
@@ -45,7 +46,53 @@ public class MyPlateFragment extends FragmentDataHelperDelegate {
 	ImageView progressBar;
 	Integer progressBarWidth;
 	TextView caloriesConsumedTextView, calorieGoalTextView;
+	private UserProgress _userProgress;
 	
+	private class UserProgressTask extends AsyncTask<Void, Void, UserProgress>
+	{
+		
+		@Override
+		protected UserProgress doInBackground(Void... params) 
+		{
+			int goal = DataHelper.getUserDailyCaloriesGoal();
+			return DataHelper.getUserCaloriesProgress(new Date(), goal);
+		}
+		
+		protected void onPostExecute(UserProgress progress) 
+		{
+			if (progress != null) 
+			{
+				// Set Progress bar width
+				Display display = getActivity().getWindowManager().getDefaultDisplay();   
+		        
+				_userProgress = progress;
+				 
+				int width = (int) (display.getWidth() * _userProgress.getProgressBarPercentage());
+				if (width < 0) {
+					width = 0;
+				}
+				
+				if (progressBarWidth != width){
+					animateProgressBarChange(width, _userProgress.isOverGoal());
+				} else {
+					if (_userProgress.isOverGoal()){
+						progressBar.setImageResource(R.drawable.progress_foreground_red);
+						progressBar.getLayoutParams().width = display.getWidth();
+					} else {
+						progressBar.setImageResource(R.drawable.progress_foreground);
+						progressBar.getLayoutParams().width = width;
+					}
+					
+					progressBar.requestLayout();
+				}
+				
+				// Update TextViews
+				caloriesConsumedTextView.setText(_userProgress.getProgress());
+				calorieGoalTextView.setText(_userProgress.getDailyCaloriesGoal());
+
+			}
+		};
+	};
 	
 	/** (non-Javadoc)
 	 * @see android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)
@@ -215,34 +262,9 @@ public class MyPlateFragment extends FragmentDataHelperDelegate {
 			this.waterBtn.setBackgroundResource(R.drawable.btn_track_blue_selector);
 		}
 		
-		// Set Progress bar width
-		Display display = getActivity().getWindowManager().getDefaultDisplay();   
-        
-		UserProgress userProgress = DataHelper.getUserCaloriesProgress(new Date());
-	 
-		int width = (int) (display.getWidth() * userProgress.getProgressBarPercentage());
-		if (width < 0) {
-			width = 0;
-		}
+		new UserProgressTask().execute(new Void[]{});
 		
-		if (this.progressBarWidth != width){
-			animateProgressBarChange(width, userProgress.isOverGoal());
-		} else {
-			if (userProgress.isOverGoal()){
-				this.progressBar.setImageResource(R.drawable.progress_foreground_red);
-				this.progressBar.getLayoutParams().width = display.getWidth();
-			} else {
-				this.progressBar.setImageResource(R.drawable.progress_foreground);
-				this.progressBar.getLayoutParams().width = width;
-			}
-			
-			this.progressBar.requestLayout();
 		}
-		
-		// Update TextViews
-		this.caloriesConsumedTextView.setText(userProgress.getProgress());
-		this.calorieGoalTextView.setText(userProgress.getDailyCaloriesGoal());
-	}
 
 	private void animateProgressBarChange(int targetWidth, final boolean isOverGoal){
 		if (!isOverGoal){
