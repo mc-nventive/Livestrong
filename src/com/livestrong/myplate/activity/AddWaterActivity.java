@@ -106,7 +106,7 @@ public class AddWaterActivity extends LiveStrongActivity {
 		switch (this.unitsPreference) {
 			case MILLILITERS:
 				waterAmount = (Integer) WaterDiaryEntry.metricWaterPickerValues.values().toArray()[selectedIndex];
-				return (double) waterAmount * 1/WaterDiaryEntry.ML_PER_OUNCE;
+				return (double) WaterDiaryEntry.getOnceWater(waterAmount);
 			default:
 				waterAmount = (Integer) WaterDiaryEntry.imperialWaterPickerValues.values().toArray()[selectedIndex];
 				return (double) waterAmount;
@@ -116,34 +116,12 @@ public class AddWaterActivity extends LiveStrongActivity {
 	private void setPickers(double onces) {
 		switch (this.unitsPreference) {
 			case MILLILITERS:
-				this.waterPicker.setCurrent(getMetricWaterIndex(onces));
+				this.waterPicker.setCurrent(WaterDiaryEntry.getMetricWaterIndex(onces));
 				break;
 			default:
-				this.waterPicker.setCurrent((int) Math.round(onces));
+				this.waterPicker.setCurrent((int) Math.round(onces / WaterDiaryEntry.ONCES_PER_GLASS) - 1);
 				break;
 		}
-	}
-
-	private int getMetricWaterIndex(double onces) {
-		int ml = (int) Math.round(onces * WaterDiaryEntry.ML_PER_OUNCE);
-
-		// To know what value to select, we will choose the one that has the smallest difference (distance) with the value from the DB
-		int index = 0;
-		Map<Integer, Double> distances = new HashMap<Integer, Double>();
-		for (double mlValue : WaterDiaryEntry.metricWaterPickerValues.values()) {
-			distances.put(index, Math.abs(ml - mlValue));
-			index++;
-		}
-
-		// Find the index (key) of the smallest distance
-		Entry<Integer, Double> min = null;
-		for (Entry<Integer, Double> entry : distances.entrySet()) {
-		    if (min == null || min.getValue() > entry.getValue()) {
-		        min = entry;
-		    }
-		}
-		
-		return min.getKey();
 	}
 	
 	private void initializePickers() {

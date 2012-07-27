@@ -80,7 +80,25 @@
                 android:src="@drawable/biglogo" />
         </LinearLayout>
 
+        <ProgressBar
+                android:id="@+id/progressBar1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" 
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/linearLayout2"/>
+        
+        <TextView 
+            android:id="@+id/progressText"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:text="Syncing..."
+            android:textColor="@color/black"
+            android:layout_below="@id/progressBar1"/>
+        
         <RelativeLayout
+            android:id="@+id/yesNoLayout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
