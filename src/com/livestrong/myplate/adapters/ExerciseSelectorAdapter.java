@@ -87,7 +87,7 @@ public class ExerciseSelectorAdapter extends AbstractBaseAdapterDataHelperDelega
 			ExerciseSearchResponse exerciseSearchResponse = (ExerciseSearchResponse) data;
 			this.setExercises((List<Exercise>) exerciseSearchResponse.getExercises());
 			if (exerciseSearchResponse.getExercises().size() == 0){
-				this.showNoResultsMessage = true;
+				this.showNoResultsMessage = true; 
 			}
 		}
 	}
