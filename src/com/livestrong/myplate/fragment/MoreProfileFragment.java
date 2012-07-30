@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.Callable;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -58,12 +59,13 @@ public class MoreProfileFragment extends FragmentDataHelperDelegate {
 	private ActivityLevels activityLevels;
 	private TreeMap<Double, String> weightGoalsMap;
 	
-	private class UserProfileTask extends AsyncTask<Void, Void, UserProfile>
+	private class UserProfileTask extends AsyncTask<Runnable, Void, UserProfile>
 	{
-		
+		private Runnable _callback;
 		@Override
-		protected UserProfile doInBackground(Void... params) 
+		protected UserProfile doInBackground(Runnable... callbacks) 
 		{
+			if(null != callbacks && callbacks.length > 0)	_callback = callbacks[0];
 			return DataHelper.getUserProfile(null);
 		}
 		
@@ -72,14 +74,21 @@ public class MoreProfileFragment extends FragmentDataHelperDelegate {
 			if (profile != null) 
 			{
 				userProfile = profile;
-				birthDate = userProfile.getDob();
+				_callback.run();
 			}
+			
 		};
 
 	};
 		
 	public MoreProfileFragment(){
-		new UserProfileTask().execute(new Void[]{});
+		new UserProfileTask().execute(new Runnable[]{ new Runnable()
+		{
+			public void run() 
+			{
+				birthDate = userProfile.getDob();
+			}
+		}});
 	}
 	
 	public void createNewUserProfile(){
@@ -128,14 +137,21 @@ public class MoreProfileFragment extends FragmentDataHelperDelegate {
 	public void onResume() {
 		super.onResume();
 		Log.d("MoreProfile", "key RESUME");
-		new UserProfileTask().execute(new Void[]{});
-		
-		if (this.view != null){
-			this.initializeFragmentBasedOnPreferences();
-		}
-		
-		this.initializeEditTexts();
-		this.initializeSpinners();
+		new UserProfileTask().execute(new Runnable[]
+				{
+					new Runnable()
+					{
+						public void run() 
+						{
+							if (view != null){
+								initializeFragmentBasedOnPreferences();
+							}
+							
+							initializeEditTexts();
+							initializeSpinners();
+						}
+					}
+				});
 	}
 	
 	private void initializeFragmentBasedOnPreferences(){

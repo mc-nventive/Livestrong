@@ -26,7 +26,7 @@ public class FoodDiaryEntry extends DiaryEntry implements LiveStrongDisplayableL
 	public final static LinkedHashMap<String, Integer> servingsPickerValues = new LinkedHashMap<String, Integer>() {
 		private static final long serialVersionUID = -3381491247661807314L;
 		{
-			for (int i=1; i<=10; i++) {
+			for (int i=0; i<=10; i++) {
 	            put(i+"", i);
 			}
         };

@@ -25,27 +25,6 @@ public class CreateExerciseActivity extends LiveStrongActivity {
 	EditText nameEditText, caloriesEditText;
 	Button cancelButton, doneButton;
 	Exercise customExercise;
-	
-	private class UserProfileTask extends AsyncTask<Void, Void, UserProfile>
-	{
-		
-		@Override
-		protected UserProfile doInBackground(Void... params) 
-		{
-			return DataHelper.getUserProfile(null);
-		}
-		
-		protected void onPostExecute(UserProfile profile) 
-		{
-			if (profile != null) 
-			{
-				customExercise = new Exercise(true, profile.getWeight());
-				initializeEditTexts();
-				initializeButtons(profile.getWeight());
-			}
-		};
-
-	};
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,7 +43,10 @@ public class CreateExerciseActivity extends LiveStrongActivity {
 		this.cancelButton = (Button) findViewById(R.id.cancelButton);
 		this.doneButton = (Button) findViewById(R.id.doneButton);
 
-		new UserProfileTask().execute(new Void[]{});
+		this.customExercise = new Exercise(true);
+
+		this.initializeEditTexts();
+		this.initializeButtons();
 	}
 
 	public void initializeEditTexts() {
@@ -72,7 +54,7 @@ public class CreateExerciseActivity extends LiveStrongActivity {
 		this.caloriesEditText.setText(Math.round(this.customExercise.getCalsPerHour()) + "");
 	}
 
-	public void initializeButtons(final double userWeight) {
+	 public void initializeButtons() {
 		View.OnClickListener onClickListener = new OnClickListener() {
 
 			@Override
@@ -99,7 +81,7 @@ public class CreateExerciseActivity extends LiveStrongActivity {
 						calories = Integer.parseInt(CreateExerciseActivity.this.caloriesEditText.getText().toString());
 					}
 					
-					CreateExerciseActivity.this.customExercise = new Exercise(true, name, calories, userWeight);
+					CreateExerciseActivity.this.customExercise = new Exercise(true, name, calories);
 					
 					RuntimeExceptionDao<Exercise, Integer> dao = DataHelper.getDatabaseHelper().getExerciseDao();
 					dao.create(CreateExerciseActivity.this.customExercise);

@@ -27,6 +27,24 @@ public class ProfileActivity extends LiveStrongFragmentActivity {
 		
 		protected void onPostExecute(UserProfile profile) 
 		{
+			// load profile fragment
+	        FragmentManager fragmentManager = getSupportFragmentManager();		
+			FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+			fragmentTransaction.replace(R.id.frameLayout, _profileFragment);
+			fragmentTransaction.commit();   
+			
+			Button doneButton = (Button) findViewById(R.id.doneButton);
+			doneButton.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
+					_profileFragment.saveProfile();
+					Intent intent = new Intent(ProfileActivity.this, TabBarActivity.class);
+					startActivity(intent);
+					setResult(Activity.RESULT_OK);
+					finish();
+				}
+			});
+			
 			 if (profile == null) 
 			 {
 		            // Use chose to not log in
@@ -56,23 +74,5 @@ public class ProfileActivity extends LiveStrongFragmentActivity {
         _profileFragment = new MoreProfileFragment();
         
         new UserProfileTask().execute(new Void[]{});
-
-        // load profile fragment
-        FragmentManager fragmentManager = getSupportFragmentManager();		
-		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-		fragmentTransaction.replace(R.id.frameLayout, _profileFragment);
-		fragmentTransaction.commit();   
-		
-		Button doneButton = (Button) findViewById(R.id.doneButton);
-		doneButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				_profileFragment.saveProfile();
-				Intent intent = new Intent(ProfileActivity.this, TabBarActivity.class);
-				startActivity(intent);
-				setResult(Activity.RESULT_OK);
-				finish();
-			}
-		});
 	}
 }
