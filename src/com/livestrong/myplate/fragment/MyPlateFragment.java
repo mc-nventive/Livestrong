@@ -5,9 +5,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -17,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.Button;
@@ -66,34 +69,44 @@ public class MyPlateFragment extends FragmentDataHelperDelegate {
 			if (progress != null) 
 			{
 				// Set Progress bar width
-				Display display = getActivity().getWindowManager().getDefaultDisplay();   
-		        
-				_userProgress = progress;
-				 
-				int width = (int) (display.getWidth() * _userProgress.getProgressBarPercentage());
-				if (width < 0) {
-					width = 0;
-				}
-				
-				if (progressBarWidth != width){
-					animateProgressBarChange(width, _userProgress.isOverGoal());
-				} else {
-					if (_userProgress.isOverGoal()){
-						progressBar.setImageResource(R.drawable.progress_foreground_red);
-						progressBar.getLayoutParams().width = display.getWidth();
-					} else {
-						progressBar.setImageResource(R.drawable.progress_foreground);
-						progressBar.getLayoutParams().width = width;
-					}
-					
-					progressBar.requestLayout();
-				}
-				
-				// Update TextViews
-				caloriesConsumedTextView.setText(_userProgress.getProgress());
-				calorieGoalTextView.setText(_userProgress.getDailyCaloriesGoal());
+				FragmentActivity activity = getActivity();
+				if (null != activity) 
+				{
+					WindowManager manager = activity.getWindowManager();
+					if (null != manager) {
+						Display display = manager.getDefaultDisplay();
+						_userProgress = progress;
+						int width = (int) (display.getWidth() * _userProgress
+								.getProgressBarPercentage());
+						if (width < 0) {
+							width = 0;
+						}
+						if (progressBarWidth != width) {
+							animateProgressBarChange(width,
+									_userProgress.isOverGoal());
+						} else {
+							if (_userProgress.isOverGoal()) {
+								progressBar
+										.setImageResource(R.drawable.progress_foreground_red);
+								progressBar.getLayoutParams().width = display
+										.getWidth();
+							} else {
+								progressBar
+										.setImageResource(R.drawable.progress_foreground);
+								progressBar.getLayoutParams().width = width;
+							}
 
-				MyPlateFragment.this.view.findViewById(R.id.progressBar1).setVisibility(View.GONE);
+							progressBar.requestLayout();
+						}
+						// Update TextViews
+						caloriesConsumedTextView.setText(_userProgress
+								.getProgress());
+						calorieGoalTextView.setText(_userProgress
+								.getDailyCaloriesGoal());
+						MyPlateFragment.this.view.findViewById(
+								R.id.progressBar1).setVisibility(View.GONE);
+					}
+				}
 			}
 		};
 	};
