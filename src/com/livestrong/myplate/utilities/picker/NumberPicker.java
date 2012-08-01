@@ -49,6 +49,8 @@ public class NumberPicker extends LinearLayout implements OnClickListener,
 	private static final String TAG = "NumberPicker";
     private static final int DEFAULT_MAX = 200;
     private static final int DEFAULT_MIN = 0;
+    
+    private boolean _isForFood;
 
     public interface OnChangedListener {
         void onChanged(NumberPicker picker, int oldVal, int newVal);
