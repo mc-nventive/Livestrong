@@ -24,9 +24,10 @@ import com.livestrong.myplate.utilities.AdvertisementHelper;
 import com.livestrong.myplate.utilities.ImageLoader;
 import com.livestrong.myplate.utilities.SessionMHelper;
 import com.livestrong.myplate.utilities.picker.NumberPicker;
+import com.livestrong.myplate.utilities.picker.NumberPicker.OnChangedListener;
 import com.livestrong.myplatelite.R;
 
-public class AddFoodActivity extends LiveStrongActivity {
+public class AddFoodActivity extends LiveStrongActivity implements OnChangedListener {
 	
 	public static String INTENT_FOOD_NAME = "foodName";
 	
@@ -261,10 +262,12 @@ public class AddFoodActivity extends LiveStrongActivity {
         this.servingsPicker.setRange(0, servingValues.length - 1, servingValues);
         this.servingsPicker.setFocusable(false);
         this.servingsPicker.setCurrent(1);
+        this.servingsPicker.setOnChangeListener(this);
         
         String[] servingFractionValues = FoodDiaryEntry.servingsFractionPickerValues.keySet().toArray(new String[FoodDiaryEntry.servingsFractionPickerValues.size()]);
         this.servingsFractionPicker.setRange(0, servingFractionValues.length - 1, servingFractionValues);
         this.servingsFractionPicker.setFocusable(false);
+        this.servingsFractionPicker.setOnChangeListener(this);
 	}
 	
     @Override
@@ -337,6 +340,28 @@ public class AddFoodActivity extends LiveStrongActivity {
 	    	tv.setText(Math.round(this.food.getProtein())+"");
 		} else {
 			DataHelper.getFood(food.getFoodId(), this);
+		}
+	}
+	
+	private int _currentServings;
+	
+	@Override
+	public void onChanged(NumberPicker picker, int oldVal, int newVal) {
+		
+		if(picker == servingsPicker)
+		{
+			if(newVal == 0)
+			{
+				this.servingsFractionPicker.setCurrent(1);
+			}
+			_currentServings = newVal;
+		}
+		if(_currentServings  == 0 && picker == servingsFractionPicker)
+		{
+			if(newVal == 0)
+			{
+				this.servingsFractionPicker.setCurrent(1); 
+			}
 		}
 	}
 }
