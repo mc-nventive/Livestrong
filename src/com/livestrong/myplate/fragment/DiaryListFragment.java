@@ -22,6 +22,7 @@ import com.livestrong.myplate.activity.AddExerciseActivity;
 import com.livestrong.myplate.activity.AddFoodActivity;
 import com.livestrong.myplate.activity.AddWaterActivity;
 import com.livestrong.myplate.activity.AddWeightActivity;
+import com.livestrong.myplate.activity.TabBarActivity;
 import com.livestrong.myplate.activity.TrackActivity;
 import com.livestrong.myplate.adapters.DiaryAdapter;
 import com.livestrong.myplate.back.models.DiaryEntry;
@@ -46,6 +47,8 @@ public class DiaryListFragment extends FragmentDataHelperDelegate implements OnI
 	protected Date selectedDate;
 	private TextView dateTextView;
 	private LinearLayout messageContainer;
+
+	private String _sessionM;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		if (container == null) {
@@ -218,9 +221,11 @@ public class DiaryListFragment extends FragmentDataHelperDelegate implements OnI
 		
 		// An activity might post a SessionM event
 		if (data != null && data.getExtras() != null) {
-			String sessionM = data.getExtras().getString(SessionMHelper.INTENT_SESSIONM);
-			if (sessionM != null)
-				SessionM.getInstance().presentActivity(getActivity(), sessionM);
+			_sessionM = data.getExtras().getString(SessionMHelper.INTENT_SESSIONM);
+			if (_sessionM != null)
+			{
+				((TabBarActivity)this.getActivity()).SessionMAchievement = _sessionM;
+			}
 		}
 	}
 	

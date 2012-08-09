@@ -19,8 +19,11 @@ import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.DataHelperDelegate;
 import com.livestrong.myplate.back.db.DatabaseHelper;
 import com.livestrong.myplate.back.models.FoodDiaryEntry.TimeOfDay;
+import com.livestrong.myplate.utilities.SessionMHelper;
 import com.livestrong.myplate.utilities.SimpleDate;
 import com.livestrong.myplatelite.R;
+import com.sessionm.api.SessionM;
+import com.sessionm.core.SessionMAndroidConfig;
 
 public class MyPlateApplication extends Application {
 	private static Context context;
@@ -46,6 +49,13 @@ public class MyPlateApplication extends Application {
 		context = this;
 		DataHelper.initialize(context);
 		setWorkingDateStamp(new Date());
+		
+		// Initialize SessionM
+		SessionM sessionM = SessionM.getInstance();
+		sessionM.getConfig().setActivityOrientation(SessionMAndroidConfig.ORIENTATION_PORTRAIT);
+		sessionM.startSession(this, Constants.SESSIONM_ID);
+		sessionM.setSessionListener(SessionMHelper.getInstance());
+		sessionM.setActivityListener(SessionMHelper.getInstance());
 	}
 
 	public static void setWorkingDateStamp(Date workingDateStamp) {

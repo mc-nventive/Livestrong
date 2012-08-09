@@ -26,7 +26,7 @@ public class AdvertisementHelper {
 		}
 		
 		
-		HashMap<String, String> targetParams = new HashMap<String, String>();
+		HashMap<String, Object> targetParams = new HashMap<String, Object>();
 
 		// Let's provide some basic targeting parameters.
 		// See admarvel_android_targeting_params.pdf for more.

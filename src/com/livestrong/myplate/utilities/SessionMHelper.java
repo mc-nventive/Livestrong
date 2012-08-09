@@ -7,7 +7,8 @@ import android.util.Log;
 import com.sessionm.api.ActivityListener;
 import com.sessionm.api.SessionListener;
 import com.sessionm.api.SessionM;
-import com.sessionm.api.SessionM$USER_SUBSCRIPTION_STATUS;
+import com.sessionm.api.SessionM.USER_SUBSCRIPTION_STATUS;
+import com.sessionm.api.User;
 
 public class SessionMHelper implements SessionListener, ActivityListener {
 
@@ -33,7 +34,7 @@ public class SessionMHelper implements SessionListener, ActivityListener {
 	}
 
 	@Override
-	public void onUserChangedSubscriptionStatus(SessionM sessionM, SessionM$USER_SUBSCRIPTION_STATUS subscrStatus) {
+	public void onUserChangedSubscriptionStatus(SessionM sessionM, USER_SUBSCRIPTION_STATUS subscrStatus) {
 		Log.i(getClass().getName(), "SessionM subscription changed: " + subscrStatus);
 	}
 
@@ -64,6 +65,10 @@ public class SessionMHelper implements SessionListener, ActivityListener {
 
 	@Override
 	public void onUserInfoChanged(SessionM sessionM, JSONObject json) {
+	}
+
+	@Override
+	public void onUserUpdated(SessionM arg0, User arg1) {
 	}
 
 }

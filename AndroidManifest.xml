@@ -62,10 +62,8 @@
         <provider android:name="com.admarvel.android.ads.AdMarvelLocalFileContentProvider" android:authorities="com.livestrong.myplatelite.AdMarvelLocalFileContentProvider" />
         
         <!--  This is for SessionM -->
-        <activity android:name="com.sessionm.sdk.BrowserActivity"></activity>
-        <service android:name="com.sessionm.sdk.SessionMService"></service>
-        <activity android:name="com.sessionm.sdk.SessionMActivity" android:configChanges="keyboard|orientation" android:excludeFromRecents="true" android:launchMode="singleTask" />
-        <receiver android:name="com.sessionm.sdk.broadcast.PackageReceiver" android:exported="true">
+        <activity android:name="com.sessionm.ui.SessionMActivity" android:configChanges="keyboard|orientation" android:excludeFromRecents="true" android:launchMode="singleTask" />
+        <receiver android:name="com.sessionm.cpi.PackageReceiver" android:exported="true">
             <intent-filter><action android:name="com.android.vending.INSTALL_REFERRER" /></intent-filter>
         </receiver>
         

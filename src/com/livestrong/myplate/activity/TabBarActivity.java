@@ -35,12 +35,13 @@ import com.livestrong.myplate.utilities.AdvertisementHelper;
 import com.livestrong.myplate.utilities.SessionMHelper;
 import com.livestrong.myplatelite.R;
 import com.sessionm.api.SessionM;
-import com.sessionm.sdk.SessionMAndroidConfig;
+import com.sessionm.core.SessionMAndroidConfig;
 
 public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabChangeListener {
 	private TabHost tabHost;
 	private HashMap<String, TabInfo> mapTabInfo = new HashMap<String, TabInfo>();
 	private TabInfo lastTab = null;
+	public String SessionMAchievement;
 	
 	private class TabInfo {
 		private int position;
@@ -91,13 +92,6 @@ public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabC
 	private void initializeAdvertisement() {
 		// Request AdM
 		AdvertisementHelper.requestAd((AdMarvelView) findViewById(R.id.ad), this);
-		
-		// Initialize SessionM
-		SessionM sessionM = SessionM.getInstance();
-		sessionM.getConfig().setActivityOrientation(SessionMAndroidConfig.ORIENTATION_PORTRAIT);
-		sessionM.startSession(this, Constants.SESSIONM_ID);
-		sessionM.setSessionListener(SessionMHelper.getInstance());
-		sessionM.setActivityListener(SessionMHelper.getInstance());
 	}
 	
 	/**
@@ -255,26 +249,8 @@ public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabC
 		
 		// An activity might post a SessionM event
 		if (data != null && data.getExtras() != null) {
-			final String sessionM = data.getExtras().getString(SessionMHelper.INTENT_SESSIONM);
-			if (sessionM != null) {
-				SessionM.getInstance().presentActivity(this, sessionM);
-			}
+			SessionMAchievement = data.getExtras().getString(SessionMHelper.INTENT_SESSIONM);
 		}
-	}
-	
-	@Override
-	protected void onStart() {
-		super.onStart();
-		// The activity is about to become visible.
-		// -> onResume()
-	}
-
-	@Override
-	protected void onResume() {
-        super.onResume();
-		// The activity has become visible (it is now "resumed").
-        
-        //MyPlateApplication.setWorkingDateStamp(new Date());
 	}
 
 	@Override
@@ -288,17 +264,43 @@ public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabC
 	}
 
 	@Override
-	protected void onPause() {
-		super.onPause();
-		// Another activity is taking focus (this activity is about to be "paused"); commit unsaved changes to persistent data, etc.
-		// -> onStop()
-	}
+    protected void onResume() {
+        super.onResume();
+        // The activity has become visible (it is now "resumed").
+        
+        SessionM.getInstance().onActivityResume(this);
+        
+        if (SessionMAchievement != null)
+		{
+			SessionM.getInstance().presentActivity(SessionM.ActivityType.ACHIEVEMENT, SessionMAchievement);
+			SessionMAchievement = null;
+		}
+    }
 
-	@Override
-	protected void onStop() {
-		super.onStop();
-		// The activity is no longer visible (it is now "stopped")
-	}
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Another activity is taking focus (this activity is about to be "paused"); commit unsaved changes to persistent data, etc.
+        // -> onStop()
+        
+        SessionM.getInstance().onActivityPause(this);
+    }
+    
+    @Override
+    protected void onStart() {
+    	// TODO Auto-generated method stub
+    	super.onStart();
+    	
+    	SessionM.getInstance().onActivityStart(this);
+    }
+    
+    @Override
+    protected void onStop() {
+    	// TODO Auto-generated method stub
+    	super.onStop();
+    
+    	SessionM.getInstance().onActivityStop(this);
+    }
 
 	@Override
 	protected void onRestart() {

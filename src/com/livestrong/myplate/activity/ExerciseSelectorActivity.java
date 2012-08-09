@@ -48,6 +48,7 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
 	private Button recentlyPerformedBtn, frequentlyPerformedBtn, customExercisesBtn, addManualButton;
 	private TextView messageTextView;
 	private Boolean isSearching = false;
+	private String _sessionM;
 	
 	protected void onCreate(Bundle savedInstanceState){
 		 super.onCreate(savedInstanceState);
@@ -110,9 +111,7 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
 			String exerciseName = data.getExtras().getString(AddExerciseActivity.INTENT_EXERCISE_NAME);
 			this.displayNotification(exerciseName + " was added to your diary.");
 			
-			String sessionM = data.getExtras().getString(SessionMHelper.INTENT_SESSIONM);
-			if (sessionM != null)
-				SessionM.getInstance().presentActivity(this, sessionM);
+			_sessionM = data.getExtras().getString(SessionMHelper.INTENT_SESSIONM);
 			
 			setResult(Activity.RESULT_OK);
 		}
@@ -323,4 +322,42 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
 		//toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
 		toast.show();
 	}
+	
+	@Override
+    protected void onResume() {
+        super.onResume();
+        // The activity has become visible (it is now "resumed").
+        
+        SessionM.getInstance().onActivityResume(this);
+        
+        if (_sessionM != null)
+		{
+			SessionM.getInstance().presentActivity(SessionM.ActivityType.ACHIEVEMENT, _sessionM);
+		}
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Another activity is taking focus (this activity is about to be "paused"); commit unsaved changes to persistent data, etc.
+        // -> onStop()
+        
+        SessionM.getInstance().onActivityPause(this);
+    }
+    
+    @Override
+    protected void onStart() {
+    	// TODO Auto-generated method stub
+    	super.onStart();
+    	
+    	SessionM.getInstance().onActivityStart(this);
+    }
+    
+    @Override
+    protected void onStop() {
+    	// TODO Auto-generated method stub
+    	super.onStop();
+    
+    	SessionM.getInstance().onActivityStop(this);
+    }
 }

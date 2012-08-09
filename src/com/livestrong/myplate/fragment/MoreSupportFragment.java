@@ -12,6 +12,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.livestrong.myplate.activity.TabBarActivity;
 import com.livestrong.myplate.activity.TipsActivity;
 import com.livestrong.myplate.activity.WebViewActivity;
 import com.livestrong.myplate.activity.WelcomeActivity;
@@ -153,7 +154,7 @@ public class MoreSupportFragment extends FragmentDataHelperDelegate {
 		
 		if (requestCode == SHARE_EMAIL_ACTIVITY && BuildValues.IS_LIGHT) {
 			// Post notification to SessionM
-			SessionM.getInstance().presentActivity(getActivity(), "sharedWithEmail");
+			((TabBarActivity)this.getActivity()).SessionMAchievement = "sharedWithEmail";
 		}
 	}
 }

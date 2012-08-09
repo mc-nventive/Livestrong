@@ -26,6 +26,7 @@ import com.livestrong.myplate.utilities.SessionMHelper;
 import com.livestrong.myplate.utilities.picker.NumberPicker;
 import com.livestrong.myplate.utilities.picker.NumberPicker.OnChangedListener;
 import com.livestrong.myplatelite.R;
+import com.sessionm.api.SessionM;
 
 public class AddFoodActivity extends LiveStrongActivity implements OnChangedListener {
 	
@@ -270,6 +271,7 @@ public class AddFoodActivity extends LiveStrongActivity implements OnChangedList
         this.servingsFractionPicker.setOnChangeListener(this);
 	}
 	
+	
     @Override
     protected void onStart() {
         super.onStart();
@@ -282,7 +284,7 @@ public class AddFoodActivity extends LiveStrongActivity implements OnChangedList
         super.onResume();
         // The activity has become visible (it is now "resumed").
     }
-
+    
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

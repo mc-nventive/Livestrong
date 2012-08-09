@@ -46,6 +46,7 @@ import android.widget.TextView;
 
 import com.livestrong.myplate.MyPlateApplication;
 import com.livestrong.myplate.activity.AddWeightActivity;
+import com.livestrong.myplate.activity.TabBarActivity;
 import com.livestrong.myplate.activity.TrackActivity;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.models.DiaryEntries;
@@ -226,7 +227,9 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 		if (data != null && data.getExtras() != null) {
 			String sessionM = data.getExtras().getString(SessionMHelper.INTENT_SESSIONM);
 			if (sessionM != null)
-				SessionM.getInstance().presentActivity(getActivity(), sessionM);
+			{
+				((TabBarActivity)this.getActivity()).SessionMAchievement = sessionM;
+			}
 		}
 	}
 		

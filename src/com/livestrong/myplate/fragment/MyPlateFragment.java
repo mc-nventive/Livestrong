@@ -24,6 +24,7 @@ import com.livestrong.myplate.MyPlateApplication;
 import com.livestrong.myplate.activity.AddWaterActivity;
 import com.livestrong.myplate.activity.ExerciseSelectorActivity;
 import com.livestrong.myplate.activity.FoodSelectorActivity;
+import com.livestrong.myplate.activity.TabBarActivity;
 import com.livestrong.myplate.animations.WidthAnimation;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.models.DiaryEntries.DiaryEntryType;
@@ -137,7 +138,7 @@ public class MyPlateFragment extends FragmentDataHelperDelegate {
 		if (data != null && data.getExtras() != null) {
 			final String sessionM = data.getExtras().getString(SessionMHelper.INTENT_SESSIONM);
 			if (sessionM != null) {
-				SessionM.getInstance().presentActivity(getActivity(), sessionM);
+				((TabBarActivity)this.getActivity()).SessionMAchievement = sessionM;
 			}
 		}
 	}

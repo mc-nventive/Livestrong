@@ -40,6 +40,7 @@ import com.livestrong.myplate.utilities.SessionMHelper;
 import com.livestrong.myplate.views.ClearableEditText;
 import com.livestrong.myplatelite.R;
 import com.sessionm.api.SessionM;
+import com.sessionm.core.Session;
 
 public class FoodSelectorActivity extends LiveStrongActivity implements OnItemClickListener {
 	
@@ -52,6 +53,7 @@ public class FoodSelectorActivity extends LiveStrongActivity implements OnItemCl
 	private ImageButton backBtn, forwardBtn;
 	private TextView timeOfDayTextView, messageTextView;
 	private Boolean isSearching = false;
+	private String _sessionM;
 	
 	protected void onCreate(Bundle savedInstanceState){
 		 super.onCreate(savedInstanceState);
@@ -356,10 +358,7 @@ public class FoodSelectorActivity extends LiveStrongActivity implements OnItemCl
 			String foodName = data.getExtras().getString(AddFoodActivity.INTENT_FOOD_NAME);
 			this.displayNotification(foodName + " was added to your diary.");
 			
-			// The add food activity potentially sets a sessionM tracking event.
-			String sessionM = data.getExtras().getString(SessionMHelper.INTENT_SESSIONM);
-			if (sessionM != null)
-				SessionM.getInstance().presentActivity(this, sessionM);
+			_sessionM = data.getExtras().getString(SessionMHelper.INTENT_SESSIONM);
 			
 			setResult(Activity.RESULT_OK);
 		}
@@ -410,4 +409,42 @@ public class FoodSelectorActivity extends LiveStrongActivity implements OnItemCl
 		//toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
 		toast.show();
 	}
+	
+	@Override
+    protected void onResume() {
+        super.onResume();
+        // The activity has become visible (it is now "resumed").
+        
+        SessionM.getInstance().onActivityResume(this);
+        
+        if (_sessionM != null)
+		{
+			SessionM.getInstance().presentActivity(SessionM.ActivityType.ACHIEVEMENT, _sessionM);
+		}
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Another activity is taking focus (this activity is about to be "paused"); commit unsaved changes to persistent data, etc.
+        // -> onStop()
+        
+        SessionM.getInstance().onActivityPause(this);
+    }
+    
+    @Override
+    protected void onStart() {
+    	// TODO Auto-generated method stub
+    	super.onStart();
+    	
+    	SessionM.getInstance().onActivityStart(this);
+    }
+    
+    @Override
+    protected void onStop() {
+    	// TODO Auto-generated method stub
+    	super.onStop();
+    
+    	SessionM.getInstance().onActivityStop(this);
+    }
 }

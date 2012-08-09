@@ -29,6 +29,7 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
+import com.livestrong.myplate.MyPlateApplication;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.DataHelper.DistanceUnits;
 import com.livestrong.myplate.back.DataHelper.WaterUnits;
@@ -89,13 +90,11 @@ public class MoreAccountFragment extends FragmentDataHelperDelegate {
 	
 	private void initializeButtons() {
 		if (BuildValues.IS_LIGHT) {
-			final Activity activity = getActivity();
-			
 			Button howItWorksButton = (Button) view.findViewById(R.id.howItWorksButton);
 			howItWorksButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					SessionM.getInstance().presentIntroduction(activity);
+					SessionM.getInstance().presentActivity(SessionM.ActivityType.INTRODUCTION);
 				}
 			});
 			
@@ -103,7 +102,7 @@ public class MoreAccountFragment extends FragmentDataHelperDelegate {
 			achievemntsButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					SessionM.getInstance().presentPortal(activity);
+					SessionM.getInstance().presentActivity(SessionM.ActivityType.PORTAL);
 				}
 			});
 		}
@@ -267,12 +266,29 @@ public class MoreAccountFragment extends FragmentDataHelperDelegate {
 	}
 	
 	@Override
-	public void onPause() {
-		// Save data
-		this.saveProfile();
-		
-		super.onPause();
-	}
+    public void onResume() {
+        super.onResume();
+        // The activity has become visible (it is now "resumed").
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        // Another activity is taking focus (this activity is about to be "paused"); commit unsaved changes to persistent data, etc.
+        // -> onStop()
+    }
+    
+    @Override
+    public void onStart() {
+    	// TODO Auto-generated method stub
+    	super.onStart();
+    }
+    
+    @Override
+    public void onStop() {
+    	// TODO Auto-generated method stub
+    	super.onStop();
+    }
 
 	private void setDailyReminder(){
         //---use the AlarmManager to trigger an alarm---

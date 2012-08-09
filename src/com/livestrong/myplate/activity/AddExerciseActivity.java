@@ -22,6 +22,7 @@ import com.livestrong.myplate.utilities.SessionMHelper;
 import com.livestrong.myplate.utilities.picker.NumberPicker;
 import com.livestrong.myplate.utilities.picker.NumberPicker.OnChangedListener;
 import com.livestrong.myplatelite.R;
+import com.sessionm.api.SessionM;
 
 public class AddExerciseActivity extends LiveStrongActivity {
 	
@@ -123,9 +124,9 @@ public class AddExerciseActivity extends LiveStrongActivity {
 						resultIntent.putExtra(AddExerciseActivity.INTENT_EXERCISE_NAME, AddExerciseActivity.this.exercise.getTitle());
 						
 						if(null != AddExerciseActivity.this.diaryEntry){
-							// Log a SessionM event
-				            resultIntent.putExtra(SessionMHelper.INTENT_SESSIONM, "trackedExercise");
+							resultIntent.putExtra(SessionMHelper.INTENT_SESSIONM, "trackedExercise");
 						}
+						
 						setResult(Activity.RESULT_OK, resultIntent);
 					}
 					

@@ -20,6 +20,7 @@ import com.livestrong.myplate.back.models.WaterDiaryEntry;
 import com.livestrong.myplate.utilities.AdvertisementHelper;
 import com.livestrong.myplate.utilities.picker.NumberPicker;
 import com.livestrong.myplatelite.R;
+import com.sessionm.api.SessionM;
 
 public class AddWaterActivity extends LiveStrongActivity {
 	
@@ -79,7 +80,7 @@ public class AddWaterActivity extends LiveStrongActivity {
 					
 					// Post SessionM event for first time tracking this day
 					// Seems like this event was removed...
-					// resultIntent.putExtra(SessionMHelper.INTENT_SESSIONM, "trackedWater");
+					// SessionM.getInstance().logAction("trackedWater");
 				} else {
 					if (diaryEntry != null){
 						if (ounces == 0.0){ // Remove the entry if user enters 0 onces

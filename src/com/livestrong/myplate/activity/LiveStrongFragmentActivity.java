@@ -11,6 +11,7 @@ import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.DataHelperDelegate;
 import com.livestrong.myplate.back.db.DatabaseHelper;
 import com.livestrong.myplate.back.db.OrmLiteFragmentActivity;
+import com.sessionm.api.SessionM;
 
 public class LiveStrongFragmentActivity extends OrmLiteFragmentActivity<DatabaseHelper> implements DataHelperDelegate {
 
@@ -48,6 +49,18 @@ public class LiveStrongFragmentActivity extends OrmLiteFragmentActivity<Database
         // We track running activities like this, to be able to detect when the app gets backgrounded.
         MyPlateApplication app = (MyPlateApplication) getApplication();
         app.minusActivity();
+    }
+    
+    @Override
+    protected void onStart() {
+    	// TODO Auto-generated method stub
+    	super.onStart();
+    }
+    
+    @Override
+    protected void onStop() {
+    	// TODO Auto-generated method stub
+    	super.onStop();
     }
 
     // pragma mark - DataHelperDelegate protocol
