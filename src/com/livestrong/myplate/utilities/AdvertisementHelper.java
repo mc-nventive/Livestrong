@@ -6,16 +6,36 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Handler;
 import android.util.Log;
 
 import com.admarvel.android.ads.AdMarvelView;
 import com.livestrong.myplate.Constants;
+import com.livestrong.myplate.activity.TabBarActivity;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.models.UserProfile;
+import com.livestrong.myplatelite.R;
 
 public class AdvertisementHelper {
 
-	public static void requestAd(AdMarvelView view, Activity activity) {
+	private static Handler _handler = new Handler();
+	
+	public static void requestAd(final AdMarvelView view, final Activity activity) {
+		
+		_handler.postDelayed(new Runnable()
+		{
+			public void run()
+			{
+				activity.runOnUiThread(new Runnable()
+				{
+					public void run()
+					{
+						requestAd(view, activity);
+					}
+				});
+			}
+		}, 30000);
+		
 		// The AdMarvel SDK throw a NPE in a different thread, if we try to run
 		// it while not having a network connection. Workaround here is to only
 		// request ads if there is a connection. However, this will unfortunately

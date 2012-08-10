@@ -32,6 +32,7 @@
                 android:id="@+id/ad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 admarvel:backgroundColor="#726D6D"
                 admarvel:textBackgroundColor="#726D6D"
                 admarvel:textFontColor="#00FF00"
