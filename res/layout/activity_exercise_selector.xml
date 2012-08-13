@@ -123,7 +123,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content" 
+            android:layout_marginBottom="50dp">
 
             <ListView
                 android:id="@+id/listView"
@@ -172,15 +173,14 @@
     </LinearLayout>
 
     <com.admarvel.android.ads.AdMarvelView
-        xmlns:admarvel="http://schemas.android.com/apk/res/com.livestrong.myplatelite"
-        android:id="@+id/ad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        admarvel:backgroundColor="#726D6D"
-        admarvel:textBackgroundColor="#726D6D"
-        admarvel:textBorderColor="#000000"
-        admarvel:textFontColor="#00FF00" />
-
+	        xmlns:admarvel="http://schemas.android.com/apk/res/com.livestrong.myplatelite"
+	        android:id="@+id/ad"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentBottom="true"
+	        android:layout_centerHorizontal="true"
+	        admarvel:backgroundColor="#726D6D"
+	        admarvel:textBackgroundColor="#726D6D"
+	        admarvel:textBorderColor="#000000"
+	        admarvel:textFontColor="#00FF00" />
 </RelativeLayout>

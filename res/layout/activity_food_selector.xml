@@ -174,9 +174,10 @@
             <ListView
                 android:id="@+id/listView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:divider="@android:color/transparent"
-                android:fadingEdge="none" >
+                android:fadingEdge="none" 
+                android:layout_marginBottom="50dp">
             </ListView>
 
             <LinearLayout
@@ -214,19 +215,20 @@
                     android:text="Add Food Manually"
                     android:textColor="@color/white" />
             </LinearLayout>
+            
+            <com.admarvel.android.ads.AdMarvelView
+		        xmlns:admarvel="http://schemas.android.com/apk/res/com.livestrong.myplatelite"
+		        android:id="@+id/ad"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentBottom="true"
+		        android:layout_centerHorizontal="true"
+		        admarvel:backgroundColor="#726D6D"
+		        admarvel:textBackgroundColor="#726D6D"
+		        admarvel:textBorderColor="#000000"
+		        admarvel:textFontColor="#00FF00" 
+		        android:layout_below="@id/messageTextView"/>
         </RelativeLayout>
     </LinearLayout>
-
-    <com.admarvel.android.ads.AdMarvelView
-        xmlns:admarvel="http://schemas.android.com/apk/res/com.livestrong.myplatelite"
-        android:id="@+id/ad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        admarvel:backgroundColor="#726D6D"
-        admarvel:textBackgroundColor="#726D6D"
-        admarvel:textBorderColor="#000000"
-        admarvel:textFontColor="#00FF00" />
 
 </RelativeLayout>

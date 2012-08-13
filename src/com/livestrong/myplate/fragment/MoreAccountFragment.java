@@ -9,6 +9,7 @@ import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.ViewPager.LayoutParams;
@@ -18,6 +19,8 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -142,6 +145,23 @@ public class MoreAccountFragment extends FragmentDataHelperDelegate {
 			this.waterSpinner.setSelection(1);
 		}
 		
+		final OnItemSelectedListener spinnersSelectionListener = new OnItemSelectedListener()
+		{
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				saveProfile();				
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				saveProfile();
+			}
+		};
+		
+		weightSpinner.setOnItemSelectedListener(spinnersSelectionListener);
+		waterSpinner.setOnItemSelectedListener(spinnersSelectionListener);
+		distancesSpinner.setOnItemSelectedListener(spinnersSelectionListener);
 	}
 	
 	private void initalizeCheckBox(){
