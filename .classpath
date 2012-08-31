@@ -18,9 +18,9 @@
 	<classpathentry kind="lib" path="libs/ormlite-core.jar"/>
 	<classpathentry kind="lib" path="libs/prettytime.jar"/>
 	<classpathentry kind="lib" path="libs/rhythm-ad-sdk.jar"/>
-	<classpathentry kind="lib" path="libs/SessionM.jar"/>
 	<classpathentry kind="lib" path="libs/spring-android-auth.jar"/>
 	<classpathentry kind="lib" path="libs/spring-android-core.jar"/>
 	<classpathentry kind="lib" path="libs/spring-android-rest-template.jar"/>
+	<classpathentry kind="lib" path="libs/SessionM.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

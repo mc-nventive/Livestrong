@@ -18,7 +18,8 @@ public class Constants {
 	/** AdMarvel Partner ID constant */
 	public static final String ADMARVEL_PARTNER_ID = "d6be43944c067f30";
 	/** SessionM ID constant */
-	public static final String SESSIONM_ID = "b3fb63aec2a9c5402095a51b0f17068a2a041bc7";
+	// public static final String SESSIONM_ID = "b3fb63aec2a9c5402095a51b0f17068a2a041bc7"; // iOS ID
+	public static final String SESSIONM_ID = "cafaa3528fdaa9219081a52c530bf3b0b43547e2";	//Android ID
 	
 	/** Use this as a field name in your Model if you want to be able to get rowId*/
 	public static final String ROW_ID_COLUMN = "rowId";
