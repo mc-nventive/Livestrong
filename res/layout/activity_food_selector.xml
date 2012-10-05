@@ -11,7 +11,7 @@
         android:focusableInTouchMode="true" >
     </LinearLayout>
 
-	<com.livestrong.myplate.views.ClearableEditText
+	<com.demandmedia.livestrong.android.views.ClearableEditText
 		android:id="@+id/editTextClearable"
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content" android:background="@color/black" style=""/>

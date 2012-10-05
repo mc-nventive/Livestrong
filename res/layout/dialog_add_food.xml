@@ -27,17 +27,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:layout_centerHorizontal="true">
 
-            <com.livestrong.myplate.utilities.picker.NumberPicker
+            <com.demandmedia.livestrong.android.utilities.picker.NumberPicker
                 android:id="@+id/servingsPicker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
-            </com.livestrong.myplate.utilities.picker.NumberPicker>
+            </com.demandmedia.livestrong.android.utilities.picker.NumberPicker>
 
-            <com.livestrong.myplate.utilities.picker.NumberPicker
+            <com.demandmedia.livestrong.android.utilities.picker.NumberPicker
                 android:id="@+id/servingsFractionPicker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
-            </com.livestrong.myplate.utilities.picker.NumberPicker>
+            </com.demandmedia.livestrong.android.utilities.picker.NumberPicker>
         </LinearLayout>
 
     </RelativeLayout>
