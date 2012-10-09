@@ -20,6 +20,7 @@ import com.livestrong.myplate.MyPlateApplication;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.models.Food;
 import com.livestrong.myplate.back.models.FoodDiaryEntry;
+import com.livestrong.myplate.constants.BuildValues;
 import com.livestrong.myplate.utilities.AdvertisementHelper;
 import com.livestrong.myplate.utilities.ImageLoader;
 import com.livestrong.myplate.utilities.SessionMHelper;
@@ -37,6 +38,8 @@ public class AddFoodActivity extends LiveStrongActivity implements OnChangedList
 	private NumberPicker servingsPicker, servingsFractionPicker;
 	private Button iAteThisButton;
 	private ProgressBar progressBar;
+
+	private AdvertisementHelper adHelper;
 	
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,11 +139,20 @@ public class AddFoodActivity extends LiveStrongActivity implements OnChangedList
 	    	tv.setText(MyPlateApplication.getWorkingTimeOfDayString());
 	    	
 	        this.initializeButtons();
-	        
-			// Initialize advertisements
-			AdvertisementHelper.requestAd((AdMarvelView) findViewById(R.id.ad), this);
         }
-    }
+		// Light version contains ads
+ 		if (BuildValues.IS_LIGHT) {
+ 			initializeAdvertisement();
+ 			this.adHelper.startAdvertising();
+ 		}
+	}
+
+	private void initializeAdvertisement() {
+		// TODO Auto-generated method stub
+		AdMarvelView admarvelView = (AdMarvelView) findViewById(R.id.ad);
+		adHelper = new AdvertisementHelper();
+		adHelper.initWithAdMarvelViewAndActivity(admarvelView, this);
+	}
 	
 	private void initializeButtons(){
         Button deleteButton = (Button) findViewById(R.id.deleteButton);
@@ -277,12 +289,14 @@ public class AddFoodActivity extends LiveStrongActivity implements OnChangedList
         super.onStart();
         // The activity is about to become visible.
         // -> onResume()
+        this.adHelper.startAdvertising();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         // The activity has become visible (it is now "resumed").
+        this.adHelper.startAdvertising();
     }
     
     @Override
@@ -297,12 +311,14 @@ public class AddFoodActivity extends LiveStrongActivity implements OnChangedList
         super.onPause();
         // Another activity is taking focus (this activity is about to be "paused"); commit unsaved changes to persistent data, etc.
         // -> onStop()
+        this.adHelper.stopAdvertising();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         // The activity is no longer visible (it is now "stopped")
+        this.adHelper.stopAdvertising();
     }
 
     @Override
@@ -310,11 +326,13 @@ public class AddFoodActivity extends LiveStrongActivity implements OnChangedList
         super.onRestart();
         // The activity was stopped, and is about to be started again. It was not destroyed, so all members are intact.
         // -> onStart()
+        this.adHelper.startAdvertising();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        this.adHelper.stopAdvertising();
         // The activity is about to be destroyed.
         if (isFinishing()) {
         	// Someone called finish()

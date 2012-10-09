@@ -42,6 +42,7 @@ public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabC
 	private HashMap<String, TabInfo> mapTabInfo = new HashMap<String, TabInfo>();
 	private TabInfo lastTab = null;
 	public String SessionMAchievement;
+	private AdvertisementHelper adHelper;
 	
 	private class TabInfo {
 		private int position;
@@ -91,7 +92,9 @@ public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabC
 	
 	private void initializeAdvertisement() {
 		// Request AdM
-		AdvertisementHelper.requestAd((AdMarvelView) findViewById(R.id.ad), this);
+		AdMarvelView admarvelView = (AdMarvelView) findViewById(R.id.ad);
+		adHelper = new AdvertisementHelper();
+		adHelper.initWithAdMarvelViewAndActivity(admarvelView, this);
 	}
 	
 	/**
@@ -268,6 +271,7 @@ public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabC
         super.onResume();
         // The activity has become visible (it is now "resumed").
         
+        adHelper.startAdvertising();
         SessionM.getInstance().onActivityResume(this);
         
         if (SessionMAchievement != null)
@@ -284,6 +288,7 @@ public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabC
         // -> onStop()
         
         SessionM.getInstance().onActivityPause(this);
+        adHelper.stopAdvertising();
     }
     
     @Override
@@ -292,6 +297,7 @@ public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabC
     	super.onStart();
     	
     	SessionM.getInstance().onActivityStart(this);
+    	adHelper.startAdvertising();
     }
     
     @Override
@@ -300,6 +306,7 @@ public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabC
     	super.onStop();
     
     	SessionM.getInstance().onActivityStop(this);
+    	adHelper.stopAdvertising();
     }
 
 	@Override
@@ -307,16 +314,14 @@ public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabC
 		super.onRestart();
 		// The activity was stopped, and is about to be started again. It was not destroyed, so all members are intact.
 		// -> onStart()
+		adHelper.startAdvertising();
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		
-		AdMarvelView adMarvelView = (AdMarvelView) findViewById(R.id.ad);
-		if (adMarvelView != null) {
-			adMarvelView.destroy();
-		}
+		adHelper.unloadAdMarvelView(); //implicitly calls stopAdvertising, initWithAdMarvelViewAndActivity needs to be called before re-using
 		
 		// The activity is about to be destroyed.
 		if (isFinishing()) {
