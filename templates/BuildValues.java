@@ -1,4 +1,4 @@
-package com.livestrong.myplate.constants;
+package com.demandmedia.livestrong.android.constants;
 
 public class BuildValues {
     public static final boolean IS_DEBUG = @app.debug@;

@@ -18,5 +18,5 @@ gen/
 # Local configuration file (sdk path, etc)
 local.properties
 
-
-src/com/livestrong/myplate/constants/BuildValues.java
+src/com/demandmedia/livestrong/android/constants/BuildValues.java
+#src/com/livestrong/myplate/constants/BuildValues.java
