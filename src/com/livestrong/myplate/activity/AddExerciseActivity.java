@@ -123,7 +123,7 @@ public class AddExerciseActivity extends LiveStrongActivity {
 						Intent resultIntent = new Intent();
 						resultIntent.putExtra(AddExerciseActivity.INTENT_EXERCISE_NAME, AddExerciseActivity.this.exercise.getTitle());
 						
-						if(null != AddExerciseActivity.this.diaryEntry){
+						if(null == AddExerciseActivity.this.diaryEntry){
 							resultIntent.putExtra(SessionMHelper.INTENT_SESSIONM, "trackedExercise");
 						}
 						
