@@ -3,6 +3,7 @@ package com.livestrong.myplate.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
@@ -10,12 +11,15 @@ import android.widget.LinearLayout;
 import com.admarvel.android.ads.AdMarvelView;
 import com.livestrong.myplate.MyPlateApplication;
 import com.livestrong.myplate.back.models.FoodDiaryEntry.TimeOfDay;
+import com.livestrong.myplate.constants.BuildValues;
 import com.livestrong.myplate.utilities.AdvertisementHelper;
 import com.livestrong.myplatelite.R;
+import com.sessionm.api.SessionM;
 
 public class TrackActivity extends LiveStrongFragmentActivity {
 	
 	private LinearLayout breakfastItem, lunchItem, dinnerItem, snacksItem, exerciseItem, waterItem, weightItem;
+	private AdvertisementHelper adHelper;
 	
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,10 +87,20 @@ public class TrackActivity extends LiveStrongFragmentActivity {
 		this.exerciseItem.setOnClickListener(onClickListener);
 		this.weightItem.setOnClickListener(onClickListener);
 		
-		// Initialize advertisements
-		AdvertisementHelper.requestAd((AdMarvelView) findViewById(R.id.ad), this);
+		// Light version contains ads
+ 		if (BuildValues.IS_LIGHT) {
+ 			initializeAdvertisement();
+ 			this.adHelper.startAdvertising();
+ 		}
 	}
-	
+
+	private void initializeAdvertisement() {
+		// Request AdM
+		AdMarvelView admarvelView = (AdMarvelView) findViewById(R.id.ad);
+		adHelper = new AdvertisementHelper();
+		adHelper.initWithAdMarvelViewAndActivity(admarvelView, this);
+	}
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 		super.onActivityResult(requestCode, resultCode, intent);
@@ -101,7 +115,7 @@ public class TrackActivity extends LiveStrongFragmentActivity {
 			}
 			
 			setResult(resultCode, resultIntent);
-			
+			this.adHelper.stopAdvertising();
 			finish();
 		}
 	}

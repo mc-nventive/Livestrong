@@ -35,6 +35,7 @@ import com.livestrong.myplate.back.api.ApiHelper;
 import com.livestrong.myplate.back.models.Food;
 import com.livestrong.myplate.back.models.FoodDiaryEntry.TimeOfDay;
 import com.livestrong.myplate.back.models.Meal;
+import com.livestrong.myplate.constants.BuildValues;
 import com.livestrong.myplate.utilities.AdvertisementHelper;
 import com.livestrong.myplate.utilities.SessionMHelper;
 import com.livestrong.myplate.views.ClearableEditText;
@@ -54,6 +55,7 @@ public class FoodSelectorActivity extends LiveStrongActivity implements OnItemCl
 	private TextView timeOfDayTextView, messageTextView;
 	private Boolean isSearching = false;
 	private String _sessionM;
+	private AdvertisementHelper adHelper;
 	
 	protected void onCreate(Bundle savedInstanceState){
 		 super.onCreate(savedInstanceState);
@@ -107,10 +109,20 @@ public class FoodSelectorActivity extends LiveStrongActivity implements OnItemCl
         
         this.loadListFromSelectedButton();
         
-		// Initialize advertisements
-		AdvertisementHelper.requestAd((AdMarvelView) findViewById(R.id.ad), this);
+		// Light version contains ads
+ 		if (BuildValues.IS_LIGHT) {
+ 			initializeAdvertisement();
+ 			this.adHelper.startAdvertising();
+ 		}
 	}
 	
+	private void initializeAdvertisement() {
+		// Request AdM
+		AdMarvelView admarvelView = (AdMarvelView) findViewById(R.id.ad);
+		adHelper = new AdvertisementHelper();
+		adHelper.initWithAdMarvelViewAndActivity(admarvelView, this);
+	}
+
 	// Initialize menu
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -414,7 +426,7 @@ public class FoodSelectorActivity extends LiveStrongActivity implements OnItemCl
     protected void onResume() {
         super.onResume();
         // The activity has become visible (it is now "resumed").
-        
+        this.adHelper.startAdvertising();
         SessionM.getInstance().onActivityResume(this);
         
         if (_sessionM != null)
@@ -428,7 +440,7 @@ public class FoodSelectorActivity extends LiveStrongActivity implements OnItemCl
         super.onPause();
         // Another activity is taking focus (this activity is about to be "paused"); commit unsaved changes to persistent data, etc.
         // -> onStop()
-        
+        this.adHelper.stopAdvertising();
         SessionM.getInstance().onActivityPause(this);
     }
     
@@ -436,7 +448,7 @@ public class FoodSelectorActivity extends LiveStrongActivity implements OnItemCl
     protected void onStart() {
     	// TODO Auto-generated method stub
     	super.onStart();
-    	
+    	this.adHelper.startAdvertising();
     	SessionM.getInstance().onActivityStart(this);
     }
     
@@ -444,7 +456,7 @@ public class FoodSelectorActivity extends LiveStrongActivity implements OnItemCl
     protected void onStop() {
     	// TODO Auto-generated method stub
     	super.onStop();
-    
+    	this.adHelper.stopAdvertising();
     	SessionM.getInstance().onActivityStop(this);
     }
 }

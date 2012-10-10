@@ -12,18 +12,23 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.admarvel.android.ads.AdMarvelView;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.livestrong.myplate.MyPlateApplication;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.models.Exercise;
+import com.livestrong.myplate.constants.BuildValues;
+import com.livestrong.myplate.utilities.AdvertisementHelper;
 import com.livestrong.myplate.utilities.SessionMHelper;
 import com.livestrong.myplatelite.R;
+import com.sessionm.api.SessionM;
 
 public class CreateExerciseActivity extends LiveStrongActivity {
 
 	EditText nameEditText, caloriesEditText;
 	Button cancelButton, doneButton;
 	Exercise customExercise;
+//	private AdvertisementHelper adHelper;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,8 +51,18 @@ public class CreateExerciseActivity extends LiveStrongActivity {
 
 		this.initializeEditTexts();
 		this.initializeButtons();
-
+		// Light version contains ads
+// 		if (BuildValues.IS_LIGHT) {
+// 			initializeAdvertisement();
+// 		}
 	}
+
+//	private void initializeAdvertisement() {
+//		// TODO Auto-generated method stub
+//		AdMarvelView admarvelView = (AdMarvelView) findViewById(R.id.ad);
+//		adHelper = new AdvertisementHelper();
+//		adHelper.initWithAdMarvelViewAndActivity(admarvelView, this);
+//	}
 
 	public void initializeEditTexts() {
 		this.nameEditText.setText(this.customExercise.getTitle());
@@ -147,4 +162,18 @@ public class CreateExerciseActivity extends LiveStrongActivity {
 		}
 		return true;
 	}
+	
+//	@Override
+//    protected void onStart() {
+//    	// TODO Auto-generated method stub
+//    	super.onStart();
+//    	adHelper.startAdvertising();
+//    }
+//    
+//    @Override
+//    protected void onStop() {
+//    	// TODO Auto-generated method stub
+//    	super.onStop();
+//    	adHelper.stopAdvertising();
+//    }
 }

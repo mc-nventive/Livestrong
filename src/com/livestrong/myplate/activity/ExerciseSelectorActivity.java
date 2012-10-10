@@ -32,6 +32,7 @@ import com.livestrong.myplate.adapters.ExerciseSelectorAdapter;
 import com.livestrong.myplate.animations.DropDownAnimation;
 import com.livestrong.myplate.back.api.ApiHelper;
 import com.livestrong.myplate.back.models.Exercise;
+import com.livestrong.myplate.constants.BuildValues;
 import com.livestrong.myplate.utilities.AdvertisementHelper;
 import com.livestrong.myplate.utilities.SessionMHelper;
 import com.livestrong.myplate.views.ClearableEditText;
@@ -49,6 +50,7 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
 	private TextView messageTextView;
 	private Boolean isSearching = false;
 	private String _sessionM;
+	private AdvertisementHelper adHelper;
 	
 	protected void onCreate(Bundle savedInstanceState){
 		 super.onCreate(savedInstanceState);
@@ -92,11 +94,22 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_DITHER);
         
         loadListFromSelectedButton();
+        // Light version contains ads
+ 		if (BuildValues.IS_LIGHT)
+ 			initializeAdvertisement();
         
 		// Initialize advertisements
-		AdvertisementHelper.requestAd((AdMarvelView) findViewById(R.id.ad), this);
+//		AdvertisementHelper.requestAd((AdMarvelView) findViewById(R.id.ad), this);
 	}
 	
+	private void initializeAdvertisement() {
+		// TODO Auto-generated method stub
+		// Request AdM
+		AdMarvelView admarvelView = (AdMarvelView) findViewById(R.id.ad);
+		adHelper = new AdvertisementHelper();
+		adHelper.initWithAdMarvelViewAndActivity(admarvelView, this);
+	}
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -328,6 +341,7 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
         super.onResume();
         // The activity has become visible (it is now "resumed").
         
+        adHelper.startAdvertising();
         SessionM.getInstance().onActivityResume(this);
         
         if (_sessionM != null)
@@ -341,7 +355,7 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
         super.onPause();
         // Another activity is taking focus (this activity is about to be "paused"); commit unsaved changes to persistent data, etc.
         // -> onStop()
-        
+        adHelper.stopAdvertising();
         SessionM.getInstance().onActivityPause(this);
     }
     
@@ -349,7 +363,7 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
     protected void onStart() {
     	// TODO Auto-generated method stub
     	super.onStart();
-    	
+    	adHelper.startAdvertising();
     	SessionM.getInstance().onActivityStart(this);
     }
     
@@ -357,7 +371,7 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
     protected void onStop() {
     	// TODO Auto-generated method stub
     	super.onStop();
-    
+    	adHelper.stopAdvertising();
     	SessionM.getInstance().onActivityStop(this);
     }
 }
