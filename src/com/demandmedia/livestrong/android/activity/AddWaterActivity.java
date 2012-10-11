@@ -1,14 +1,11 @@
 package com.demandmedia.livestrong.android.activity;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.demandmedia.livestrong.android.Constants;
 import com.demandmedia.livestrong.android.MyPlateApplication;
 import com.demandmedia.livestrong.android.R;
 import com.demandmedia.livestrong.android.back.DataHelper;
@@ -16,6 +13,7 @@ import com.demandmedia.livestrong.android.back.DataHelper.WaterUnits;
 import com.demandmedia.livestrong.android.back.models.DiaryEntries;
 import com.demandmedia.livestrong.android.back.models.WaterDiaryEntry;
 import com.demandmedia.livestrong.android.utilities.picker.NumberPicker;
+import com.flurry.android.FlurryAgent;
 
 public class AddWaterActivity extends LiveStrongActivity {
 	
@@ -85,6 +83,8 @@ public class AddWaterActivity extends LiveStrongActivity {
 					}
 				}
 
+				FlurryAgent.logEvent(Constants.Flurry.TRACK_WATER_EVENT);
+				
 	            DataHelper.saveDiaryEntry(e, AddWaterActivity.this);
 	            finish();
 			}

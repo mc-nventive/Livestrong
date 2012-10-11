@@ -27,12 +27,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.demandmedia.livestrong.android.Constants;
 import com.demandmedia.livestrong.android.R;
 import com.demandmedia.livestrong.android.adapters.ExerciseSelectorAdapter;
 import com.demandmedia.livestrong.android.animations.DropDownAnimation;
 import com.demandmedia.livestrong.android.back.api.ApiHelper;
 import com.demandmedia.livestrong.android.back.models.Exercise;
 import com.demandmedia.livestrong.android.views.ClearableEditText;
+import com.flurry.android.FlurryAgent;
 
 public class ExerciseSelectorActivity extends LiveStrongActivity implements OnItemClickListener {
 	
@@ -248,6 +250,7 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
 		if (ApiHelper.isOnline()){
 			String searchString = searchEditText.getText().toString();
 			this.exerciseSelectorAdapter.loadExercisesFromServerSearch(searchString);
+			FlurryAgent.logEvent(Constants.Flurry.EXERCISE_SEARCH_EVENT);
 		}
 	}
 	
@@ -312,4 +315,57 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
 		//toast.setGravity(Gravity.TOP|Gravity.CENTER_HORIZONTAL, 0, 0);
 		toast.show();
 	}
+	
+	@Override
+    protected void onStart() {
+        super.onStart();
+        // The activity is about to become visible.
+        // -> onResume()
+        FlurryAgent.onStartSession(this, Constants.Flurry.PAID_VERSION_API_KEY);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // The activity has become visible (it is now "resumed").
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    	// Called before making the activity vulnerable to destruction; save your activity state in outState.
+        // UI elements states are saved automatically by super.onSaveInstanceState()
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Another activity is taking focus (this activity is about to be "paused"); commit unsaved changes to persistent data, etc.
+        // -> onStop()
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // The activity is no longer visible (it is now "stopped")
+        FlurryAgent.onEndSession(this);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        // The activity was stopped, and is about to be started again. It was not destroyed, so all members are intact.
+        // -> onStart()
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // The activity is about to be destroyed.
+        if (isFinishing()) {
+        	// Someone called finish()
+        } else {
+        	// System is temporarily destroying this instance of the activity to save space
+        }
+    }
 }

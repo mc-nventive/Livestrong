@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Stack;
+import java.util.TreeMap;
 
 import org.acra.ACRA;
 import org.acra.annotation.ReportsCrashes;
@@ -20,6 +21,7 @@ import com.demandmedia.livestrong.android.back.DataHelperDelegate;
 import com.demandmedia.livestrong.android.back.db.DatabaseHelper;
 import com.demandmedia.livestrong.android.back.models.FoodDiaryEntry.TimeOfDay;
 import com.demandmedia.livestrong.android.utilities.SimpleDate;
+import com.flurry.android.FlurryAgent;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 
 @ReportsCrashes(formKey = "dEx3eE1zenRWcG5NR1lTaW5td1Jvdmc6MQ")
@@ -47,6 +49,25 @@ public class MyPlateApplication extends Application {
 		context = this;
 		DataHelper.initialize(context);
 		setWorkingDateStamp(new Date());
+		
+		FlurryAgent.onStartSession(this, Constants.Flurry.PAID_VERSION_API_KEY);
+		FlurryAgent.setCaptureUncaughtExceptions(false);
+		FlurryAgent.logEvent(Constants.Flurry.DEVICE_INFO, new TreeMap<String, String>()
+		{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 5491492252405552286L;
+
+			{
+				put("model", android.os.Build.MODEL);
+				put("device", android.os.Build.DEVICE);
+				put("manufacturer", android.os.Build.MANUFACTURER);
+				put("product", android.os.Build.PRODUCT);
+				put("brand", android.os.Build.BRAND);
+			}
+		});
+		FlurryAgent.onEndSession(this);
 	}
 
 	public static void setWorkingDateStamp(Date workingDateStamp) {

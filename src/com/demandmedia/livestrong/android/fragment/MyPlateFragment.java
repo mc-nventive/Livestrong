@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.demandmedia.livestrong.android.Constants;
 import com.demandmedia.livestrong.android.MyPlateApplication;
 import com.demandmedia.livestrong.android.R;
 import com.demandmedia.livestrong.android.activity.AddWaterActivity;
@@ -38,6 +39,7 @@ import com.demandmedia.livestrong.android.back.DataHelper;
 import com.demandmedia.livestrong.android.back.models.UserProgress;
 import com.demandmedia.livestrong.android.back.models.DiaryEntries.DiaryEntryType;
 import com.demandmedia.livestrong.android.back.models.FoodDiaryEntry.TimeOfDay;
+import com.flurry.android.FlurryAgent;
 
 public class MyPlateFragment extends FragmentDataHelperDelegate {
 	private final static Class<?> NEXT_ACTIVITY_FOOD     = FoodSelectorActivity.class; 
@@ -214,6 +216,14 @@ public class MyPlateFragment extends FragmentDataHelperDelegate {
         		DataHelper.refreshData(this);
         	}
         }
+	}
+	
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		
+		FlurryAgent.logEvent(Constants.Flurry.MY_PLATE_ACTIVITY);
 	}
 	
 	@Override

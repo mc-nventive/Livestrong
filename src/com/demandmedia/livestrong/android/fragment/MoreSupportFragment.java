@@ -1,5 +1,6 @@
 package com.demandmedia.livestrong.android.fragment;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,15 +13,19 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.demandmedia.livestrong.android.Constants;
 import com.demandmedia.livestrong.android.R;
 import com.demandmedia.livestrong.android.activity.TipsActivity;
 import com.demandmedia.livestrong.android.activity.WebViewActivity;
 import com.demandmedia.livestrong.android.activity.WelcomeActivity;
 import com.demandmedia.livestrong.android.back.DataHelper;
+import com.flurry.android.FlurryAgent;
 
 public class MoreSupportFragment extends FragmentDataHelperDelegate {
 	
 	private LinearLayout view;
+	
+	private final int _sendEmailRequestCode = 1;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		if (container == null) {
@@ -81,7 +86,7 @@ public class MoreSupportFragment extends FragmentDataHelperDelegate {
             	emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "LIVESTRONG.COM Calorie Tracker");
             	emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Check out the LIVESTRONG.COM Calorie Tracker that helps me track my progress daily! \n\n");
 
-            	startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            	startActivityForResult(Intent.createChooser(emailIntent, "Send mail..."), _sendEmailRequestCode);
 			}
 		});
 		
@@ -141,5 +146,16 @@ public class MoreSupportFragment extends FragmentDataHelperDelegate {
 		});
 		
 		return this.view;
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) 
+	{
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if(requestCode == _sendEmailRequestCode)
+		{
+			FlurryAgent.logEvent(Constants.Flurry.SHARED_WITH_EMAIL_EVENT);
+		}
 	}
 }

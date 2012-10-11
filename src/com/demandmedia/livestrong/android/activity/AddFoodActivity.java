@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.demandmedia.livestrong.android.Constants;
 import com.demandmedia.livestrong.android.MyPlateApplication;
 import com.demandmedia.livestrong.android.R;
 import com.demandmedia.livestrong.android.back.DataHelper;
@@ -23,6 +24,7 @@ import com.demandmedia.livestrong.android.back.models.FoodDiaryEntry;
 import com.demandmedia.livestrong.android.utilities.ImageLoader;
 import com.demandmedia.livestrong.android.utilities.picker.NumberPicker;
 import com.demandmedia.livestrong.android.utilities.picker.NumberPicker.OnChangedListener;
+import com.flurry.android.FlurryAgent;
 
 public class AddFoodActivity extends LiveStrongActivity implements OnChangedListener {
 	
@@ -188,6 +190,8 @@ public class AddFoodActivity extends LiveStrongActivity implements OnChangedList
 						
 						if (pickerServings > 0.0){
 							Intent resultIntent = new Intent();
+							//Regardless if it is an update or an edit
+							FlurryAgent.logEvent(Constants.Flurry.TRACKED_FOOD_EVENT);
 							resultIntent.putExtra(AddFoodActivity.INTENT_FOOD_NAME, AddFoodActivity.this.food.getTitle());
 						
 							setResult(Activity.RESULT_OK, resultIntent);

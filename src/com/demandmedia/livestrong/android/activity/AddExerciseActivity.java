@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.demandmedia.livestrong.android.Constants;
 import com.demandmedia.livestrong.android.MyPlateApplication;
 import com.demandmedia.livestrong.android.R;
 import com.demandmedia.livestrong.android.back.DataHelper;
@@ -18,6 +19,7 @@ import com.demandmedia.livestrong.android.back.models.ExerciseDiaryEntry;
 import com.demandmedia.livestrong.android.utilities.ImageLoader;
 import com.demandmedia.livestrong.android.utilities.picker.NumberPicker;
 import com.demandmedia.livestrong.android.utilities.picker.NumberPicker.OnChangedListener;
+import com.flurry.android.FlurryAgent;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 
 public class AddExerciseActivity extends LiveStrongActivity {
@@ -117,6 +119,10 @@ public class AddExerciseActivity extends LiveStrongActivity {
 
 					if (pickerMinutes > 0.0){						
 						Intent resultIntent = new Intent();
+						
+						//Regardeless wheter it was a new or an update
+						FlurryAgent.logEvent(Constants.Flurry.TRACKED_EXERCISE_EVENT);
+						
 						resultIntent.putExtra(AddExerciseActivity.INTENT_EXERCISE_NAME, AddExerciseActivity.this.exercise.getTitle());
 						setResult(Activity.RESULT_OK, resultIntent);
 					}
