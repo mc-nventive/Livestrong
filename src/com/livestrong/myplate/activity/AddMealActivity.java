@@ -12,6 +12,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.flurry.android.FlurryAgent;
+import com.livestrong.myplate.Constants;
 import com.livestrong.myplate.MyPlateApplication;
 import com.livestrong.myplate.adapters.MealListAdapter;
 import com.livestrong.myplate.back.DataHelper;
@@ -64,8 +66,11 @@ public class AddMealActivity extends LiveStrongActivity implements DataHelperDel
 					}
 					
 					Intent resultIntent = new Intent();
+					
 					resultIntent.putExtra(SessionMHelper.INTENT_SESSIONM, "trackedFood");
 					resultIntent.putExtra(AddFoodActivity.INTENT_FOOD_NAME, meal.getTitle());
+					
+					FlurryAgent.logEvent(Constants.Flurry.TRACKED_FOOD_EVENT);
 					
 					setResult(Activity.RESULT_OK, resultIntent);
 					

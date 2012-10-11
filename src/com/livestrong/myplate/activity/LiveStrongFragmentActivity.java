@@ -11,7 +11,6 @@ import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.DataHelperDelegate;
 import com.livestrong.myplate.back.db.DatabaseHelper;
 import com.livestrong.myplate.back.db.OrmLiteFragmentActivity;
-import com.sessionm.api.SessionM;
 
 public class LiveStrongFragmentActivity extends OrmLiteFragmentActivity<DatabaseHelper> implements DataHelperDelegate {
 

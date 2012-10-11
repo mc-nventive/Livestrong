@@ -1,17 +1,19 @@
 package com.livestrong.myplate.activity;
 
 import java.lang.reflect.Method;
+import java.util.TreeMap;
 
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
 
+import com.flurry.android.FlurryAgent;
 import com.j256.ormlite.android.apptools.OrmLiteBaseActivity;
+import com.livestrong.myplate.Constants;
 import com.livestrong.myplate.MyPlateApplication;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.DataHelperDelegate;
 import com.livestrong.myplate.back.db.DatabaseHelper;
-import com.sessionm.api.SessionM;
 
 public class LiveStrongActivity extends OrmLiteBaseActivity<DatabaseHelper> implements DataHelperDelegate {
 
@@ -21,7 +23,7 @@ public class LiveStrongActivity extends OrmLiteBaseActivity<DatabaseHelper> impl
 		DataHelper.setDatabaseHelper(getHelper());
 		Log.d(this.getClass().getName(), "Setting database helper");
 	}
-
+	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
@@ -55,12 +57,16 @@ public class LiveStrongActivity extends OrmLiteBaseActivity<DatabaseHelper> impl
     protected void onStart() {
     	// TODO Auto-generated method stub
     	super.onStart();
+    	
+    	FlurryAgent.onStartSession(this, Constants.Flurry.LITE_VERSION_API_KEY);
     }
     
     @Override
     protected void onStop() {
     	// TODO Auto-generated method stub
     	super.onStop();
+    	
+    	FlurryAgent.onEndSession(this);
     }
     
     // pragma mark - DataHelperDelegate protocol
@@ -107,7 +113,20 @@ public class LiveStrongActivity extends OrmLiteBaseActivity<DatabaseHelper> impl
 	protected void dataReceived(Method methodCalled, Object data) {
 	}
 
-	protected boolean errorOccurred(Method methodCalled, Exception error, String errorMessage) {
+	protected boolean errorOccurred(Method methodCalled, Exception error, final String errorMessage) 
+	{
+		FlurryAgent.logEvent(Constants.Flurry.SERVER_ERROR_ON_SYNC_EVENT, new TreeMap<String, String>()
+		{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = -612146922218353300L;
+
+			{
+				put("message", errorMessage);
+			}
+		});
+				
 		return false;
 	}
 }

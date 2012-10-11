@@ -11,7 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.admarvel.android.ads.AdMarvelView;
+import com.flurry.android.FlurryAgent;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
+import com.livestrong.myplate.Constants;
 import com.livestrong.myplate.MyPlateApplication;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.models.Exercise;
@@ -23,7 +25,6 @@ import com.livestrong.myplate.utilities.SessionMHelper;
 import com.livestrong.myplate.utilities.picker.NumberPicker;
 import com.livestrong.myplate.utilities.picker.NumberPicker.OnChangedListener;
 import com.livestrong.myplatelite.R;
-import com.sessionm.api.SessionM;
 
 public class AddExerciseActivity extends LiveStrongActivity {
 	
@@ -129,6 +130,7 @@ public class AddExerciseActivity extends LiveStrongActivity {
 						if(null == AddExerciseActivity.this.diaryEntry){
 							resultIntent.putExtra(SessionMHelper.INTENT_SESSIONM, "trackedExercise");
 						}
+						FlurryAgent.logEvent(Constants.Flurry.TRACKED_EXERCISE_EVENT);
 						
 						setResult(Activity.RESULT_OK, resultIntent);
 					}

@@ -28,6 +28,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.admarvel.android.ads.AdMarvelView;
+import com.flurry.android.FlurryAgent;
+import com.livestrong.myplate.Constants;
 import com.livestrong.myplate.adapters.ExerciseSelectorAdapter;
 import com.livestrong.myplate.animations.DropDownAnimation;
 import com.livestrong.myplate.back.api.ApiHelper;
@@ -271,6 +273,7 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
 		if (ApiHelper.isOnline()){
 			String searchString = searchEditText.getText().toString();
 			this.exerciseSelectorAdapter.loadExercisesFromServerSearch(searchString);
+			FlurryAgent.logEvent(Constants.Flurry.EXERCISE_SEARCH_EVENT);
 		}
 	}
 	

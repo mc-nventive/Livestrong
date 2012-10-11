@@ -1,9 +1,5 @@
 package com.livestrong.myplate.activity;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.admarvel.android.ads.AdMarvelView;
+import com.flurry.android.FlurryAgent;
+import com.livestrong.myplate.Constants;
 import com.livestrong.myplate.MyPlateApplication;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.DataHelper.WaterUnits;
@@ -21,7 +19,6 @@ import com.livestrong.myplate.constants.BuildValues;
 import com.livestrong.myplate.utilities.AdvertisementHelper;
 import com.livestrong.myplate.utilities.picker.NumberPicker;
 import com.livestrong.myplatelite.R;
-import com.sessionm.api.SessionM;
 
 public class AddWaterActivity extends LiveStrongActivity {
 	
@@ -98,6 +95,7 @@ public class AddWaterActivity extends LiveStrongActivity {
 				}
 				
 				setResult(Activity.RESULT_OK, resultIntent);
+				FlurryAgent.logEvent(Constants.Flurry.TRACK_WATER_EVENT);
 
 	            DataHelper.saveDiaryEntry(e, AddWaterActivity.this);
 	            finish();

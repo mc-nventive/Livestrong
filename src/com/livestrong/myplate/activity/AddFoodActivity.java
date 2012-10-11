@@ -16,6 +16,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.admarvel.android.ads.AdMarvelView;
+import com.flurry.android.FlurryAgent;
+import com.livestrong.myplate.Constants;
 import com.livestrong.myplate.MyPlateApplication;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.models.Food;
@@ -27,7 +29,6 @@ import com.livestrong.myplate.utilities.SessionMHelper;
 import com.livestrong.myplate.utilities.picker.NumberPicker;
 import com.livestrong.myplate.utilities.picker.NumberPicker.OnChangedListener;
 import com.livestrong.myplatelite.R;
-import com.sessionm.api.SessionM;
 
 public class AddFoodActivity extends LiveStrongActivity implements OnChangedListener {
 	
@@ -213,6 +214,7 @@ public class AddFoodActivity extends LiveStrongActivity implements OnChangedList
 								// Post SessionM event in previous activity, because this one is closing
 								resultIntent.putExtra(SessionMHelper.INTENT_SESSIONM, "trackedFood");
 							}
+							FlurryAgent.logEvent(Constants.Flurry.TRACKED_FOOD_EVENT);
 							setResult(Activity.RESULT_OK, resultIntent);
 						}
 						

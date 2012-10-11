@@ -3,7 +3,6 @@ package com.livestrong.myplate.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
@@ -14,7 +13,6 @@ import com.livestrong.myplate.back.models.FoodDiaryEntry.TimeOfDay;
 import com.livestrong.myplate.constants.BuildValues;
 import com.livestrong.myplate.utilities.AdvertisementHelper;
 import com.livestrong.myplatelite.R;
-import com.sessionm.api.SessionM;
 
 public class TrackActivity extends LiveStrongFragmentActivity {
 	

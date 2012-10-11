@@ -37,4 +37,32 @@ public class Constants {
 	public static final String AVATAR_IMAGE_MEDIUM 	= "medium";
 	public static final String AVATAR_IMAGE_LARGE 	= "large";
 	
+	public static class Flurry
+	{
+		public static final String LITE_VERSION_API_KEY = "B9NSTP5H5WNSZXXGX28J";
+		
+		public static final String DEVICE_INFO = "Device Info";
+		
+		public static final String EXERCISE_SEARCH_EVENT = "exerciseSearch";
+		public static final String TRACKED_EXERCISE_EVENT = "trackedExercise";
+		public static final String FOOD_SEARCH_EVENT = "foodSearch";
+		public static final String TRACKED_FOOD_EVENT = "trackedFood";
+		public static final String TRACKED_WEIGHT_EVENT = "trackedWeight";
+		public static final String TRACK_WATER_EVENT = "trackedWater";
+		
+		public static final String SERVER_ERROR_ON_SYNC_EVENT = "SyncError";
+		
+		public static final String SHARED_WITH_EMAIL_EVENT = "sharedWithEmail";
+		
+		public static final String MY_WEIGHT_ACTIVITY = "myWeight";
+		public static final String MY_PLATE_ACTIVITY = "myPlate";
+		
+		public static final String SHARED_WITH_FACEBOOK_EVENT = "sharedWithFacebook";
+		public static final String SHARED_WITH_TWITTER_EVENT = "sharedWithTwitter";
+		
+		public static final String DECLINED_TO_RATE_APP_EVENT = "declinedToRateApp";
+		public static final String RATED_APP_EVENT = "ratedApp";
+		
+		public static final String GIFTED_APP_EVENT = "giftedApp";
+	}
 }

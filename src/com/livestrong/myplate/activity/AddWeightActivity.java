@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.flurry.android.FlurryAgent;
+import com.livestrong.myplate.Constants;
 import com.livestrong.myplate.MyPlateApplication;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.DataHelper.WaterUnits;
@@ -92,6 +94,7 @@ public class AddWeightActivity extends LiveStrongActivity {
 					e.setWeight(weight);
 				}
 				
+				FlurryAgent.logEvent(Constants.Flurry.TRACKED_WEIGHT_EVENT);
 				setResult(Activity.RESULT_OK, resultIntent);
 				
 	            DataHelper.saveDiaryEntry(e, AddWeightActivity.this);
@@ -115,6 +118,7 @@ public class AddWeightActivity extends LiveStrongActivity {
         super.onStart();
         // The activity is about to become visible.
         // -> onResume()
+        FlurryAgent.logEvent(Constants.Flurry.MY_WEIGHT_ACTIVITY);
     }
 
     @Override

@@ -28,6 +28,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.admarvel.android.ads.AdMarvelView;
+import com.flurry.android.FlurryAgent;
+import com.livestrong.myplate.Constants;
 import com.livestrong.myplate.MyPlateApplication;
 import com.livestrong.myplate.adapters.FoodSelectorAdapter;
 import com.livestrong.myplate.animations.DropDownAnimation;
@@ -41,7 +43,6 @@ import com.livestrong.myplate.utilities.SessionMHelper;
 import com.livestrong.myplate.views.ClearableEditText;
 import com.livestrong.myplatelite.R;
 import com.sessionm.api.SessionM;
-import com.sessionm.core.Session;
 
 public class FoodSelectorActivity extends LiveStrongActivity implements OnItemClickListener {
 	
@@ -318,6 +319,7 @@ public class FoodSelectorActivity extends LiveStrongActivity implements OnItemCl
 		if (ApiHelper.isOnline()){
 			String searchString = searchEditText.getText().toString();
 			foodSelectorAdapter.loadFoodFromServerSearch(searchString);
+			FlurryAgent.logEvent(Constants.Flurry.FOOD_SEARCH_EVENT);
 		}
 	}
 	

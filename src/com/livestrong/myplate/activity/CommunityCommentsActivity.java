@@ -96,6 +96,7 @@ public class CommunityCommentsActivity extends LiveStrongActivity {
 		});
 	}
 
+	@SuppressWarnings("unused")
 	private void sendMessage() {
 		if (DataHelper.isLoggedIn() == false || BuildValues.IS_LIGHT){
 			new AlertDialog.Builder(MyPlateApplication.getFrontMostActivity())
@@ -112,16 +113,18 @@ public class CommunityCommentsActivity extends LiveStrongActivity {
 			
 			return;
 		}
-				
-		this.sendButton.setVisibility(View.INVISIBLE);
-		this.progressBar.setVisibility(View.VISIBLE);
-		this.messageEditText.setEnabled(false);
-		
-		DataHelper.postNewComment(
-			this.message.getPostId(),
-			this.messageEditText.getText().toString(),
-			this);
-		this.hideKeyboard();
+		else
+		{
+			this.sendButton.setVisibility(View.INVISIBLE);
+			this.progressBar.setVisibility(View.VISIBLE);
+			this.messageEditText.setEnabled(false);
+			
+			DataHelper.postNewComment(
+				this.message.getPostId(),
+				this.messageEditText.getText().toString(),
+				this);
+			this.hideKeyboard();
+		}
 	}
 	
 	@Override

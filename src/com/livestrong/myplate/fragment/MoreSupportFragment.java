@@ -12,6 +12,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.flurry.android.FlurryAgent;
+import com.livestrong.myplate.Constants;
 import com.livestrong.myplate.activity.TabBarActivity;
 import com.livestrong.myplate.activity.TipsActivity;
 import com.livestrong.myplate.activity.WebViewActivity;
@@ -19,7 +21,6 @@ import com.livestrong.myplate.activity.WelcomeActivity;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.constants.BuildValues;
 import com.livestrong.myplatelite.R;
-import com.sessionm.api.SessionM;
 
 public class MoreSupportFragment extends FragmentDataHelperDelegate {
 	
@@ -152,9 +153,11 @@ public class MoreSupportFragment extends FragmentDataHelperDelegate {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		
-		if (requestCode == SHARE_EMAIL_ACTIVITY && BuildValues.IS_LIGHT) {
+		if (requestCode == SHARE_EMAIL_ACTIVITY && BuildValues.IS_LIGHT) 
+		{
 			// Post notification to SessionM
 			((TabBarActivity)this.getActivity()).SessionMAchievement = "sharedWithEmail";
+			FlurryAgent.logEvent(Constants.Flurry.SHARED_WITH_EMAIL_EVENT);
 		}
 	}
 }

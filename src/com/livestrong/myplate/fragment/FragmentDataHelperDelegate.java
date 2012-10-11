@@ -1,11 +1,14 @@
 package com.livestrong.myplate.fragment;
 
 import java.lang.reflect.Method;
+import java.util.TreeMap;
 
 import android.app.Activity;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 
+import com.flurry.android.FlurryAgent;
+import com.livestrong.myplate.Constants;
 import com.livestrong.myplate.back.DataHelperDelegate;
 
 public class FragmentDataHelperDelegate extends Fragment implements DataHelperDelegate {
@@ -59,11 +62,38 @@ public class FragmentDataHelperDelegate extends Fragment implements DataHelperDe
 		}
 		return false;
 	}
+	
+	@Override
+	public void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		FlurryAgent.onStartSession(this.getActivity(), Constants.Flurry.LITE_VERSION_API_KEY);
+	}
+	
+	@Override
+	public void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		FlurryAgent.onEndSession(this.getActivity());
+	}
 
 	protected void dataReceived(Method methodCalled, Object data) {
 	}
 
-	protected boolean errorOccurred(Method methodCalled, Exception error, String message) {
+	protected boolean errorOccurred(Method methodCalled, Exception error, final String message) 
+	{
+		FlurryAgent.logEvent(Constants.Flurry.SERVER_ERROR_ON_SYNC_EVENT, new TreeMap<String, String>()
+		{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 2273936086496756457L;
+			
+			{
+				put("message", message);
+			}
+		});
+					
 		return false;
 	}
 }

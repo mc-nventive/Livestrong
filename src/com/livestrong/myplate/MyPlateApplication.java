@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Stack;
+import java.util.TreeMap;
 
 import org.acra.ACRA;
 
@@ -14,6 +15,7 @@ import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
 
+import com.flurry.android.FlurryAgent;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.livestrong.myplate.back.DataHelper;
 import com.livestrong.myplate.back.DataHelperDelegate;
@@ -56,6 +58,25 @@ public class MyPlateApplication extends Application {
 		sessionM.startSession(this, Constants.SESSIONM_ID);
 		sessionM.setSessionListener(SessionMHelper.getInstance());
 		sessionM.setActivityListener(SessionMHelper.getInstance());
+		
+		FlurryAgent.onStartSession(this, Constants.Flurry.LITE_VERSION_API_KEY);
+		FlurryAgent.setCaptureUncaughtExceptions(false);
+		FlurryAgent.logEvent(Constants.Flurry.DEVICE_INFO, new TreeMap<String, String>()
+		{
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 5491492252405552286L;
+
+			{
+				put("model", android.os.Build.MODEL);
+				put("device", android.os.Build.DEVICE);
+				put("manufacturer", android.os.Build.MANUFACTURER);
+				put("product", android.os.Build.PRODUCT);
+				put("brand", android.os.Build.BRAND);
+			}
+		});
+		FlurryAgent.onEndSession(this);
 	}
 
 	public static void setWorkingDateStamp(Date workingDateStamp) {
