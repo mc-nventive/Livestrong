@@ -1,6 +1,5 @@
 package com.demandmedia.livestrong.android.activity;
 
-import java.util.Date;
 import java.util.HashMap;
 
 import android.content.Context;
@@ -22,7 +21,6 @@ import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
 import android.widget.TextView;
 
-import com.demandmedia.livestrong.android.MyPlateApplication;
 import com.demandmedia.livestrong.android.R;
 import com.demandmedia.livestrong.android.fragment.CommunityFragment;
 import com.demandmedia.livestrong.android.fragment.DiaryFragment;
@@ -36,7 +34,6 @@ public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabC
 	private TabInfo lastTab = null;
 	
 	private class TabInfo {
-		private int position;
 		private String tag;
 		private String label;
 		private Class<?> clss;
@@ -44,7 +41,6 @@ public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabC
         private Fragment fragment;
         private int drawableId;
         public <D extends Fragment> TabInfo(int position, String tag, String label, int drawableId, Class<D> clazz, Bundle args) {
-        	this.position = position;
         	this.tag = tag;
         	this.label = label;
         	this.drawableId = drawableId;
@@ -175,8 +171,6 @@ public class TabBarActivity extends LiveStrongFragmentActivity implements OnTabC
 		this.initialiseTabHost(savedInstanceState);
 		this.lastTab = null;
 		
-		//initialize the pager
-		Fragment newFragment = null;
 		String tag = null;
 		
 		if (savedInstanceState != null) {

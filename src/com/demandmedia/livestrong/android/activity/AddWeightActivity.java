@@ -1,8 +1,6 @@
 package com.demandmedia.livestrong.android.activity;
 
 import java.text.DecimalFormat;
-import java.text.Format;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;

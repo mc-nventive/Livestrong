@@ -40,7 +40,6 @@ import com.demandmedia.livestrong.android.back.DataHelper;
 import com.demandmedia.livestrong.android.back.DataHelper.DistanceUnits;
 import com.demandmedia.livestrong.android.back.DataHelper.WaterUnits;
 import com.demandmedia.livestrong.android.back.DataHelper.WeightUnits;
-import com.demandmedia.livestrong.android.back.models.UserProfile;
 import com.demandmedia.livestrong.android.utilities.NotificationReceiver;
 
 public class MoreAccountFragment extends FragmentDataHelperDelegate {

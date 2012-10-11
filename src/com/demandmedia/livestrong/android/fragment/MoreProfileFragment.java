@@ -7,8 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.concurrent.Callable;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.os.AsyncTask;

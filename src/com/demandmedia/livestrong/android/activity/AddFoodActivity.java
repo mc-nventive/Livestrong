@@ -190,8 +190,9 @@ public class AddFoodActivity extends LiveStrongActivity implements OnChangedList
 						
 						if (pickerServings > 0.0){
 							Intent resultIntent = new Intent();
-							//Regardless if it is an update or an edit
+							
 							FlurryAgent.logEvent(Constants.Flurry.TRACKED_FOOD_EVENT);
+							
 							resultIntent.putExtra(AddFoodActivity.INTENT_FOOD_NAME, AddFoodActivity.this.food.getTitle());
 						
 							setResult(Activity.RESULT_OK, resultIntent);

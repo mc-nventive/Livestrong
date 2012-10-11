@@ -321,7 +321,6 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
         super.onStart();
         // The activity is about to become visible.
         // -> onResume()
-        FlurryAgent.onStartSession(this, Constants.Flurry.PAID_VERSION_API_KEY);
     }
 
     @Override
@@ -348,7 +347,6 @@ public class ExerciseSelectorActivity extends LiveStrongActivity implements OnIt
     protected void onStop() {
         super.onStop();
         // The activity is no longer visible (it is now "stopped")
-        FlurryAgent.onEndSession(this);
     }
 
     @Override

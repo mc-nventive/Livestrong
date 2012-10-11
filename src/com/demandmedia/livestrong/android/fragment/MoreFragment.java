@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import android.widget.LinearLayout;
 
 import com.demandmedia.livestrong.android.R;
 import com.demandmedia.livestrong.android.back.DataHelper;
-import com.demandmedia.livestrong.android.back.models.Exercise;
 import com.demandmedia.livestrong.android.back.models.UserProfile;
 
 public class MoreFragment extends FragmentDataHelperDelegate {

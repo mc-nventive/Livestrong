@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -53,14 +52,6 @@ public class ComposeMessageActivity extends LiveStrongActivity {
         this.initializeButtons();
         
         
-	}
-
-	/**
-	 * Called when the activity has detected the user's press of the back key
-	 */
-	private void onBackButtonPressed() {
-	    Log.e("DD", "back pressed");
-	    finish();
 	}
 	
 	@Override

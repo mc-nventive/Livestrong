@@ -120,7 +120,6 @@ public class AddExerciseActivity extends LiveStrongActivity {
 					if (pickerMinutes > 0.0){						
 						Intent resultIntent = new Intent();
 						
-						//Regardeless wheter it was a new or an update
 						FlurryAgent.logEvent(Constants.Flurry.TRACKED_EXERCISE_EVENT);
 						
 						resultIntent.putExtra(AddExerciseActivity.INTENT_EXERCISE_NAME, AddExerciseActivity.this.exercise.getTitle());

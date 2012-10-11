@@ -5,7 +5,6 @@ import java.lang.reflect.Method;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.view.MotionEvent;

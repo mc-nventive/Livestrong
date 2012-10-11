@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,7 +16,6 @@ import com.demandmedia.livestrong.android.MyPlateApplication;
 import com.demandmedia.livestrong.android.R;
 import com.demandmedia.livestrong.android.back.DataHelper;
 import com.demandmedia.livestrong.android.back.models.Exercise;
-import com.demandmedia.livestrong.android.back.models.UserProfile;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 
 public class CreateExerciseActivity extends LiveStrongActivity {
