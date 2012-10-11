@@ -187,69 +187,74 @@ public class MoreProfileFragment extends FragmentDataHelperDelegate {
 	}
 	
 	private void initializeSpinners(){
-		ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.gender, R.layout.spinner_item);
-		genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		this.genderSpinner.setAdapter(genderAdapter);
-		Gender gender = userProfile.getGender();
-		if (gender == Gender.MALE){
-			this.genderSpinner.setSelection(0);
-		} else if (gender == Gender.FEMALE){
-			this.genderSpinner.setSelection(1);
-		}
-		
-		this.activityLevels = DataHelper.getActivityLevels(null);
-		HashMap<Float, String> levels;
-		if (this.activityLevels == null){
-			levels = new HashMap<Float, String>();
-		} else {
-			levels = this.activityLevels.getLevels();
-		}
-		
-		Set<Float>keys =  levels.keySet();
-		ArrayList<Float> sortedKeys = new ArrayList<Float>(keys);
-		Collections.sort(sortedKeys);
-		
-		CharSequence levelsStrings[] = new CharSequence[levels.values().size()];
-		levelsStrings = levels.values().toArray(levelsStrings);			
-		int i = 0;
-		int selectedIndex = 0;
-		for (Float key:sortedKeys){
-			levelsStrings[i] = levels.get(key);
-			// equals for double numbers with 3 decimals.....
-			if (Math.round(this.userProfile.getActivityLevel()*1000) == Math.round(key*1000)) {
-				selectedIndex = i;
+		Context context = getActivity();
+		if (null != context) {
+			ArrayAdapter<CharSequence> genderAdapter = ArrayAdapter
+					.createFromResource(context, R.array.gender,
+							R.layout.spinner_item);
+			genderAdapter
+					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			this.genderSpinner.setAdapter(genderAdapter);
+			Gender gender = userProfile.getGender();
+			if (gender == Gender.MALE) {
+				this.genderSpinner.setSelection(0);
+			} else if (gender == Gender.FEMALE) {
+				this.genderSpinner.setSelection(1);
 			}
-			i++;
-		}
-		
-		ArrayAdapter<CharSequence> activityLevelAdapter = new ArrayAdapter<CharSequence>(getActivity(), R.layout.spinner_item, levelsStrings);
-		activityLevelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		this.activityLevelSpinner.setAdapter(activityLevelAdapter);
-		this.activityLevelSpinner.setSelection(selectedIndex);
-				
-		
-		this.weightGoalsMap = this.userProfile.getWeightGoals();
-		Set<Double>weightKeys = weightGoalsMap.keySet();
-		ArrayList<Double> sortedWeightKeys = new ArrayList<Double>(weightKeys);
-		Collections.sort(sortedWeightKeys);
-
-		String weightStrings[] = new String[weightGoalsMap.size()];
-		weightStrings = weightGoalsMap.values().toArray(weightStrings);
-		i = 0;
-		selectedIndex = 0;
-		for (Double key : sortedWeightKeys){
-			weightStrings[i] = weightGoalsMap.get(key);
-			if (this.userProfile.getGoal() == (double)key){
-				selectedIndex = i;
+			this.activityLevels = DataHelper.getActivityLevels(null);
+			HashMap<Float, String> levels;
+			if (this.activityLevels == null) {
+				levels = new HashMap<Float, String>();
+			} else {
+				levels = this.activityLevels.getLevels();
 			}
-			i++;
+			Set<Float> keys = levels.keySet();
+			ArrayList<Float> sortedKeys = new ArrayList<Float>(keys);
+			Collections.sort(sortedKeys);
+			CharSequence levelsStrings[] = new CharSequence[levels.values()
+					.size()];
+			levelsStrings = levels.values().toArray(levelsStrings);
+			int i = 0;
+			int selectedIndex = 0;
+			for (Float key : sortedKeys) {
+				levelsStrings[i] = levels.get(key);
+				// equals for double numbers with 3 decimals.....
+				if (Math.round(this.userProfile.getActivityLevel() * 1000) == Math
+						.round(key * 1000)) {
+					selectedIndex = i;
+				}
+				i++;
+			}
+			ArrayAdapter<CharSequence> activityLevelAdapter = new ArrayAdapter<CharSequence>(
+					getActivity(), R.layout.spinner_item, levelsStrings);
+			activityLevelAdapter
+					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			this.activityLevelSpinner.setAdapter(activityLevelAdapter);
+			this.activityLevelSpinner.setSelection(selectedIndex);
+			this.weightGoalsMap = this.userProfile.getWeightGoals();
+			Set<Double> weightKeys = weightGoalsMap.keySet();
+			ArrayList<Double> sortedWeightKeys = new ArrayList<Double>(
+					weightKeys);
+			Collections.sort(sortedWeightKeys);
+			String weightStrings[] = new String[weightGoalsMap.size()];
+			weightStrings = weightGoalsMap.values().toArray(weightStrings);
+			i = 0;
+			selectedIndex = 0;
+			for (Double key : sortedWeightKeys) {
+				weightStrings[i] = weightGoalsMap.get(key);
+				if (this.userProfile.getGoal() == (double) key) {
+					selectedIndex = i;
+				}
+				i++;
+			}
+			//ArrayAdapter<CharSequence> weightGoalAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.weightGoal, R.layout.spinner_item);
+			ArrayAdapter<CharSequence> weightGoalAdapter = new ArrayAdapter<CharSequence>(
+					getActivity(), R.layout.spinner_item, weightStrings);
+			weightGoalAdapter
+					.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			this.weightGoalSpinner.setAdapter(weightGoalAdapter);
+			this.weightGoalSpinner.setSelection(selectedIndex);
 		}
-		
-		//ArrayAdapter<CharSequence> weightGoalAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.weightGoal, R.layout.spinner_item);
-		ArrayAdapter<CharSequence> weightGoalAdapter = new ArrayAdapter<CharSequence>(getActivity(), R.layout.spinner_item, weightStrings);
-		weightGoalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		this.weightGoalSpinner.setAdapter(weightGoalAdapter);
-		this.weightGoalSpinner.setSelection(selectedIndex);
 	}
 	
 	private void initializeBirthdayEditText(){
