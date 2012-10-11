@@ -1,0 +1,2 @@
+Project: LIVESTRONG.COM Calorie Counter Lite
+API Key: B9NSTP5H5WNSZXXGX28J
