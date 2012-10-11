@@ -342,14 +342,13 @@ public class UserProfile extends AbstractLiveStrongApiObject {
 		List<WeightDiaryEntry> entries;
 		try {
 			entries = diaryDao.queryBuilder()
-					.orderBy(DiaryEntry.DATESTAMP_FIELD_NAME, false)
-					.limit((long) 1)
+					.orderBy(DiaryEntry.DATESTAMP_FIELD_NAME, true)
 					.where()
 					.eq(DiaryEntry.DELETED_FIELD_NAME, false)
 					.query();
 
 			if (entries != null && entries.size() > 0) {
-				WeightDiaryEntry weightEntry = (WeightDiaryEntry) entries.get(0);
+				WeightDiaryEntry weightEntry = (WeightDiaryEntry) entries.get(entries.size() - 1);
 				this.weight = weightEntry.getWeight();
 			}
 		} catch (SQLException e) {

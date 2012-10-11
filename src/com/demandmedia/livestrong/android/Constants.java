@@ -26,7 +26,7 @@ public class Constants {
 	{
 		public static final String PAID_VERSION_API_KEY = "K2D3KBPQPNM8QG4VJ9YZ";
 		
-		public static final String DEVICE_INFO = "Device Info";
+		public static final String DEVICE_INFO = "Device Info";	//No Need to logEvent device info because it is already done by Flurry
 		
 		public static final String EXERCISE_SEARCH_EVENT = "exerciseSearch";
 		public static final String TRACKED_EXERCISE_EVENT = "trackedExercise";

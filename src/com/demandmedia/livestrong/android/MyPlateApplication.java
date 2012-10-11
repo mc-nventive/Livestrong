@@ -50,24 +50,7 @@ public class MyPlateApplication extends Application {
 		DataHelper.initialize(context);
 		setWorkingDateStamp(new Date());
 		
-		FlurryAgent.onStartSession(this, Constants.Flurry.PAID_VERSION_API_KEY);
 		FlurryAgent.setCaptureUncaughtExceptions(false);
-		FlurryAgent.logEvent(Constants.Flurry.DEVICE_INFO, new TreeMap<String, String>()
-		{
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 5491492252405552286L;
-
-			{
-				put("model", android.os.Build.MODEL);
-				put("device", android.os.Build.DEVICE);
-				put("manufacturer", android.os.Build.MANUFACTURER);
-				put("product", android.os.Build.PRODUCT);
-				put("brand", android.os.Build.BRAND);
-			}
-		});
-		FlurryAgent.onEndSession(this);
 	}
 
 	public static void setWorkingDateStamp(Date workingDateStamp) {
