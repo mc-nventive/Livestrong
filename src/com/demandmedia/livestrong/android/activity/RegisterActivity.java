@@ -21,7 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.demandmedia.livestrong.android.MyPlateApplication;
-import com.demandmedia.livestrong.android.R;
+import com.livestrong.myplate.R;
 import com.demandmedia.livestrong.android.back.DataHelper;
 import com.demandmedia.livestrong.android.back.api.ApiHelper;
 import com.demandmedia.livestrong.android.back.models.UserProfile;

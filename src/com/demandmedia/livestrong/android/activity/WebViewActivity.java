@@ -8,7 +8,7 @@ import android.webkit.WebView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.demandmedia.livestrong.android.R;
+import com.livestrong.myplate.R;
 
 public class WebViewActivity extends Activity {
 	

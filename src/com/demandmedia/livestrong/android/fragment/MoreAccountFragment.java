@@ -34,7 +34,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.demandmedia.livestrong.android.R;
+import com.livestrong.myplate.R;
 import com.demandmedia.livestrong.android.activity.LoginActivity;
 import com.demandmedia.livestrong.android.back.DataHelper;
 import com.demandmedia.livestrong.android.back.DataHelper.DistanceUnits;

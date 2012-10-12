@@ -28,7 +28,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
-import com.demandmedia.livestrong.android.R;
+import com.livestrong.myplate.R;
 import com.demandmedia.livestrong.android.activity.CommunityCommentsActivity;
 import com.demandmedia.livestrong.android.adapters.CommunityListAdapter;
 import com.demandmedia.livestrong.android.animations.DropDownAnimation;

@@ -10,7 +10,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-import com.demandmedia.livestrong.android.R;
+import com.livestrong.myplate.R;
 import com.demandmedia.livestrong.android.activity.TabBarActivity;
 import com.demandmedia.livestrong.android.back.DataHelper;
 import com.demandmedia.livestrong.android.back.db.DatabaseHelper;

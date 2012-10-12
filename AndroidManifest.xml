@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.demandmedia.livestrong.android"
+    package="com.livestrong.myplate"
     android:versionCode="3"
     android:versionName="1.3" >
 
@@ -12,38 +12,38 @@
 
     <application
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name_short" android:name="MyPlateApplication" android:theme="@android:style/Theme.NoTitleBar">
+        android:label="@string/app_name_short" android:name="com.demandmedia.livestrong.android.MyPlateApplication" android:theme="@android:style/Theme.NoTitleBar">
         
-        <activity android:name=".activity.WelcomeActivity" android:screenOrientation="portrait" >
+        <activity android:name="com.demandmedia.livestrong.android.activity.WelcomeActivity" android:screenOrientation="portrait" >
         	<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LoginActivity" android:screenOrientation="portrait"/>        
-        <activity android:name=".activity.AddExerciseActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.AddFoodActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.AddWaterActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.AddWeightActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.AddMealActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.ExerciseSelectorActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.FoodSelectorActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.NutritionFactsActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.ProgressFragment" />
-        <activity android:name=".activity.SearchActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.TabBarActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".activity.CommunityCommentsActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.ComposeMessageActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.CreateFoodActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.CreateExerciseActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.TrackActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.MainActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.RegisterActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.ProfileActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.WebViewActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.DisplayNotificationActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.TipsActivity" android:screenOrientation="portrait" />
-        <receiver android:name=".utilities.NotificationReceiver"></receiver>
+        <activity android:name="com.demandmedia.livestrong.android.activity.LoginActivity" android:screenOrientation="portrait"/>        
+        <activity android:name="com.demandmedia.livestrong.android.activity.AddExerciseActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.demandmedia.livestrong.android.activity.AddFoodActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.demandmedia.livestrong.android.activity.AddWaterActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.demandmedia.livestrong.android.activity.AddWeightActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.demandmedia.livestrong.android.activity.AddMealActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.demandmedia.livestrong.android.activity.ExerciseSelectorActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.demandmedia.livestrong.android.activity.FoodSelectorActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.demandmedia.livestrong.android.activity.NutritionFactsActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.demandmedia.livestrong.android.activity.ProgressFragment" />
+        <activity android:name="com.demandmedia.livestrong.android.activity.SearchActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.demandmedia.livestrong.android.activity.TabBarActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name="com.demandmedia.livestrong.android.activity.CommunityCommentsActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.demandmedia.livestrong.android.activity.ComposeMessageActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.demandmedia.livestrong.android.activity.CreateFoodActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.demandmedia.livestrong.android.activity.CreateExerciseActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.demandmedia.livestrong.android.activity.TrackActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.demandmedia.livestrong.android.activity.MainActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.demandmedia.livestrong.android.activity.RegisterActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.demandmedia.livestrong.android.activity.ProfileActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.demandmedia.livestrong.android.activity.WebViewActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.demandmedia.livestrong.android.activity.DisplayNotificationActivity" android:screenOrientation="portrait" />
+        <activity android:name="com.demandmedia.livestrong.android.activity.TipsActivity" android:screenOrientation="portrait" />
+        <receiver android:name="com.demandmedia.livestrong.android.utilities.NotificationReceiver"></receiver>
     </application>
 
 </manifest>

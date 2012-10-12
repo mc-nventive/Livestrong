@@ -1,6 +1,6 @@
 package com.demandmedia.livestrong.android.utilities;
 
-import com.demandmedia.livestrong.android.R;
+import com.livestrong.myplate.R;
 
 import android.content.Context;
 import android.util.AttributeSet;

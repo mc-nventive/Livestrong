@@ -23,6 +23,7 @@ import com.demandmedia.livestrong.android.back.models.FoodDiaryEntry.TimeOfDay;
 import com.demandmedia.livestrong.android.utilities.SimpleDate;
 import com.flurry.android.FlurryAgent;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.livestrong.myplate.R;
 
 @ReportsCrashes(formKey = "dEx3eE1zenRWcG5NR1lTaW5td1Jvdmc6MQ")
 public class MyPlateApplication extends Application {

@@ -21,7 +21,7 @@ import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabContentFactory;
 import android.widget.TextView;
 
-import com.demandmedia.livestrong.android.R;
+import com.livestrong.myplate.R;
 import com.demandmedia.livestrong.android.fragment.CommunityFragment;
 import com.demandmedia.livestrong.android.fragment.DiaryFragment;
 import com.demandmedia.livestrong.android.fragment.MoreFragment;

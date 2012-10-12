@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.demandmedia.livestrong.android.MyPlateApplication;
-import com.demandmedia.livestrong.android.R;
+import com.livestrong.myplate.R;
 import com.demandmedia.livestrong.android.back.DataHelper;
 
 public class DiaryFragment extends FragmentDataHelperDelegate {

@@ -1,5 +1,7 @@
 package com.demandmedia.livestrong.android;
 
+import com.livestrong.myplate.R;
+
 public class Constants {
 
 	/** Application name */

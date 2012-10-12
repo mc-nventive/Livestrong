@@ -28,7 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.demandmedia.livestrong.android.Constants;
-import com.demandmedia.livestrong.android.R;
+import com.livestrong.myplate.R;
 import com.demandmedia.livestrong.android.adapters.ExerciseSelectorAdapter;
 import com.demandmedia.livestrong.android.animations.DropDownAnimation;
 import com.demandmedia.livestrong.android.back.api.ApiHelper;

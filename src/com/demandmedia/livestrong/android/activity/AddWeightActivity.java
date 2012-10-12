@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.demandmedia.livestrong.android.Constants;
 import com.demandmedia.livestrong.android.MyPlateApplication;
-import com.demandmedia.livestrong.android.R;
+import com.livestrong.myplate.R;
 import com.demandmedia.livestrong.android.back.DataHelper;
 import com.demandmedia.livestrong.android.back.DataHelper.WaterUnits;
 import com.demandmedia.livestrong.android.back.DataHelper.WeightUnits;

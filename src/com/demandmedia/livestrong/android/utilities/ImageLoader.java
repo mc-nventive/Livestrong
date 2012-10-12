@@ -21,7 +21,7 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.demandmedia.livestrong.android.R;
+import com.livestrong.myplate.R;
 
 public class ImageLoader {
     

@@ -21,7 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.demandmedia.livestrong.android.MyPlateApplication;
-import com.demandmedia.livestrong.android.R;
+import com.livestrong.myplate.R;
 import com.demandmedia.livestrong.android.activity.AddExerciseActivity;
 import com.demandmedia.livestrong.android.activity.AddFoodActivity;
 import com.demandmedia.livestrong.android.activity.AddWaterActivity;

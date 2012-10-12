@@ -17,7 +17,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.demandmedia.livestrong.android.R;
+import com.livestrong.myplate.R;
 import com.demandmedia.livestrong.android.adapters.DiaryCalendarAdapter;
 
 public class DiaryCalendarFragment extends FragmentDataHelperDelegate {

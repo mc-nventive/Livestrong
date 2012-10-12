@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.demandmedia.livestrong.android.Constants;
-import com.demandmedia.livestrong.android.R;
+import com.livestrong.myplate.R;
 import com.demandmedia.livestrong.android.activity.TipsActivity;
 import com.demandmedia.livestrong.android.activity.WebViewActivity;
 import com.demandmedia.livestrong.android.activity.WelcomeActivity;
