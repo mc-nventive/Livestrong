@@ -323,9 +323,9 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 	}
 	
 	public void unSelectTabButtons() {
-		((Button) getView().findViewById(R.id.weightButton)).setSelected(false);
-		((Button) getView().findViewById(R.id.caloriesButton)).setSelected(false);
-		((Button) getView().findViewById(R.id.nutrientsButton)).setSelected(false);
+                this.weightButton.setSelected(false);
+		this.caloriesButton.setSelected(false);
+		this.nutrientsButton.setSelected(false);
 	}
 
 	/**
@@ -385,7 +385,7 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 		XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
 
 		renderer.setLabelsTextSize(getPixelSize());
-		renderer.setLabelsColor(android.R.color.black);
+		renderer.setLabelsColor(getResources().getColor(android.R.color.black));
 		renderer.setPointSize(5f);
 		
 		renderer.setShowLegend(false);
@@ -629,10 +629,10 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 		});
 	}
 	
-	private FragmentActivity getCurrentActivity() {
-		FragmentActivity act = super.getActivity();
+	private Activity getCurrentActivity() {
+		Activity act = super.getActivity();
 		if (act == null) {
-			act = (FragmentActivity) MyPlateApplication.getFrontMostActivity();
+			act = (Activity) MyPlateApplication.getFrontMostActivity();
 		}
 		return act;
 	}
