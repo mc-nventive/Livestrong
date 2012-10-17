@@ -7,7 +7,7 @@ import android.util.Log;
 import com.sessionm.api.ActivityListener;
 import com.sessionm.api.SessionListener;
 import com.sessionm.api.SessionM;
-import com.sessionm.api.SessionM.USER_SUBSCRIPTION_STATUS;
+import com.sessionm.api.SessionM.State;
 import com.sessionm.api.User;
 
 public class SessionMHelper implements SessionListener, ActivityListener {
@@ -34,25 +34,10 @@ public class SessionMHelper implements SessionListener, ActivityListener {
 	}
 
 	@Override
-	public void onUserChangedSubscriptionStatus(SessionM sessionM, USER_SUBSCRIPTION_STATUS subscrStatus) {
-		Log.i(getClass().getName(), "SessionM subscription changed: " + subscrStatus);
-	}
-
-	@Override
-	public void onCancelled(SessionM sessionM) {
-		Log.i(getClass().getName(), "SessionM cancelled");
-	}
-
-	@Override
 	public void onDismissed(SessionM sessionM) {
 		Log.i(getClass().getName(), "SessionM dismissed");
 	}
 
-	@Override
-	public void onFinishLoading(SessionM sessionM) {
-		Log.i(getClass().getName(), "SessionM loaded");
-		
-	}
 
 	@Override
 	public void onPresented(SessionM sessionM) {
@@ -60,15 +45,26 @@ public class SessionMHelper implements SessionListener, ActivityListener {
 	}
 
 	@Override
-	public void onStartLoading(SessionM sessionM) {
-	}
-
-	@Override
-	public void onUserInfoChanged(SessionM sessionM, JSONObject json) {
-	}
-
-	@Override
 	public void onUserUpdated(SessionM arg0, User arg1) {
+	}
+
+	@Override
+	public void onUnavailable(SessionM arg0) {
+		// TODO Auto-generated method stub
+		Log.i(getClass().getName(), String.format("Activity unavailable: %1$s", arg0.toString()));
+	}
+
+	@Override
+	public boolean shouldAutopresentActivity(SessionM arg0) {
+		// TODO Auto-generated method stub
+		Log.i(getClass().getName(), String.format("Activity shouldAutoPresentActivity: %1$s", arg0.toString()));
+		return true;
+	}
+
+	@Override
+	public void onSessionStateChanged(SessionM arg0, State arg1) {
+		// TODO Auto-generated method stub
+		Log.i(getClass().getName(), String.format("Session State Changed To: %1$s", arg1.toString()));
 	}
 
 }

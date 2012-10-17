@@ -25,7 +25,6 @@ import com.livestrong.myplate.utilities.SessionMHelper;
 import com.livestrong.myplate.utilities.SimpleDate;
 import com.livestrong.myplatelite.R;
 import com.sessionm.api.SessionM;
-import com.sessionm.core.SessionMAndroidConfig;
 
 public class MyPlateApplication extends Application {
 	private static Context context;
@@ -54,7 +53,7 @@ public class MyPlateApplication extends Application {
 		
 		// Initialize SessionM
 		SessionM sessionM = SessionM.getInstance();
-		sessionM.getConfig().setActivityOrientation(SessionMAndroidConfig.ORIENTATION_PORTRAIT);
+		//sessionM.getConfig().setActivityOrientation(SessionMAndroidConfig.ORIENTATION_PORTRAIT);	//Removed from API at version 1.3.2
 		sessionM.startSession(this, Constants.SESSIONM_ID);
 		sessionM.setSessionListener(SessionMHelper.getInstance());
 		sessionM.setActivityListener(SessionMHelper.getInstance());

@@ -119,8 +119,11 @@ public class MoreProfileFragment extends FragmentDataHelperDelegate {
 			this.initializeFragmentBasedOnPreferences();
 		}
 		
-		this.initializeEditTexts();
-		this.initializeSpinners();
+		if (null != this.userProfile) 
+		{
+			this.initializeEditTexts();
+			this.initializeSpinners();
+		}
 	}
 	
 	private void initializeFragmentBasedOnPreferences(){

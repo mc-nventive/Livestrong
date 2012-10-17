@@ -4,7 +4,7 @@ public class Constants {
 
 	/** Application name */
 	public static final String APPLICATION_NAME = "Livestrong";
-	public static final double APPLICATION_VERSION = 1.2;
+	public static final double APPLICATION_VERSION = 1.3;
 	
 	/**
 	 * The application package of the paid app.

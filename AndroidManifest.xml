@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.livestrong.myplatelite"
-    android:versionCode="3"
-    android:versionName="1.2" >
+    android:versionCode="4"
+    android:versionName="1.3" >
 
     <uses-sdk android:minSdkVersion="10" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -62,7 +62,7 @@
         <provider android:name="com.admarvel.android.ads.AdMarvelLocalFileContentProvider" android:authorities="com.livestrong.myplatelite.AdMarvelLocalFileContentProvider" />
         
         <!--  This is for SessionM -->
-        <activity android:name="com.sessionm.ui.SessionMActivity" android:configChanges="keyboard|orientation" android:excludeFromRecents="true" android:launchMode="singleTask" />
+        <activity android:name="com.sessionm.ui.SessionMActivity" android:configChanges="keyboard|orientation" android:excludeFromRecents="true" android:launchMode="standard" />
         <receiver android:name="com.sessionm.cpi.PackageReceiver" android:exported="true">
             <intent-filter><action android:name="com.android.vending.INSTALL_REFERRER" /></intent-filter>
         </receiver>

@@ -255,7 +255,11 @@ public class NumberPicker extends LinearLayout implements OnClickListener,
         if (mDisplayedValues == null) {
             mText.setText(formatNumber(mCurrent));
         } else {
-            mText.setText(mDisplayedValues[mCurrent - mStart]);
+        	int index = mCurrent - mStart;
+        	
+            if (0 <= index && index < mDisplayedValues.length) {
+				mText.setText(mDisplayedValues[index]);
+			}
         }
         mText.setSelection(mText.getText().length());
     }
