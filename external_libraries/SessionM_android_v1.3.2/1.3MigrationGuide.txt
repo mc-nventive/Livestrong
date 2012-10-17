@@ -1,0 +1,15 @@
+Session M Android SDK Version 1.3 Migration Guide
+
+Session M Android SDK 1.3 introduced significant API changes compared to 1.2 version. Specifically, major API changes include:
+1. Achievement auto-present mode. By default, when application calls com.sessionm.api.SessionM.logAction() which results in new achievement the pop-up will automatically be displayed. The auto-present mode can be disabled by calling SessionM.setAutopresentMode() or by returning false from ActivityListener.shouldAutopresentActivity(). 
+2. Previously deprecated methods such as SessionM.presentPortal(Context,…), presentAchievement(Context,…) have been removed. Instead, application should use presentActivity(ActivityType) method to explicitely present SessionM UI. 
+3. A new SessionM state notification callback has been aded to SessionStateListener interface - onSessionStateChanged(SessionM, SessionM.State) and method onSessionStarted(SessionM) - deprecated.
+4. BaseActivity has been significantly enhanced to implement new SessionListener and ActivityListener interfaces to make integration easier. 
+
+To transition your application to 1.3 SDK follow these steps:
+1. Ensure that your application's Android activities either extend BaseActivity class or call SessionM onActivityStart(), onActivityResume(), onActivityPause() and onActivityStop() from respective methods of your Activity implementation. Extending BaseActivity is the easiest way to integrate SessionM into your application. 
+2. Whenever you need to log and present an achievement, if available, call SessionM.logAction(). 
+3. If you need to log action and defer presentation of the achievement to later point in application lifecycle ensure you either call SessionM.setAutopresentMode() with false or return false from ActivityListener.shouldAutopresentActivity(). 
+4. In your SessionListener implementation move session start handling logic, if any, from onSessionStarted() to onSessionStateChanged(). 
+
+For more information see JavaDoc and, specifically, SessionM class documentation. 

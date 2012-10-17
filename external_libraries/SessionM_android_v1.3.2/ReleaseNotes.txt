@@ -1,0 +1,9 @@
+Session M Android SDK Version 1.3.2 Release Notes
+________________
+Copyright:  2012 Session M. All rights reserved.
+Date: 10/05/2012
+Version:  1.3.2
+
+Changes:
+- updated API
+
