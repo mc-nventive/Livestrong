@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
-        <view class="com.livestrong.myplate.utilities.PinnedHeaderListView"
+        <view class="com.demandmedia.livestrong.android.utilities.PinnedHeaderListView"
 		        android:id="@android:id/list"
 		        android:layout_width="match_parent"
 		        android:layout_height="match_parent" 

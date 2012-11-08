@@ -87,7 +87,7 @@
 		<echo message="Debug: ${app.debug}"/>
 		<echo message="API - Use Staging: ${app.api.staging}"/>
 		<echo message="API - Ignore invalid SSL certificates: ${app.api.ignore_invalid_certs}"/>
-	    <copy file="./templates/BuildValues.java" todir="./src/com/livestrong/myplate/constants/" overwrite="true">
+	    <copy file="./templates/BuildValues.java" todir="./src/com/demandmedia/livestrong/android/constants/" overwrite="true">
 		    <filterset>
 		        <filter token="app.debug" value="${app.debug}"/>
 		        <filter token="app.api.staging" value="${app.api.staging}"/>

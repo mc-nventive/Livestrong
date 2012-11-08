@@ -80,7 +80,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp" >
 
-        <com.livestrong.myplate.utilities.picker.NumberPicker
+        <com.demandmedia.livestrong.android.utilities.picker.NumberPicker
             android:id="@+id/waterPicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

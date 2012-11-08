@@ -114,12 +114,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical" android:layout_marginTop="-2dp">
 
-        <com.livestrong.myplate.utilities.PullToRefreshListView
+        <com.demandmedia.livestrong.android.utilities.PullToRefreshListView
             android:id="@+id/communityListView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fadingEdge="none" android:divider="@android:color/transparent">
-        </com.livestrong.myplate.utilities.PullToRefreshListView>
+        </com.demandmedia.livestrong.android.utilities.PullToRefreshListView>
 
     </LinearLayout>
 

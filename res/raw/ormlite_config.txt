@@ -2,7 +2,7 @@
 # generated on 2012/04/27 02:58:55
 #
 # --table-start--
-dataClass=com.livestrong.myplate.back.models.ActivityLevels
+dataClass=com.demandmedia.livestrong.android.back.models.ActivityLevels
 tableName=Activity_Levels
 # --table-fields-start--
 # --field-start--
@@ -21,7 +21,7 @@ dataPersister=SERIALIZABLE
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.livestrong.myplate.back.models.DiaryEntry
+dataClass=com.demandmedia.livestrong.android.back.models.DiaryEntry
 tableName=diaryentry
 # --table-fields-start--
 # --field-start--
@@ -50,7 +50,7 @@ indexName=diaryentry_dirty_idx
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.livestrong.myplate.back.models.Exercise
+dataClass=com.demandmedia.livestrong.android.back.models.Exercise
 tableName=Exercise
 # --table-fields-start--
 # --field-start--
@@ -99,7 +99,7 @@ columnName=custom
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.livestrong.myplate.back.models.ExerciseDiaryEntry
+dataClass=com.demandmedia.livestrong.android.back.models.ExerciseDiaryEntry
 tableName=Diary_Exercise
 # --table-fields-start--
 # --field-start--
@@ -146,7 +146,7 @@ indexName=Diary_Exercise_dirty_idx
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.livestrong.myplate.back.models.Food
+dataClass=com.demandmedia.livestrong.android.back.models.Food
 tableName=Food
 # --table-fields-start--
 # --field-start--
@@ -222,7 +222,7 @@ columnName=custom
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.livestrong.myplate.back.models.FoodDiaryEntry
+dataClass=com.demandmedia.livestrong.android.back.models.FoodDiaryEntry
 tableName=Diary_Food
 # --table-fields-start--
 # --field-start--
@@ -273,7 +273,7 @@ indexName=Diary_Food_dirty_idx
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.livestrong.myplate.back.models.Meal
+dataClass=com.demandmedia.livestrong.android.back.models.Meal
 tableName=Meal
 # --table-fields-start--
 # --field-start--
@@ -301,7 +301,7 @@ foreignCollectionEager=true
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.livestrong.myplate.back.models.MealItem
+dataClass=com.demandmedia.livestrong.android.back.models.MealItem
 tableName=MealItem
 # --table-fields-start--
 # --field-start--
@@ -339,7 +339,7 @@ fieldName=brandShortcut
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.livestrong.myplate.back.models.MealNutritionInfo
+dataClass=com.demandmedia.livestrong.android.back.models.MealNutritionInfo
 tableName=MealNutritionInfo
 # --table-fields-start--
 # --field-start--
@@ -374,7 +374,7 @@ fieldName=protein
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.livestrong.myplate.back.models.UserProfile
+dataClass=com.demandmedia.livestrong.android.back.models.UserProfile
 tableName=UserProfile
 # --table-fields-start--
 # --field-start--
@@ -415,7 +415,7 @@ fieldName=dirty
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.livestrong.myplate.back.models.WaterDiaryEntry
+dataClass=com.demandmedia.livestrong.android.back.models.WaterDiaryEntry
 tableName=Diary_Water
 # --table-fields-start--
 # --field-start--
@@ -447,7 +447,7 @@ indexName=Diary_Water_dirty_idx
 # --table-end--
 #################################
 # --table-start--
-dataClass=com.livestrong.myplate.back.models.WeightDiaryEntry
+dataClass=com.demandmedia.livestrong.android.back.models.WeightDiaryEntry
 tableName=Diary_Weight
 # --table-fields-start--
 # --field-start--
