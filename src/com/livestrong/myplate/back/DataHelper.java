@@ -1,5 +1,10 @@
 package com.livestrong.myplate.back;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -106,6 +111,8 @@ public class DataHelper {
 	public static Method METHOD_GET_DAILY_DIARY_ENTRIES_FOR_DATES;
 	public static Method METHOD_GET_DAILY_DIARY_ENTRIES_FOR_DAY;
 	public static Method METHOD_GET_TODAY_NUTRIENTS;
+	
+	public static boolean INITIALIZED;
 
 	static {
 		try {
@@ -149,6 +156,8 @@ public class DataHelper {
 		databaseHelper = new Stack<DatabaseHelper>();
 		
 		DataHelper.initializePreferences();
+		
+		INITIALIZED = true;
 	}
 
 	private static void initializePreferences(){
@@ -182,10 +191,9 @@ public class DataHelper {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	public static DatabaseHelper getDatabaseHelper() {
 		if (databaseHelper.size() == 0) {
-			setDatabaseHelper((DatabaseHelper) OpenHelperManager.getHelper(context));
+			setDatabaseHelper((DatabaseHelper) OpenHelperManager.getHelper(context, DatabaseHelper.class));
 		}
 		return databaseHelper.lastElement();
 	}
@@ -1241,5 +1249,48 @@ public class DataHelper {
 			// Data was fetched from the remote server; persist it.
 			DatabaseHelper.persistData(methodCalled, responseData);
 		}
+	}
+	
+	public static byte[] serializeObject(Object object)
+	{
+		if(null == object)	return null;
+		
+		try 
+		{
+			ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+			ObjectOutputStream out = new ObjectOutputStream(outStream);
+			out.writeObject(object);
+			out.close();
+			
+			return outStream.toByteArray();
+			
+		} catch (IOException e) {
+			Log.e("serializeObject", "error", e); 
+		}
+		
+		return null;
+	}
+
+	public static Object deserializeObject(byte[] blob) {
+		try { 
+		  if(null == blob)	return null;
+	      ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(blob)); 
+	      Object object = in.readObject(); 
+	      in.close(); 
+
+	      return object;
+		} catch(NullPointerException npe) { 
+		      Log.e("deserializeObject", "error", npe); 
+
+		      return null; 
+		    
+	    } catch(ClassNotFoundException cnfe) { 
+	      Log.e("deserializeObject", "class not found error", cnfe); 
+
+	      return null; 
+	    } catch(IOException ioe) { 
+	      Log.e("deserializeObject", "io error", ioe);
+	      return null;
+	    }
 	}
 }

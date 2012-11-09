@@ -37,7 +37,7 @@ import com.livestrong.myplate.constants.BuildValues;
 
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
-	private static final String DATABASE_NAME = "livestrong_myplate.db";
+	public static final String DATABASE_NAME = "livestrong_myplate.db";
 	private static final int DATABASE_VERSION = 6;
 
 	private static Collection<Class<?>> databaseTables;
