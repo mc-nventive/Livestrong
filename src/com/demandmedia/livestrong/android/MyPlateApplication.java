@@ -5,8 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Stack;
-import java.util.TreeMap;
-
 import org.acra.ACRA;
 import org.acra.annotation.ReportsCrashes;
 
@@ -53,6 +51,7 @@ public class MyPlateApplication extends Application {
 		
 		FlurryAgent.setCaptureUncaughtExceptions(false);
 	}
+
 
 	public static void setWorkingDateStamp(Date workingDateStamp) {
 		if (workingDateStamp == null){

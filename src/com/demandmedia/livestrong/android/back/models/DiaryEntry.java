@@ -1,9 +1,12 @@
 package com.demandmedia.livestrong.android.back.models;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
+
+import android.database.Cursor;
 
 import com.demandmedia.livestrong.android.back.api.ISO8601DateParser;
 import com.demandmedia.livestrong.android.back.api.models.AbstractLiveStrongApiObject;
@@ -35,6 +38,27 @@ public abstract class DiaryEntry extends AbstractLiveStrongApiObject implements 
 	
 	public DiaryEntry() {
 		this.guid = UUID.randomUUID().toString().toLowerCase();
+	}
+	
+	public DiaryEntry(Cursor cloningDatabaseCursor)
+	{
+		try 
+		{
+			this.datestamp = new SimpleDateFormat("yyyy-MM-dd").parse(cloningDatabaseCursor.getString(cloningDatabaseCursor.getColumnIndex(DATESTAMP_FIELD_NAME)));
+		} catch (ParseException e) 
+		{
+			e.printStackTrace();
+		}
+		this.deleted = cloningDatabaseCursor.getShort(cloningDatabaseCursor.getColumnIndex(DELETED_FIELD_NAME)) > 0;
+		this.dirty = cloningDatabaseCursor.getShort(cloningDatabaseCursor.getColumnIndex(DIRTY_FIELD_NAME)) > 0;
+		this.guid = cloningDatabaseCursor.getString(cloningDatabaseCursor.getColumnIndex("guid"));
+		try 
+		{
+			this.modified = ISO8601DateParser.parse(cloningDatabaseCursor.getString(cloningDatabaseCursor.getColumnIndex(MODIFIED_FIELD_NAME)));
+		} catch (ParseException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	public DiaryEntry(Date datestamp, Object didWhat) {

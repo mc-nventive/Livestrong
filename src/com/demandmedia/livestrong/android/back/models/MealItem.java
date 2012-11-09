@@ -2,6 +2,8 @@ package com.demandmedia.livestrong.android.back.models;
 
 import java.io.Serializable;
 
+import android.database.Cursor;
+
 import com.demandmedia.livestrong.android.back.DataHelper;
 import com.demandmedia.livestrong.android.back.api.models.AbstractLiveStrongApiObject;
 import com.j256.ormlite.field.DatabaseField;
@@ -41,6 +43,22 @@ public class MealItem extends AbstractLiveStrongApiObject implements LiveStrongD
 
 	@DatabaseField
 	private String brandShortcut;
+	
+	public MealItem(){}
+	
+	public MealItem(Cursor cursor, Meal linkedMeal, Food linkedFood)
+	{
+		id = cursor.getInt(cursor.getColumnIndex("id"));
+		meal = linkedMeal;
+		food = linkedFood;
+		itemId = cursor.getInt(cursor.getColumnIndex("itemId"));
+		servings = cursor.getDouble(cursor.getColumnIndex("services"));
+		itemTitle = cursor.getString(cursor.getColumnIndex("itemTitle"));
+		cals = cursor.getDouble(cursor.getColumnIndex("cals"));
+		itemBrand = cursor.getString(cursor.getColumnIndex("itemBrand"));
+		itemShortcut = cursor.getString(cursor.getColumnIndex("itemShortcut"));
+		brandShortcut = cursor.getString(cursor.getColumnIndex("brandShortcut"));
+	}
 	
 	public String getTitle() {
 		return itemTitle;

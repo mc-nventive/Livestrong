@@ -2,6 +2,8 @@ package com.demandmedia.livestrong.android.back.models;
 
 import java.io.Serializable;
 
+import android.database.Cursor;
+
 import com.demandmedia.livestrong.android.back.api.models.AbstractLiveStrongApiObject;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -36,6 +38,24 @@ public class MealNutritionInfo extends AbstractLiveStrongApiObject implements Se
 	
 	@DatabaseField
 	private double protein;
+	
+	public MealNutritionInfo()
+	{
+		
+	}
+	
+	public MealNutritionInfo(Cursor cursor)
+	{
+		id = cursor.getInt(cursor.getColumnIndex("id"));
+		cals = cursor.getDouble(cursor.getColumnIndex("cals"));
+		fat = cursor.getDouble(cursor.getColumnIndex("fat"));
+		cholesterol = cursor.getDouble(cursor.getColumnIndex("cholesterol"));
+		sodium = cursor.getDouble(cursor.getColumnIndex("sodium"));
+		carbs = cursor.getDouble(cursor.getColumnIndex("carbs"));
+		sugars = cursor.getDouble(cursor.getColumnIndex("sugards"));
+		dietary_fiber = cursor.getDouble(cursor.getColumnIndex("dietary_fiber"));
+		protein = cursor.getDouble(cursor.getColumnIndex("protein"));
+	}
 
 	public int getId() {
 		return id;

@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import android.database.Cursor;
+
 import com.demandmedia.livestrong.android.back.DataHelper;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 import com.j256.ormlite.field.DatabaseField;
@@ -74,6 +76,17 @@ public class FoodDiaryEntry extends DiaryEntry implements LiveStrongDisplayableL
 		this.itemId = food.getFoodId();
 		this.timeOfDay = timeOfDay;
 		this.servings = servings;
+	}
+	
+	public FoodDiaryEntry(Cursor cursor, Food linkedFood)
+	{
+		super(cursor);
+		this.itemId = cursor.getInt(cursor.getColumnIndex(ITEM_ID_FIELD_NAME));
+		this.label = cursor.getString(cursor.getColumnIndex("label"));
+		this.mealId = cursor.getInt(cursor.getColumnIndex("mealId"));
+		this.servings = cursor.getDouble(cursor.getColumnIndex("servings"));
+		this.setTimeOfDay(cursor.getString(cursor.getColumnIndex(TIME_OF_DAY_FIELD_NAME)));
+		this.food = linkedFood;
 	}
 	
 	public String getTitle() {

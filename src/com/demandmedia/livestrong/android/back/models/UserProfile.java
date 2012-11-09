@@ -2,11 +2,15 @@ package com.demandmedia.livestrong.android.back.models;
 
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
+
+import android.database.Cursor;
+import android.util.Log;
 
 import com.demandmedia.livestrong.android.back.DataHelper;
 import com.demandmedia.livestrong.android.back.DataHelper.DistanceUnits;
@@ -72,6 +76,24 @@ public class UserProfile extends AbstractLiveStrongApiObject {
 			this.height = 70.0;
 			this.weight = 160.0;
 		}
+	}
+	
+	public UserProfile(Cursor cursor)
+	{
+		username = cursor.getString(cursor.getColumnIndex("username"));
+		try {
+			dob = new SimpleDateFormat("yyyy-MM-dd").parse(cursor.getString(cursor.getColumnIndex("dob")));
+		} catch (ParseException e) {
+			Log.e("UserProfile", e.getMessage());
+		}
+		setGender(cursor.getString(cursor.getColumnIndex("gender")));
+		height = cursor.getDouble(cursor.getColumnIndex("height"));
+		weight = cursor.getDouble(cursor.getColumnIndex("weight"));
+		activityLevel = cursor.getDouble(cursor.getColumnIndex("activityLevel"));
+		calories = cursor.getDouble(cursor.getColumnIndex("calories"));
+		goal = cursor.getDouble(cursor.getColumnIndex("goal"));
+		mode = GoalMode.valueOf(cursor.getString(cursor.getColumnIndex("mode")));
+		dirty = cursor.getShort(cursor.getColumnIndex("dirty")) > 0; 
 	}
 	
 	public void setProfileDefaults(){

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import android.database.Cursor;
 import com.demandmedia.livestrong.android.Constants;
 import com.demandmedia.livestrong.android.back.DataHelper;
 import com.demandmedia.livestrong.android.back.api.models.AbstractLiveStrongApiObject;
@@ -88,6 +89,23 @@ public class Exercise extends AbstractLiveStrongApiObject implements LiveStrongD
 		this.exercise = name;
 		this.exerciseId = CUSTOM_EXERCISE_ID;
 		this.calsPerHour = calsPerHour;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Exercise(Cursor cursor)
+	{
+		this.id = cursor.getInt(cursor.getColumnIndex("id"));
+		this.active = cursor.getDouble(cursor.getColumnIndex("active"));
+		this.calFactor = cursor.getDouble(cursor.getColumnIndex("calFactor"));
+		this.calsPerHour = cursor.getInt(cursor.getColumnIndex("calsPerHour"));
+		this.cph = cursor.getDouble(cursor.getColumnIndex("cph"));
+		this.custom = cursor.getShort(cursor.getColumnIndex("custom")) > 0;
+		this.description = cursor.getString(cursor.getColumnIndex("description"));
+		this.exercise = cursor.getString(cursor.getColumnIndex(TITLE_FIELD_NAME));
+		this.distance = cursor.getDouble(cursor.getColumnIndex("distance"));
+		this.exerciseId = cursor.getInt(cursor.getColumnIndex(EXERCISE_ID_FIELD_NAME));
+		
+		this.images = (HashMap<Integer, String>) DataHelper.deserializeObject(cursor.getBlob(cursor.getColumnIndex("images")));
 	}
 	
 	public String getTitle() {

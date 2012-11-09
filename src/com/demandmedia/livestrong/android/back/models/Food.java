@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import android.database.Cursor;
+
 import com.demandmedia.livestrong.android.Constants;
 import com.demandmedia.livestrong.android.back.DataHelper;
 import com.demandmedia.livestrong.android.back.api.models.AbstractLiveStrongApiObject;
@@ -133,6 +135,32 @@ public class Food extends AbstractLiveStrongApiObject implements LiveStrongDispl
 		this.carbs = carbs;
 		this.protein = protein;
 		setCals(calories);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Food(Cursor cursor)
+	{
+		id = cursor.getInt(cursor.getColumnIndex(ID_FIELD_NAME));
+		foodId = cursor.getInt(cursor.getColumnIndex(FOOD_ID_FIELD_NAME));
+		itemTitle = cursor.getString(cursor.getColumnIndex(ITEM_TITLE_FIELD_NAME));
+		servingSize = cursor.getString(cursor.getColumnIndex("servingSize"));
+		itemBrand = cursor.getString(cursor.getColumnIndex("itemBrand"));
+		cals = cursor.getInt(cursor.getColumnIndex("cals"));
+		calsFromFat = cursor.getInt(cursor.getColumnIndex("calsFromFat"));
+		fat = cursor.getDouble(cursor.getColumnIndex("fat"));
+		satFat = cursor.getDouble(cursor.getColumnIndex("satFat"));
+		carbs = cursor.getDouble(cursor.getColumnIndex("carbs"));
+		protein = cursor.getDouble(cursor.getColumnIndex("protein"));
+		cholesterol = cursor.getDouble(cursor.getColumnIndex("cholesterol"));
+		sodium = cursor.getDouble(cursor.getColumnIndex("sodium"));
+		dietaryFiber = cursor.getDouble(cursor.getColumnIndex("dietaryFiber"));
+		sugars = cursor.getDouble(cursor.getColumnIndex("sugars"));
+		calsPercFat = cursor.getDouble(cursor.getColumnIndex("calsPercFat"));
+		calsPercCarbs = cursor.getDouble(cursor.getColumnIndex("calsPercCarbs"));
+		calsPercProtein = cursor.getDouble(cursor.getColumnIndex("calsPercProtein"));
+		verification = cursor.getShort(cursor.getColumnIndex("verification")) > 0;
+		
+		this.images = (HashMap<Integer, String>) DataHelper.deserializeObject(cursor.getBlob(cursor.getColumnIndex("images")));
 	}
 	
 	public void setServingSize(String string) {

@@ -1,15 +1,15 @@
 package com.demandmedia.livestrong.android;
 
-import com.livestrong.myplate.R;
-
 public class Constants {
 
 	/** Application name */
 	public static final String APPLICATION_NAME = "Livestrong";
-	public static final double APPLICATION_VERSION = 1.3;
+	public static final double APPLICATION_VERSION = 1.4;
 	
 	/** Use this as a field name in your Model if you want to be able to get rowId*/
 	public static final String ROW_ID_COLUMN = "rowId";
+	
+	public static final String APPLICATION_PACKAGE_ID_LITE = "com.livestrong.myplatelite";
 	
 	/**log title for back*/
 	public static final String LOG_MYPLATE = "BACK_LOG";
