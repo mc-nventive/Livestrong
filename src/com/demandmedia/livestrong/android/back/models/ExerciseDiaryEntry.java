@@ -3,6 +3,8 @@ package com.demandmedia.livestrong.android.back.models;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
+import android.database.Cursor;
+
 import com.demandmedia.livestrong.android.back.DataHelper;
 import com.google.gson.annotations.SerializedName;
 import com.j256.ormlite.field.DatabaseField;
@@ -56,6 +58,16 @@ public class ExerciseDiaryEntry extends DiaryEntry {
 		this.exerciseId = exercise.getExerciseId();
 		this.minutes = minutes;
 		getCals(); // will set this.caloriesBurned
+	}
+	
+	public ExerciseDiaryEntry(Cursor cloningDatabaseCursor, Exercise linkedExercise)
+	{
+		super(cloningDatabaseCursor);
+		this.exerciseId = cloningDatabaseCursor.getInt(cloningDatabaseCursor.getColumnIndex(EXERCISE_ID_FIELD_NAME));
+		this.label = cloningDatabaseCursor.getString(cloningDatabaseCursor.getColumnIndex("label"));
+		this.caloriesBurned = cloningDatabaseCursor.getInt(cloningDatabaseCursor.getColumnIndex("caloriesBurned"));
+		this.minutes = cloningDatabaseCursor.getInt(cloningDatabaseCursor.getColumnIndex("minutes"));
+		this.exercise = linkedExercise;
 	}
 	
 	public String getTitle() {

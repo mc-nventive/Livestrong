@@ -6,6 +6,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import android.database.Cursor;
+
 import com.demandmedia.livestrong.android.back.DataHelper;
 import com.demandmedia.livestrong.android.back.DataHelper.WaterUnits;
 import com.j256.ormlite.field.DatabaseField;
@@ -48,6 +50,12 @@ public class WaterDiaryEntry extends DiaryEntry implements LiveStrongDisplayable
 	public WaterDiaryEntry(double onces, Date datestamp) {
 		super(datestamp, null);
 		addOnces(onces);
+	}
+	
+	public WaterDiaryEntry(Cursor cursor)
+	{
+		super(cursor);
+		this.glasses = cursor.getInt(cursor.getColumnIndex("glasses"));
 	}
 	
 	public String getTitle() {

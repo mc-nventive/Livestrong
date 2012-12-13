@@ -104,9 +104,16 @@
 	    </copy-->
 	</target>
 	
-	<target name="full-debug-staging" depends="read-debug-staging-properties, process-template, debug" />
-	<target name="full-debug-prod" depends="read-debug-prod-properties, process-template, debug" />
-	<target name="full-release" depends="read-release-properties, process-template, clean, release" />
+	<target name="resourceNamespaceReplace">
+	    <echo message="replacing com.livestrong.myplate.R with com.demandmedia.livestrong.android.R"/>
+	    <replace dir="src" token="import com.livestrong.myplate.R;" value="import com.demandmedia.livestrong.android.R;">
+		  <include name="**/*.java"/>
+		</replace>
+	</target>
+	
+	<target name="full-debug-staging" depends="read-debug-staging-properties, process-template, resourceNamespaceReplace, debug" />
+	<target name="full-debug-prod" depends="read-debug-prod-properties, process-template, resourceNamespaceReplace, debug" />
+	<target name="full-release" depends="read-release-properties, process-template, clean, resourceNamespaceReplace, release" />
 	<target name="read-debug-staging-properties">
 	    <property file="./templates/debug-staging.properties" />
 	</target>

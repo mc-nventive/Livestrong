@@ -323,7 +323,7 @@ public class ProgressFragment extends FragmentDataHelperDelegate {
 	}
 	
 	public void unSelectTabButtons() {
-                this.weightButton.setSelected(false);
+		this.weightButton.setSelected(false);
 		this.caloriesButton.setSelected(false);
 		this.nutrientsButton.setSelected(false);
 	}

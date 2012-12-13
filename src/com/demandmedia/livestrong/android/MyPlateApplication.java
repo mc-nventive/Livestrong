@@ -5,8 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Stack;
-import java.util.TreeMap;
-
 import org.acra.ACRA;
 import org.acra.annotation.ReportsCrashes;
 
@@ -23,6 +21,7 @@ import com.demandmedia.livestrong.android.back.models.FoodDiaryEntry.TimeOfDay;
 import com.demandmedia.livestrong.android.utilities.SimpleDate;
 import com.flurry.android.FlurryAgent;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
+import com.demandmedia.livestrong.android.R;
 
 @ReportsCrashes(formKey = "dEx3eE1zenRWcG5NR1lTaW5td1Jvdmc6MQ")
 public class MyPlateApplication extends Application {
@@ -52,6 +51,7 @@ public class MyPlateApplication extends Application {
 		
 		FlurryAgent.setCaptureUncaughtExceptions(false);
 	}
+
 
 	public static void setWorkingDateStamp(Date workingDateStamp) {
 		if (workingDateStamp == null){

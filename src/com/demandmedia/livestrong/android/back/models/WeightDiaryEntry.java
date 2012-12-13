@@ -3,6 +3,8 @@ package com.demandmedia.livestrong.android.back.models;
 import java.text.DecimalFormat;
 import java.util.Date;
 
+import android.database.Cursor;
+
 import com.demandmedia.livestrong.android.back.DataHelper;
 import com.demandmedia.livestrong.android.back.DataHelper.WeightUnits;
 import com.j256.ormlite.field.DatabaseField;
@@ -29,6 +31,13 @@ public class WeightDiaryEntry extends DiaryEntry implements LiveStrongDisplayabl
 	public WeightDiaryEntry(double weight, Date datestamp) {
 		super(datestamp, null);
 		this.weight = convertWeightFromSelectedUnits(weight);
+	}
+	
+	public WeightDiaryEntry(Cursor cursor)
+	{
+		super(cursor);
+		this.weight = cursor.getDouble(cursor.getColumnIndex("weight"));
+		this.calories = cursor.getDouble(cursor.getColumnIndex("calories"));
 	}
 	
 	public String getTitle() {

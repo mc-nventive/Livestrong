@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.Collection;
 
+import android.database.Cursor;
+
 import com.demandmedia.livestrong.android.back.DataHelper;
 import com.demandmedia.livestrong.android.back.api.LiveStrongDataObjectTypeAdapter;
 import com.demandmedia.livestrong.android.back.api.models.AbstractLiveStrongApiObject;
@@ -35,6 +37,17 @@ public class Meal extends AbstractLiveStrongApiObject implements LiveStrongDispl
 
 	@ForeignCollectionField(eager = true)
 	private Collection<MealItem> items;
+	
+	public Meal(){}
+	
+	public Meal(Cursor cursor, Collection<MealItem> mealItems, MealNutritionInfo mealNutritionInfo)
+	{
+		this.mealId = cursor.getInt(cursor.getColumnIndex("mealId"));
+		this.cals = cursor.getDouble(cursor.getColumnIndex("cals"));
+		this.mealName = cursor.getString(cursor.getColumnIndex("mealName")); 
+		this.items = mealItems;
+		this.nutritionInfo = mealNutritionInfo;
+	}
 
 	public String getTitle() {
 		return mealName;
@@ -68,6 +81,11 @@ public class Meal extends AbstractLiveStrongApiObject implements LiveStrongDispl
 
 	public Collection<MealItem> getItems() {
 		return items;
+	}
+	
+	public void setItems(Collection<MealItem> mealItems)
+	{
+		items = mealItems;
 	}
 
 	public void save() {
