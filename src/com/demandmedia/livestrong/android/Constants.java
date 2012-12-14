@@ -4,7 +4,7 @@ public class Constants {
 
 	/** Application name */
 	public static final String APPLICATION_NAME = "Livestrong";
-	public static final double APPLICATION_VERSION = 1.4;
+	public static final double APPLICATION_VERSION = 2.1;
 	
 	/** Use this as a field name in your Model if you want to be able to get rowId*/
 	public static final String ROW_ID_COLUMN = "rowId";
