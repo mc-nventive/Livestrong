@@ -126,8 +126,6 @@
                     android:id="@+id/caloriesLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@+id/header_text"
-                    android:layout_alignBottom="@+id/header_text"
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
                     android:layout_centerVertical="true"

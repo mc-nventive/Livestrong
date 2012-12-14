@@ -29,6 +29,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import com.livestrong.myplate.activity.CommunityCommentsActivity;
+import com.livestrong.myplate.activity.UpgradeActivity;
 import com.livestrong.myplate.adapters.CommunityListAdapter;
 import com.livestrong.myplate.animations.DropDownAnimation;
 import com.livestrong.myplate.back.DataHelper;
@@ -212,15 +213,15 @@ public class CommunityFragment extends FragmentDataHelperDelegate implements OnI
 	private void writeMessageButtonPressed() {
 		if (DataHelper.isLoggedIn() == false || BuildValues.IS_LIGHT){
 			new AlertDialog.Builder(getActivity())
-		      .setMessage("This function is not available in the lite version. Would you like to visit the Play store now?")
-		      .setTitle("")
-		      .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					Utils.openPlayStore(getActivity());
-				}
-			  })
-			  .setNegativeButton(android.R.string.no, null)
+		      .setMessage("Posting to the community requires you to be logged in to your LIVESTRONG account, which is not available in the Lite version.")
+		      .setTitle("Account Required")
+		      .setPositiveButton(android.R.string.ok, null)
+			  .setNegativeButton(R.string.learn_more, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						startActivity(new Intent(getActivity(), UpgradeActivity.class));
+					}
+				  })
 		      .show();
 			return;
 		}

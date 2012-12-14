@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_repeat"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            style="@style/black_toolbar"
+            android:layout_width="fill_parent"
+            android:layout_marginBottom="-3dp"
+            android:orientation="horizontal"
+            android:paddingBottom="1.0dip"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="5.0dip" >
+
+            <TextView
+                android:id="@+id/headerTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="UPGRADE"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+           <TextView
+               android:id="@+id/textView1"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:layout_marginTop="20dp"
+               android:layout_marginBottom="4dp"
+               android:layout_marginLeft="20dp"
+               android:layout_marginRight="20dp"
+               android:gravity="center"
+               android:text="Build a healthier YOU with the LIVESTRONG.COM Calorie Tracker for your Android device!"
+               android:textColor="@color/black"
+               android:textSize="16dp" 
+               android:textStyle="bold"/>
+           
+           <TextView
+               android:id="@+id/textView2"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:layout_marginTop="20dp"
+               android:layout_marginBottom="4dp"
+               android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+               android:gravity="center"
+               android:text="Experience the full benefits of the LIVESTRONG.COM Calorie Tracker. Upgrade now and you can:"
+               android:textColor="@color/black"
+               android:textSize="16dp" />
+           
+           <TextView
+               android:id="@+id/textView3"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:layout_marginTop="20dp"
+               android:layout_marginBottom="4dp"
+               android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+               android:gravity="center"
+               android:text="Track anywhere - on your Android device or from the website with automatic sync"
+               android:textColor="@color/black"
+               android:textSize="16dp" />
+           
+           <TextView
+               android:id="@+id/textView4"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:layout_marginTop="20dp"
+               android:layout_marginBottom="4dp"
+               android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+               android:gravity="center"
+               android:text="Participate in the LIVESTRONG.COM community to give and get support."
+               android:textColor="@color/black"
+               android:textSize="16dp" />
+           
+           <TextView
+               android:id="@+id/textView4"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               android:layout_marginTop="20dp"
+               android:layout_marginBottom="4dp"
+               android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+               android:gravity="center"
+               android:text="Absolutely No Ads!"
+               android:textColor="@color/black"
+               android:textSize="16dp"
+               android:textStyle="bold" />
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp">
+
+                    
+                <Button
+                    android:id="@+id/toMarketButton"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+               		android:layout_marginRight="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/btn_black_selector"
+                    android:text="Upgrade"
+                    android:textColor="@color/white" 
+                    android:layout_weight="0.5"/>
+
+                <Button
+                    android:id="@+id/notNowButton"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+               		android:layout_marginRight="20dp"
+                    android:background="@drawable/btn_black_selector"
+                    android:text="Not Now"
+                    android:textColor="@color/white" 
+                    android:layout_weight="0.5"/>
+            </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

@@ -26,6 +26,25 @@
 	            android:layout_width="match_parent"
 	            android:layout_height="50dp"
 	            android:orientation="vertical" >
+	            
+	            <Button
+	                android:id="@+id/upgradeButton"
+	                android:layout_width="match_parent"
+	                android:layout_height="30dp"
+	                android:layout_marginLeft="20dp"
+	                android:layout_marginRight="20dp"
+	                android:layout_marginTop="15dp"
+	                android:background="@drawable/btn_black_selector"
+	                android:isScrollContainer="true"
+	                android:text="Upgrade to Calorie Tracker"
+	                android:textColor="@color/white" />
+	        </LinearLayout>
+	        
+	        <LinearLayout
+	            android:id="@+id/LinearLayout06"
+	            android:layout_width="match_parent"
+	            android:layout_height="50dp"
+	            android:orientation="vertical" >
 
 	            <Button
 	                android:id="@+id/tipsButton"

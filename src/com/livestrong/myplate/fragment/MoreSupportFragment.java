@@ -16,6 +16,7 @@ import com.flurry.android.FlurryAgent;
 import com.livestrong.myplate.Constants;
 import com.livestrong.myplate.activity.TabBarActivity;
 import com.livestrong.myplate.activity.TipsActivity;
+import com.livestrong.myplate.activity.UpgradeActivity;
 import com.livestrong.myplate.activity.WebViewActivity;
 import com.livestrong.myplate.activity.WelcomeActivity;
 import com.livestrong.myplate.back.DataHelper;
@@ -43,6 +44,16 @@ public class MoreSupportFragment extends FragmentDataHelperDelegate {
 		// Hook up outlets
 		this.view = (LinearLayout) inflater.inflate(R.layout.fragment_more_support, container, false);
 			
+      
+	      Button upgradeButton = (Button)this.view.findViewById(R.id.upgradeButton);
+	      upgradeButton.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(getActivity(), UpgradeActivity.class);
+					startActivity(intent);
+				}
+			});
+      
 			
 		Button termsButton = (Button) this.view.findViewById(R.id.termsAndConditionsButton);
 		termsButton.setOnClickListener(new OnClickListener() {
